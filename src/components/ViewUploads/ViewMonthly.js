@@ -35,7 +35,7 @@ const View = () => {
           rec.totalChargeable = rec.totalChargeable / 12;
           rec.totalChargeable = formatNumber(rec.totalChargeable);
           rec.period = rec.payPeriod;
-          rec.payPeriod = dateformat(rec.payPeriod, "mmm yyyy");
+          // rec.payPeriod = dateformat(rec.payPeriod, "mmm yyyy");
           records.push(rec);
         }
         let sumOfTax = sum.reduce((preVal, curVal) => preVal + curVal);

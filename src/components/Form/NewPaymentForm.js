@@ -276,9 +276,8 @@ const NewPaymentForm = () => {
                   label="Residential Address"
                   required
                   ref={register}
-                  value={`${
-                    data?.taxPayerInfo?.address?.substr(0, 44) ?? ""
-                  }...`}
+                  value={`${data?.taxPayerInfo?.address?.substr(0, 44) ?? ""
+                    }...`}
                   name="address"
                 />
               </div>
