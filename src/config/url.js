@@ -5,7 +5,7 @@ const url = {
 
   // live db
   BASE_URL: "https://portallive.bespoque.dev/api/v1/",
-  // PAY_URL: "https://etaxpay.irs.kg.gov.ng/",
+  PAY_URL: "https://etaxpay.irs.kg.gov.ng/",
 
   // Test Db
   // BASE_URL: "https://portalapi.bespoque.dev/api/v1/",
