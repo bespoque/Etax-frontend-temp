@@ -120,20 +120,21 @@ const NewPaymentForm = () => {
         email: data.email,
       });
 
-      const { channel, assessmentId, taxId, ref } = res.data.body;
+      const { channel, assessmentId, assessment_id, taxId, ref } = res.data.body;
 
       if (res.data.status === 200) {
         if (channel === "Remita") {
           router.push(
-            `${url.PAY_URL}remita/initialize.php?assessmentId=${assessmentId}&taxId=${taxId}`
+            `${url.PAY_URL}remita/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
           );
         } else if (channel === "eTransact") {
+          console.log(assessmentId, taxId, channel, ref, assessment_id);
           router.push(
-            `${url.PAY_URL}etransact/initialize.php?assessmentId=${assessmentId}&taxId=${taxId}`
+            `${url.PAY_URL}etransact/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
           );
         } else if (channel === "WebPay") {
           router.push(
-            `${url.PAY_URL}interswitch/initialize.php?assessmentId=${assessmentId}&taxId=${taxId}`
+            `${url.PAY_URL}interswitch/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
           );
         } else if (channel === "Bank") {
           setLoadingState("Generating Pdf...");
