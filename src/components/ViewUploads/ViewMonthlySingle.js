@@ -46,15 +46,16 @@ const ViewMonthlySingle = () => {
             } else {
               rec.status = "Paid";
             }
+            console.log("total", total);
             rec.salary = parseInt(rec.salary);
             rec.chargeable = parseInt(rec.chargeable) / 12;
             rec.totalRelief = parseInt(rec.totalRelief);
-            rec.tax = (rec.tax);
+            rec.taxf = parseInt(rec.tax);
             salarySum.push(rec.salary);
             chargeableSum.push(rec.chargeable);
             totalReliefSum.push(rec.totalRelief);
-            taxSum.push(rec.tax);
-            rec.tax = formatNumber(rec.tax);
+            taxSum.push(rec.taxf);
+            rec.taxFormatted = formatNumber(rec.tax);
             rec.totalRelief = formatNumber(rec.totalRelief);
             rec.chargeable = formatNumber(rec.chargeable);
             rec.salary = formatNumber(rec.salary);

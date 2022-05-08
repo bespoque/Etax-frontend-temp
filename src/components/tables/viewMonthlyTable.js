@@ -104,7 +104,7 @@ const singleFields = [
 
   {
     name: 'Tax',
-    key: 'tax',
+    key: 'taxFormatted',
   },
 ];
 
