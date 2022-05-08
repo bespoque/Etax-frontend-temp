@@ -50,7 +50,7 @@ const ViewMonthlySingle = () => {
             rec.salary = parseInt(rec.salary);
             rec.chargeable = parseInt(rec.chargeable) / 12;
             rec.totalRelief = parseInt(rec.totalRelief);
-            rec.taxf = parseInt(rec.tax);
+            rec.taxf = Number(rec.tax);
             salarySum.push(rec.salary);
             chargeableSum.push(rec.chargeable);
             totalReliefSum.push(rec.totalRelief);
