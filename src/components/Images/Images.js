@@ -10,6 +10,52 @@ export const KgirsLogo = () => {
     />
   );
 };
+export const KgirsLogo2 = () => {
+  return (
+    <Image
+      layout="fixed"
+      src="/images/logo2.png"
+      alt="login"
+      width={60}
+      height={60}
+    />
+  );
+};
+export const CoatOfArms = () => {
+  return (
+    <Image
+      layout="fixed"
+      src="/images/icons/coat of arms.png"
+      alt="login"
+      width={85}
+      height={60}
+    />
+  );
+};
+
+export const KogiGov = () => {
+  return (
+    <Image
+      layout="fixed"
+      src="/images/kog_govt.png"
+      alt="login"
+      width={85}
+      height={60}
+    />
+  );
+};
+
+export const Signature = () => {
+  return (
+    <Image
+      layout="fixed"
+      src="/images/signature.png"
+      alt="login"
+      width={121}
+      height={49}
+    />
+  );
+};
 
 export const LoginImage = () => {
   return (

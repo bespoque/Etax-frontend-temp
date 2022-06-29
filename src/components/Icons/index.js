@@ -147,6 +147,20 @@ export const RevenueItems = () => {
   );
 };
 
+export const DirectAssessment = () => {
+  return (
+    <div className="mx-6 flex items-center">
+      <Image
+        layout="fixed"
+        src="/images/icons/Direct_assessment.png"
+        alt=""
+        width={18}
+        height={18}
+      />
+    </div>
+  );
+};
+
 export const TaxReceipt = () => {
   return (
     <Image

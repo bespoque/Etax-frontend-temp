@@ -1,4 +1,4 @@
-import { Dashboard, Invoice, UserGuide } from '../../components/Icons/index';
+import { Dashboard, DirectAssessment, Invoice, UserGuide } from '../../components/Icons/index';
 
 const initialState = [
   {
@@ -29,6 +29,23 @@ const initialState = [
             url: '/payment/pending-invoice',
             title: 'Pending Assessment',
             items: [],
+          },
+        ],
+      },
+      {
+        url: '/',
+        icon: <DirectAssessment />,
+        title: 'DIRECT ASSESSMENT',
+        items: [
+          {
+            title: 'TCC',
+            items: [
+              {
+                title: 'View',
+                url: '/view/tcc',
+                items: []
+              }
+            ],
           },
         ],
       },

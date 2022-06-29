@@ -14,6 +14,7 @@ import {
 } from 'react-icons/fi';
 import {
   Dashboard,
+  DirectAssessment,
   FileReturns,
   Invoice,
   UserGuide,
@@ -79,7 +80,7 @@ const initialState = [
               },
               { title: 'Upload Document', url: '/uploads/annualdocs', items: [] },
               { title: 'View document', url: '/view/viewdocuments', items: [] },
-            
+
             ],
           },
           {
@@ -116,6 +117,23 @@ const initialState = [
       //       url: '/payment/pending-invoice',
       //       title: 'Unpaid Assessment',
       //       items: [],
+      //     },
+      //   ],
+      // },
+      // {
+      //   url: '/',
+      //   icon: <DirectAssessment />,
+      //   title: 'DIRECT ASSESSMENT',
+      //   items: [
+      //     {
+      //       title: 'TCC',
+      //       items: [
+      //         {
+      //           title: 'View',
+      //           url: '/view/tcc',
+      //           items: []
+      //         }
+      //       ],
       //     },
       //   ],
       // },
