@@ -120,23 +120,23 @@ const initialState = [
       //     },
       //   ],
       // },
-      // {
-      //   url: '/',
-      //   icon: <DirectAssessment />,
-      //   title: 'DIRECT ASSESSMENT',
-      //   items: [
-      //     {
-      //       title: 'TCC',
-      //       items: [
-      //         {
-      //           title: 'View',
-      //           url: '/view/tcc',
-      //           items: []
-      //         }
-      //       ],
-      //     },
-      //   ],
-      // },
+      {
+        url: '/',
+        icon: <DirectAssessment />,
+        title: 'DIRECT ASSESSMENT',
+        items: [
+          {
+            title: 'TCC',
+            items: [
+              {
+                title: 'View',
+                url: '/view/tcc',
+                items: []
+              }
+            ],
+          },
+        ],
+      },
 
       {
         url: '#',
