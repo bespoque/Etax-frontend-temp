@@ -137,6 +137,23 @@ const initialState = [
           },
         ],
       },
+      {
+        url: '/',
+        icon: <DirectAssessment />,
+        title: 'PAYE',
+        items: [
+          {
+            title: 'TCC',
+            items: [
+              {
+                title: 'View',
+                url: '/view/paye-tcc',
+                items: []
+              }
+            ],
+          },
+        ],
+      },
 
       {
         url: '#',

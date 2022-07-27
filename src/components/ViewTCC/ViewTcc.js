@@ -72,7 +72,6 @@ const ViewTcc = () => {
     fetchPost();
   }, []);
 
-
   // Get current post
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;

@@ -136,7 +136,7 @@ export const PrintSingleTcc = ({
   })
 
   payerDetails.forEach((ind, i) => {
-    fileRef = ind.ref
+    fileRef = ind.file_ref
   })
 
   payerDetails.forEach((ind, i) => {
