@@ -18,14 +18,7 @@ import { ViewTccTable } from "../tables/viewtccTable";
 import { shallowEqual, useSelector } from "react-redux";
 
 const ViewTcc = () => {
-  const [post, setPost] = useState(() => []);
-  const [sum, setSum] = useState(() => null);
-  const [totalemp, setTotalemp] = useState('');
   const [isFetching, setIsFetching] = useState(() => true);
-  const [currentPage, setCurrentPage] = useState(() => 1);
-  const [postPerPage, setPostPerPage] = useState(() => 10);
-  const [year, setYear] = useState('');
-  const [query, setQuery] = useState(() => "");
   const [tcc, setTcc] = useState(() => []);
 
   const { auth } = useSelector(
@@ -35,35 +28,27 @@ const ViewTcc = () => {
     shallowEqual
   );
 
-  
+
   const decoded = jwt.decode(auth);
   const kgtin = decoded.kgtin
   useEffect(() => {
     setAuthToken();
     const fetchPost = async () => {
       try {
-        let res = await axios.get(`${url.BASE_URL}user/da/list-tp-tcc?kgtin=${kgtin}`);
+        let res = await axios.get(`${url.BASE_URL}user/da/list-tp-tcc?kgtin=${2247055792}`);
         res = res.data.body.tccPrint;
-        setTcc(res)
-        let employeessTotal = res.length
-        setTotalemp(employeessTotal)
+        console.log("res", res);
         let records = [];
-        let sum = [];
         for (let i = 0; i < res.length; i++) {
           let rec = res[i];
-          // console.log(rec.tax_pay_cal);
-          sum.push(rec.tax_pay_cal);
           rec.amount1 = formatNumber(rec.amount1);
           rec.amount2 = formatNumber(rec.amount2);
-          rec.con_rel_cal = formatNumber(rec.con_rel_cal);
           rec.amount3 = formatNumber(rec.amount3);
-          rec.crt_time = dateformat(rec.crt_time, "yyyy");
+          rec.crt_time = dateformat(rec.crt_time, "mm yyyy");
           records.push(rec);
         }
-        let sumOfTax = sum.reduce((preVal, curVal) => preVal + curVal);
         setIsFetching(false);
-        setSum(() => sumOfTax);
-        setPost(() => records);
+        setTcc(() => records);
       } catch (e) {
         setIsFetching(false);
         // console.log(e.response);
@@ -72,20 +57,11 @@ const ViewTcc = () => {
     fetchPost();
   }, []);
 
-  // Get current post
-  const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = post.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const next = (currentPage) => setCurrentPage(() => currentPage + 1);
-  const previous = (currentPage) => setCurrentPage(() => currentPage - 1);
-
 
 
   return (
     <>
-      <SectionTitle title="View Tcc"  />
+      <SectionTitle title="View Tcc" />
 
       {isFetching && (
         <div className="flex justify-center item mb-2">
@@ -102,34 +78,14 @@ const ViewTcc = () => {
         </div>
       )}
       <Widget>
-       
+
 
         <div className="mt-4">
-          {query !== "" ? (
-            <>
-              <ViewTccTable />
-              <CustomPagination
-                paginate={paginate}
-                totalPosts={res[0].length}
-                postPerPage={postPerPage}
-                currentPage={currentPage}
-                next={next}
-                previous={previous}
-              />
-            </>
-          ) : (
-            <>
-              <ViewTccTable tccData={tcc} />
-              <CustomPagination
-                paginate={paginate}
-                totalPosts={post.length}
-                postPerPage={postPerPage}
-                currentPage={currentPage}
-                next={next}
-                previous={previous}
-              />
-            </>
-          )}
+
+          <>
+            <ViewTccTable tccData={tcc} />
+          </>
+
         </div>
       </Widget>
     </>
