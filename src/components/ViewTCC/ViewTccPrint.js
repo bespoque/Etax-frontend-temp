@@ -33,7 +33,7 @@ const ViewTCCPrint = () => {
       }
       const fetchPost = async () => {
         try {
-          let res = await axios.post(`https://rhmlive.bespoque.dev/api/v1/forma/view-tp-tcc`, id);
+          let res = await axios.post(`${url.BASE_URL}user/da/view-tp-tcc`, id);
           let fetctTcc = res.data.body;
           console.log("fetctTcc", fetctTcc);
           let tccdat = fetctTcc.tcc

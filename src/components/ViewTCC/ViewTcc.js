@@ -42,7 +42,7 @@ const ViewTcc = () => {
     setAuthToken();
     const fetchPost = async () => {
       try {
-        let res = await axios.get(`https://rhmlive.bespoque.dev/api/v1/forma/list-tp-tcc?kgtin=${kgtin}`);
+        let res = await axios.get(`${url.BASE_URL}user/da/list-tp-tcc?kgtin=${kgtin}`);
         res = res.data.body.tccPrint;
         setTcc(res)
         let employeessTotal = res.length
