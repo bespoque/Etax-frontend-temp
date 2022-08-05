@@ -263,7 +263,8 @@ export const PrintSingleTcc = ({
                       <KogiGov />
                     </div>
                   </div>
-                  <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span></p>
+                  <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span> of</p>
+                  <p className="font-bold">{ind.address}</p>
                   <div>
                     <p>fully paid his/her Personal Income Tax for the past years, that is: <span>
                       {`${secondYear !== "" ? `${firstYear},` : firstYear} ${thirdYear !== "" ? `${secondYear},` : secondYear} ${thirdYear}`}
