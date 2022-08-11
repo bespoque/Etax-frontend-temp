@@ -161,6 +161,20 @@ export const DirectAssessment = () => {
   );
 };
 
+export const PAYE = () => {
+  return (
+    <div className="mx-6 flex items-center">
+      <Image
+        layout="fixed"
+        src="/images/icons/paye.png"
+        alt=""
+        width={18}
+        height={18}
+      />
+    </div>
+  );
+};
+
 export const TaxReceipt = () => {
   return (
     <Image

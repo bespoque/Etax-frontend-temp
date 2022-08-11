@@ -17,6 +17,7 @@ import {
   DirectAssessment,
   FileReturns,
   Invoice,
+  PAYE,
   UserGuide,
 } from '../../components/Icons/index';
 
@@ -126,6 +127,16 @@ const initialState = [
         title: 'DIRECT ASSESSMENT',
         items: [
           {
+            title: 'ASSESSMENT',
+            items: [
+              {
+                title: 'View',
+                url: '/view/assessments',
+                items: []
+              }
+            ],
+          },
+          {
             title: 'TCC',
             items: [
               {
@@ -134,12 +145,12 @@ const initialState = [
                 items: []
               }
             ],
-          },
+          }
         ],
       },
       {
         url: '/',
-        icon: <DirectAssessment />,
+        icon: <PAYE />,
         title: 'PAYE',
         items: [
           {
