@@ -119,8 +119,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled(true);
         return;
       }
-      if (file.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -144,8 +144,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled2(true);
         return;
       }
-      if (file2.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file2.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -169,8 +169,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled3(true);
         return;
       }
-      if (file3.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file3.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100");
         return
       }
       else {
@@ -194,8 +194,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled4(true);
         return;
       }
-      if (file4.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file4.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -219,8 +219,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled5(true);
         return;
       }
-      if (file5.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file5.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -244,8 +244,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled6(true);
         return;
       }
-      if (file6.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file6.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -295,8 +295,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled8(true);
         return;
       }
-      if (file8.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file8.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -320,8 +320,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled9(true);
         return;
       }
-      if (file9.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file9.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -345,8 +345,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled10(true);
         return;
       }
-      if (file10.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file10.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -370,8 +370,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled11(true);
         return;
       }
-      if (file11.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file11.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -395,8 +395,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled12(true);
         return;
       }
-      if (file12.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file12.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -419,8 +419,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled13(true);
         return;
       }
-      if (file13.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file13.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -444,8 +444,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled14(true);
         return;
       }
-      if (file14.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file14.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -469,8 +469,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled15(true);
         return;
       }
-      if (file15.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file15.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -494,8 +494,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled16(true);
         return;
       }
-      if (file16.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file16.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -519,8 +519,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled17(true);
         return;
       }
-      if (file17.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file17.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
@@ -544,8 +544,8 @@ const AnnualDocsUploadForm = () => {
         setDisabled18(true);
         return;
       }
-      if (file18.size > 1024 * 200) {
-        alert("file too large..file size shoulde not exceed 200kb");
+      if (file18.size > 1024 * 100) {
+        alert("file too large..file size shoulde not exceed 100kb");
         return
       }
       else {
