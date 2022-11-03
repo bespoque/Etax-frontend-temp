@@ -15,7 +15,7 @@ export const Header = () => {
           <Link href="https://irs.kg.gov.ng/kgtin-popup/">
             <a className="flex items-center w-full px-2">
               <GetKgtinIcon />
-              <li className="list-none ml-2">Get KGTIN</li>
+              <li className="list-none ml-2">Don’t have KGTIN? Get KGTIN</li>
             </a>
           </Link>
         </div>

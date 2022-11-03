@@ -76,7 +76,7 @@ const LoginForm = () => {
           autoComplete="off"
           type="text"
           required
-          placeholder="Tax Id"
+          placeholder="Enter KGTIN"
         />
         {errors.kgtin && errors.kgtin.type === "minLength" && (
           <p className="text-red-600">Tax Id must be 10 digits</p>
