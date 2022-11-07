@@ -59,24 +59,24 @@ const initialState = [
           }
         ],
       },
-      {
-        url: '/',
-        icon: <PAYE />,
-        title: 'PAYE',
-        items: [
-          {
-            title: 'TCC',
-            items: [
-              {
-                title: 'View',
-                url: '/view/tcc',
-                items: []
-              }
-            ],
-          },
+      // {
+      //   url: '/',
+      //   icon: <PAYE />,
+      //   title: 'PAYE',
+      //   items: [
+      //     {
+      //       title: 'TCC',
+      //       items: [
+      //         {
+      //           title: 'View',
+      //           url: '/view/tcc',
+      //           items: []
+      //         }
+      //       ],
+      //     },
 
-        ],
-      },
+      //   ],
+      // },
 
       {
         url: '#',
