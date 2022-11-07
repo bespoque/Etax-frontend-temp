@@ -1680,7 +1680,7 @@ const AnnualDocsUploadForm = () => {
 
           <form onSubmit={handleSubmit(onSubmit7)}>
             <div className="flex justify-between mb-5">
-              <p>Trial balance for the year ended 31st Dec. 2021 </p>
+              <p>List of expertriates </p>
               <input
                 id="customFile7"
                 type="file"
