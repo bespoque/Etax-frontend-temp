@@ -1460,8 +1460,8 @@ const AnnualDocsUploadForm = () => {
             </div>
           </form>
 
-          {/* <hr className="mb-2" /> */}
-          {/* 
+          <hr className="mb-2" />
+          
           <form onSubmit={handleSubmit(onSubmit3)}>
             <div className="flex justify-between mb-5">
               <p>List of expertriates <small>[where applicable]</small> <span className="font-bold" style={{ color: "red" }}> * </span><small>(pdf, jpg, png)</small> </p>
@@ -1510,7 +1510,7 @@ const AnnualDocsUploadForm = () => {
 
               </div>
             </div>
-          </form> */}
+          </form>
 
 
         </div>
