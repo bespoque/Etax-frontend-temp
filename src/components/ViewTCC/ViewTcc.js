@@ -78,10 +78,7 @@ const ViewTcc = () => {
         </div>
       )}
       <Widget>
-
-
         <div className="mt-4">
-
           <>
             <ViewTccTable tccData={tcc} />
           </>

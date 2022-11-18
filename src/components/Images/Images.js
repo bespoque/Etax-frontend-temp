@@ -26,8 +26,8 @@ export const CoatOfArms = () => {
     <Image
       layout="fixed"
       src="/images/icons/coat of arms.png"
-      alt="login"
-      width={85}
+      alt="coat of arms"
+      width={75}
       height={60}
     />
   );
@@ -38,19 +38,21 @@ export const KogiGov = () => {
     <Image
       layout="fixed"
       src="/images/kog_govt.png"
-      alt="login"
+      alt="kogi gov"
       width={85}
       height={60}
     />
   );
 };
 
+
+
 export const Signature = () => {
   return (
     <Image
       layout="fixed"
       src="/images/signature.png"
-      alt="login"
+      alt="sign"
       width={121}
       height={49}
     />

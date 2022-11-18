@@ -12,6 +12,7 @@ import { saveAs } from "file-saver";
 import UseFetcher from "../../components/fetcher/useFetcher";
 
 import Loader from "react-loader-spinner";
+import Link from "next/link";
 
 const Index = () => {
   const [submitting, setSubmitting] = useState(() => false);
@@ -161,7 +162,8 @@ const Index = () => {
 
                         <button
                           className="text-black font-semibold px-25 bg-white  w-full border-green-500 p-2 border text-center"
-                          onClick={() => fetchReceipt(data[0].ref)}
+                          // onClick={() => fetchReceipt(data[0].ref)}
+                          onClick={()=> router.push(`/verify-tcc?id=${data[0].ref}`)}
                           disabled={submitting}
                         >
                           <div className="flex justify-center">

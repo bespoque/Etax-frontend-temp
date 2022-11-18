@@ -18,6 +18,7 @@ const Layouts = ({ children }) => {
       '/email-confirmation',
       '/logout',
       '/reset-password',
+      '/verify-tcc',
       '/reset-password/update',
       '/forgot-password',
       '/lock-screen',
@@ -31,7 +32,8 @@ const Layouts = ({ children }) => {
     ['/landing', '/login-1', '/login-2', '/login-3'].includes(pathname)
   ) {
     return <Empty>{children}</Empty>;
-  } else if (['/', '/signup', '/signup/auth'].includes(pathname)) {
+  }
+   else if (['/', '/signup', '/signup/auth'].includes(pathname)) {
     return <Layout2>{children}</Layout2>;
   } else {
     return <Layout1>{children}</Layout1>;

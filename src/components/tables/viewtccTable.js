@@ -227,8 +227,6 @@ export const PrintSingleTcc = ({
           <div className="flex justify-around">
             <div>
 
-
-
               <div className="flex mb-8">
                 <KgirsLogo2 />
                 <p className="self-center w-48 font-bold">KOGI STATE INTERNAL REVENUE SERVICE</p>
