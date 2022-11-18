@@ -41,6 +41,7 @@ export const KogiGov = () => {
       alt="kogi gov"
       width={85}
       height={60}
+   
     />
   );
 };

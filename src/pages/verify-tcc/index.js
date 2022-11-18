@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature } from '../../components/Images/Images'
 import axios from 'axios';
 import url from '../../config/url';
 import { useRouter } from 'next/router';
 import setAuthToken from '../../functions/setAuthToken';
 import QRCode from 'react-qr-code';
-import Widget from '../../components/widget';
 import Loader from 'react-loader-spinner';
 import { formatNumber } from '../../functions/numbers';
+import ReactToPrint from 'react-to-print';
+
+
 
 export default function index() {
   const [colData, setColData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
   const params = new URLSearchParams(window.location.search)
-
+  const componentRef = useRef();
 
   useEffect(() => {
     if (router && router.query) {
@@ -71,23 +73,30 @@ export default function index() {
             >
               Back
             </button>
-            <button className="btn  bg-green-600 btn-default text-white
-            btn-outlined bg-transparent rounded-md"
-              type="submit"
-            >
-              Download
-            </button>
+            <div >
+              <ReactToPrint
+                pageStyle='@page { size: auto; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; padding: 40px !important; } }'
+                // pageStyle="@page { size: 7.5in 13in  }"
+                trigger={() => <button className="btn w-32 bg-green-600 btn-default text-white
+                  btn-outlined bg-transparent rounded-md"
+                  type="submit"
+                >
+                  Print
+                </button>}
+                content={() => componentRef.current}
+              />
+            </div>
           </div>
-          <div class="border p-6">
+          <div class="border p-6" ref={componentRef}>
             <p>KOGI STATE GOVERNMENT</p>
             <section class="flex justify-between">
               <p class="font-bold">REVENUE RECEIPT</p>
               <p class="font-bold">{`Ref - ${colData.referenceNo}`}</p>
             </section>
             <section class="flex justify-end mt-8">
-              <CoatOfArms />
-              <KogiGov />
-              <KgirsLogo2 />
+                  <CoatOfArms />
+                  <KogiGov />
+                  <KgirsLogo2 />
             </section>
             <div class="flex justify-between">
               <div>
