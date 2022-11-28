@@ -39,56 +39,71 @@ const ViewAnnualSingle = () => {
             `${url.BASE_URL}annual/view-annual`, yearValue
           );
           res = res.data.body.annualYr;
-          console.log(res);
+          console.log("res", res);
           let sum = {};
           let records = [];
           let salarySum = [];
-          let chargeableSum = [];
-          let totalReliefSum = [];
+          let reliefSum = [];
+          let pensionSum = [];
+          let nhisSum = [];
+          let lapSum = [];
           let taxSum = [];
           for (let i = 0; i < res.length; i++) {
             let rec = res[i];
-            rec.year = dateformat(rec.year, "yyyy");
-            rec.salary = parseInt(rec.salary);
-            rec.chargeable = parseInt(rec.chargeable) / 12;
-            rec.totalRelief = parseInt(rec.totalRelief);
-            rec.tax = parseInt(rec.tax);
+            rec.salary = Number(rec.basic_salary);
+            rec.consolRel = Number(rec.con_rel_cal)
+            rec.pens = Number(rec.pension)
+            rec.nhisScheme = Number(rec.nhis)
+            rec.lapScheme = Number(rec.lap)
+            reliefSum.push(rec.consolRel);
             salarySum.push(rec.salary);
-            chargeableSum.push(rec.chargeable);
-            totalReliefSum.push(rec.totalRelief);
+            pensionSum.push(rec.pens);
+            nhisSum.push(rec.nhisScheme);
+            lapSum.push(rec.lapScheme);
+            rec.year = dateformat(rec.year, "yyyy");
+            rec.tax = parseInt(rec.tax);
             taxSum.push(rec.tax);
             rec.nhis = formatNumber(rec.nhis);
             rec.lap = formatNumber(rec.lap);
             rec.net_tax_ded = formatNumber(rec.net_tax_ded);
             rec.tax_pay_cal = formatNumber(rec.tax_pay_cal);
-            rec.nhis = formatNumber(rec.nhis);
-            rec.con_rel_cal =(formatNumber(rec.con_rel_cal));
+            rec.con_rel_cal = (formatNumber(rec.con_rel_cal));
             rec.basic_salary = formatNumber(rec.basic_salary);
             rec.pension = formatNumber(rec.pension);
             rec.name = rec.staff_names;
             records.push(rec);
           }
-
+        
           const totalSalary = salarySum.reduce(
             (preVal, curVal) => preVal + curVal,
             0
           );
-          const totalChargeable = chargeableSum.reduce(
+          const totalConRel = reliefSum.reduce(
             (preVal, curVal) => preVal + curVal,
             0
           );
-          const totalRelief = totalReliefSum.reduce(
+          const totalPension = pensionSum.reduce(
             (preVal, curVal) => preVal + curVal,
             0
           );
-          const totalTax = taxSum.reduce(
+          const totalNHIS = nhisSum.reduce(
             (preVal, curVal) => preVal + curVal,
             0
           );
+          const totalLAP = lapSum.reduce(
+            (preVal, curVal) => preVal + curVal,
+            0
+          );
+          // const totalTax = taxSum.reduce(
+          //   (preVal, curVal) => preVal + curVal,
+          //   0
+          // );
           sum.totalSalary = totalSalary;
-          sum.totalChargeable = totalChargeable;
-          sum.totalRelief = totalRelief;
-          sum.totalTax = totalTax;
+          sum.totalConRel = totalConRel;
+          sum.totalPension = totalPension;
+          sum.totalNHIS = totalNHIS;
+          sum.totalLAP = totalLAP;
+          // sum.totalTax = totalTax;
           setIsFetching(false);
           setPost(() => records);
           setTotal(() => sum);
@@ -99,7 +114,7 @@ const ViewAnnualSingle = () => {
       fetchPost();
     }
   }, [router]);
-
+  console.log("Annual sum", total);
   // Get current post
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -122,28 +137,7 @@ const ViewAnnualSingle = () => {
   };
 
   const searchedPost = search(post).slice(indexOfFirstPost, indexOfLastPost);
-  const deleteHandler = async (assessmentId) => {
-    try {
-      setAuthToken();
-      let res = await axios.delete(
-        `${url.BASE_URL}payment/delete-pending-invoice/${assessmentId}`
-      );
 
-      console.log(res.data);
-      alert(res.data.message);
-      router.push("/view/monthly");
-    } catch (e) {
-      if (e.response) {
-        alert(e.response.message);
-      }
-    }
-  };
-
-  // const deletePrompt = (assessmentId) => {
-  //   if (window.confirm("Are you sure you want to delete this record?")) {
-  //     deleteHandler(assessmentId);
-  //   }
-  // };
 
   return (
     <>

@@ -99,7 +99,6 @@ const AnnualUploadForm = () => {
     const formData = new FormData();
     formData.append('payPeriod', payPeriod);
     formData.append('csv', file);
-
     setAuthToken();
     setSubmitting(() => true);
     try {
@@ -121,6 +120,9 @@ const AnnualUploadForm = () => {
       setSubmitting(() => false);
       setUploadSuccessful(() => true);
       show();
+      const timer = setTimeout(() => router.push("/uploads/annualdocs"), 3000);
+      return () => clearTimeout(timer);
+      
     } catch (error) {
       setUploadPercentage(0);
       setFile(null);
@@ -152,6 +154,7 @@ const AnnualUploadForm = () => {
       <Widget>
         <form onSubmit={handleSubmit(handleUpload)}>
           <div className="flex flex-col lg:flex-row lg:flex-wrap w-full lg:space-x-4">
+
             <div className="w-full lg:w-1/12">
               <SelectAnnual
                 label="Select Year"
@@ -171,6 +174,7 @@ const AnnualUploadForm = () => {
                 onChange={fileHandler}
                 onClick={(e) => (e.target.value = null)}
               />
+              <small className="text-red-600">Document to upload does not accept comma</small>
               <div className="flex items-center">
                 <button
                   className="btn btn-default btn-outlined bg-transparent mr-4"
@@ -185,6 +189,7 @@ const AnnualUploadForm = () => {
               </div>
             </div>
           </div>
+
           <div className="mt-4">
             <SubmitButton type="submit" disabled={disabled}>
               Submit
@@ -259,6 +264,7 @@ const AnnualUploadForm = () => {
 
         <div className="flex justify-end">
           <div>
+
             <p className="text-center text-xl">Sample Csv</p>
             <SampleCsv />
             <div className="flex justify-center">

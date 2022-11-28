@@ -5,6 +5,7 @@ import url from "../../config/url";
 import Link from "next/link";
 import setAuthToken from '../../functions/setAuthToken';
 import Loader from 'react-loader-spinner';
+import { FiTrash, FiTrash2 } from 'react-icons/fi';
 
 export const ViewDocs = () => {
   const [uploadedDocs, setDocuments] = useState([])
@@ -138,7 +139,9 @@ export const ViewDocs = () => {
   })
   const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
+const DeleteSubmissionLetter = () => {
 
+}
 
 
   return (
@@ -168,6 +171,7 @@ export const ViewDocs = () => {
           {coverL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/cover_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>

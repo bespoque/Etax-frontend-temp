@@ -150,7 +150,6 @@ const singleFields = [
 
 export const ViewAnnualTableSingle = ({ remittance, total }) => {
   const items = remittance;
-  console.log(remittance);
 
   return (
     <>
@@ -180,11 +179,12 @@ export const ViewAnnualTableSingle = ({ remittance, total }) => {
                 <tr className="font-semibold">
                   <td></td>
                   <td></td>
-                  <td></td>
-                  {/* <td>{formatNumber(total.totalSalary)}</td>
-                  <td>{formatNumber(total.totalChargeable)}</td>
-                  <td>{formatNumber(total.totalRelief)}</td>
-                  <td>{formatNumber(total.totalTax)}</td> */}
+                  <td>{formatNumber(total.totalSalary)}</td>
+                  <td>{formatNumber(total.totalConRel)}</td>
+                  <td>{formatNumber(total.totalPension)}</td>
+                  <td>{formatNumber(total.totalNHIS)}</td>
+                  <td>{formatNumber(total.totalLAP)}</td>
+                  {/* <td>{formatNumber(total.totalTax)}</td> */}
                 </tr>
               )}
             </tbody>
