@@ -1347,6 +1347,7 @@ const AnnualDocsUploadForm = () => {
       {/* <TokenModalsOverlay>
         <TokenModals />
       </TokenModalsOverlay> */}
+
       <div className="flex justify-center flex-col lg:flex-row lg:flex-wrap w-full lg:space-x-4">
         <div className="w-full lg:w-1/12">
           <SelectAnnual
@@ -1358,6 +1359,7 @@ const AnnualDocsUploadForm = () => {
         </div>
       </div>
       <h6 className="p-2 font-bold">Correspondence</h6>
+      <p className="flex justify-center">Documents should not exceed 100kb</p>
       <Widget>
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>
