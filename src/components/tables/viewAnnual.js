@@ -18,10 +18,10 @@ const fields = [
     name: "Net Tax deducted",
     key: "netTaxDeduct",
   },
-  {
-    name: "Total Tax",
-    key: "tax_pay_cal",
-  },
+  // {
+  //   name: "Total Tax",
+  //   key: "tax_pay_cal",
+  // },
 
 ];
 
