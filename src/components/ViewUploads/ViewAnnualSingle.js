@@ -47,7 +47,7 @@ const ViewAnnualSingle = () => {
           let pensionSum = [];
           let nhisSum = [];
           let lapSum = [];
-          let taxSum = [];
+          let netTaxSum = [];
           for (let i = 0; i < res.length; i++) {
             let rec = res[i];
             rec.salary = Number(rec.basic_salary);
@@ -55,11 +55,13 @@ const ViewAnnualSingle = () => {
             rec.pens = Number(rec.pension)
             rec.nhisScheme = Number(rec.nhis)
             rec.lapScheme = Number(rec.lap)
+            rec.netTax = Number(rec.net_tax_ded)
             reliefSum.push(rec.consolRel);
             salarySum.push(rec.salary);
             pensionSum.push(rec.pens);
             nhisSum.push(rec.nhisScheme);
             lapSum.push(rec.lapScheme);
+            netTaxSum.push(rec.netTax);
             rec.year = dateformat(rec.year, "yyyy");
             rec.tax = parseInt(rec.tax);
             taxSum.push(rec.tax);
@@ -94,15 +96,16 @@ const ViewAnnualSingle = () => {
             (preVal, curVal) => preVal + curVal,
             0
           );
-          // const totalTax = taxSum.reduce(
-          //   (preVal, curVal) => preVal + curVal,
-          //   0
-          // );
+          const totalNetTax = netTaxSum.reduce(
+            (preVal, curVal) => preVal + curVal,
+            0
+          );
           sum.totalSalary = totalSalary;
           sum.totalConRel = totalConRel;
           sum.totalPension = totalPension;
           sum.totalNHIS = totalNHIS;
           sum.totalLAP = totalLAP;
+          sum.totalNetTax = totalNetTax;
           // sum.totalTax = totalTax;
           setIsFetching(false);
           setPost(() => records);
