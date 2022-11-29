@@ -8,6 +8,7 @@ import { FiX, FiCheck } from 'react-icons/fi';
 import setAuthToken from '../../functions/setAuthToken';
 import { ProcessorSpinner, Progress } from '../spiner/index';
 import { SelectAnnual, SelectMonth } from '../forms/selects';
+import Link from 'next/link';
 
 const AnnualDocsUploadForm = () => {
   //handle file
@@ -1461,7 +1462,7 @@ const AnnualDocsUploadForm = () => {
           </form>
 
           <hr className="mb-2" />
-          
+
           <form onSubmit={handleSubmit(onSubmit3)}>
             <div className="flex justify-between mb-5">
               <p>List of expertriates <small>[where applicable]</small> <span className="font-bold" style={{ color: "red" }}> * </span><small>(pdf, jpg, png)</small> </p>
@@ -2253,7 +2254,7 @@ const AnnualDocsUploadForm = () => {
         </form>
 
         <hr className="mb-2" />
-        
+
         <form onSubmit={handleSubmit(onSubmit18)}>
           <div className="flex justify-between mb-5">
             <p>Evidence of remittance of LAP  <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
@@ -2302,6 +2303,16 @@ const AnnualDocsUploadForm = () => {
             </div>
           </div>
         </form>
+        <div className="flex justify-center">
+
+          <button
+            className="disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-white hover:bg-white-500 hover:border-green-500"
+            type="submit"
+          >
+            <Link href={`/dashboard`}>Done</Link>
+
+          </button>
+        </div>
       </Widget>
 
     </>

@@ -39,7 +39,6 @@ const ViewAnnualSingle = () => {
             `${url.BASE_URL}annual/view-annual`, yearValue
           );
           res = res.data.body.annualYr;
-          console.log("res", res);
           let sum = {};
           let records = [];
           let salarySum = [];
@@ -48,6 +47,7 @@ const ViewAnnualSingle = () => {
           let nhisSum = [];
           let lapSum = [];
           let netTaxSum = [];
+          let expTaxSum = [];
           for (let i = 0; i < res.length; i++) {
             let rec = res[i];
             rec.salary = Number(rec.basic_salary);
@@ -56,15 +56,17 @@ const ViewAnnualSingle = () => {
             rec.nhisScheme = Number(rec.nhis)
             rec.lapScheme = Number(rec.lap)
             rec.netTax = Number(rec.net_tax_ded)
+            rec.expTax = Number(rec.tax_pay_cal)
             reliefSum.push(rec.consolRel);
             salarySum.push(rec.salary);
             pensionSum.push(rec.pens);
             nhisSum.push(rec.nhisScheme);
             lapSum.push(rec.lapScheme);
             netTaxSum.push(rec.netTax);
+            expTaxSum.push(rec.expTax);
             rec.year = dateformat(rec.year, "yyyy");
             rec.tax = parseInt(rec.tax);
-            taxSum.push(rec.tax);
+            // taxSum.push(rec.tax);
             rec.nhis = formatNumber(rec.nhis);
             rec.lap = formatNumber(rec.lap);
             rec.net_tax_ded = formatNumber(rec.net_tax_ded);
@@ -100,13 +102,17 @@ const ViewAnnualSingle = () => {
             (preVal, curVal) => preVal + curVal,
             0
           );
+          const totalExpTax = expTaxSum.reduce(
+            (preVal, curVal) => preVal + curVal,
+            0
+          );
           sum.totalSalary = totalSalary;
           sum.totalConRel = totalConRel;
           sum.totalPension = totalPension;
           sum.totalNHIS = totalNHIS;
           sum.totalLAP = totalLAP;
           sum.totalNetTax = totalNetTax;
-          // sum.totalTax = totalTax;
+          sum.totalExpTax = totalExpTax;
           setIsFetching(false);
           setPost(() => records);
           setTotal(() => sum);
@@ -118,6 +124,7 @@ const ViewAnnualSingle = () => {
     }
   }, [router]);
   console.log("Annual sum", total);
+  console.log("Posts", post);
   // Get current post
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
