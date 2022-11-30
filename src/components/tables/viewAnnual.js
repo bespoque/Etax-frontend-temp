@@ -11,13 +11,13 @@ const fields = [
     key: "year",
   },
   {
-    name: "Basic Salary",
+    name: "Gross Basic Salary",
     key: "basicSalary",
   },
-  {
-    name: "Net Tax deducted",
-    key: "netTaxDeduct",
-  },
+  // {
+  //   name: "Net Tax deducted",
+  //   key: "netTaxDeduct",
+  // },
   // {
   //   name: "Total Tax",
   //   key: "tax_pay_cal",
