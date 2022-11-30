@@ -1080,10 +1080,11 @@ const DeleteSubmissionLetter = () => {
         </div>
 
         <div className="flex">
-          {coverL.map((element, i) => (
-            <div key={i} className="p-2">
+          {coverL.map((element, index) => (
+            <div key={index} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/cover_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <input type="text" name="file_name" defaultValue={element} className="hidden" />
+              <p><button onClick={DeleteSubmissionLetter(index)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>

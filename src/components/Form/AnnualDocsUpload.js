@@ -558,7 +558,8 @@ const AnnualDocsUploadForm = () => {
 
   const onSubmit = async data => {
     let employer_id = localStorage.getItem("kgtin")
-    const year = data.year
+    // const year = data.year
+    const year = "2022"
     const formData = new FormData();
     formData.append('employer_id', employer_id);
     formData.append('cover_letter', file);
@@ -2311,7 +2312,7 @@ const AnnualDocsUploadForm = () => {
             className="disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-white hover:bg-white-500 hover:border-green-500"
             type="submit"
           >
-            <Link href={`/dashboard`}>Done</Link>
+            <Link href={`/dashboard`}>Submit</Link>
 
           </button>
         </div>
