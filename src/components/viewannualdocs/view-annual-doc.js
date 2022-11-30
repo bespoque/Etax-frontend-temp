@@ -139,9 +139,9 @@ export const ViewDocs = () => {
   })
   const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
-const DeleteSubmissionLetter = () => {
+  const DeleteSubmissionLetter = () => {
 
-}
+  }
 
 
   return (
@@ -595,9 +595,9 @@ export const ViewDocsYr2 = () => {
   })
   const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
-const DeleteSubmissionLetter = () => {
+  const DeleteSubmissionLetter = () => {
 
-}
+  }
 
 
   return (
@@ -1051,9 +1051,9 @@ export const ViewDocsYr3 = () => {
   })
   const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
-const DeleteSubmissionLetter = () => {
+  const DeleteSubmissionLetter = () => {
 
-}
+  }
 
 
   return (
@@ -1083,8 +1083,7 @@ const DeleteSubmissionLetter = () => {
           {coverL.map((element, index) => (
             <div key={index} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/cover_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <input type="text" name="file_name" defaultValue={element} className="hidden" />
-              <p><button onClick={DeleteSubmissionLetter(index)}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={()=> console.log(element)}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1106,7 +1105,7 @@ const DeleteSubmissionLetter = () => {
           {indReturnL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/indv_return_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1123,7 +1122,7 @@ const DeleteSubmissionLetter = () => {
           {expertriateL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exp_order_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1141,7 +1140,7 @@ const DeleteSubmissionLetter = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1159,7 +1158,7 @@ const DeleteSubmissionLetter = () => {
           {evidenceOfPayeR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/paye_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1175,7 +1174,7 @@ const DeleteSubmissionLetter = () => {
           {exitStaffL.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exit_staff_list/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1191,7 +1190,7 @@ const DeleteSubmissionLetter = () => {
           {TrialBal21.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/endyr_trial_bal/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1207,7 +1206,7 @@ const DeleteSubmissionLetter = () => {
           {withTaxD.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_deduct/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1223,7 +1222,7 @@ const DeleteSubmissionLetter = () => {
           {withTaxR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1239,7 +1238,7 @@ const DeleteSubmissionLetter = () => {
           {monthlyImmR.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/mnthly_immi_returns/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1255,7 +1254,7 @@ const DeleteSubmissionLetter = () => {
           {devLevyR.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/dev_levy_receipts/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1271,7 +1270,7 @@ const DeleteSubmissionLetter = () => {
           {busPremisesR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/bus_premises_receipt/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1287,7 +1286,7 @@ const DeleteSubmissionLetter = () => {
           {groundRentR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/grnd_rent_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1303,7 +1302,7 @@ const DeleteSubmissionLetter = () => {
           {SSCLevy.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/sscl/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1319,7 +1318,7 @@ const DeleteSubmissionLetter = () => {
           {pensionR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/pension_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1335,7 +1334,7 @@ const DeleteSubmissionLetter = () => {
           {nhfR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhf_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1351,7 +1350,7 @@ const DeleteSubmissionLetter = () => {
           {nhisR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhis_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1367,7 +1366,7 @@ const DeleteSubmissionLetter = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
             </div>
           ))}
         </div>
@@ -1507,9 +1506,9 @@ export const ViewDocsYr4 = () => {
   })
   const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
-const DeleteSubmissionLetter = () => {
+  const DeleteSubmissionLetter = () => {
 
-}
+  }
 
 
   return (
