@@ -62,11 +62,11 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const existStaffList = uploadedDocs.map(function (doc) {
-  //   let exitStaf = doc.exit_staff_list
-  //   return exitStaf
-  // })
-  // const exitStaffL = existStaffList.filter(item => item !== null && item !== "")
+  const existStaffList = uploadedDocs.filter(c => c.doc_title === "exit_staff_list")
+
+  const exitStaffL = existStaffList.map((doc) => {
+    return doc.doc_name
+  })
 
   // const TrialBal = uploadedDocs.map(function (doc) {
   //   let trialB = doc.endyr_trial_bal
@@ -152,20 +152,11 @@ export const ViewDocs = () => {
     axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
       .then(function (response) {
         setIsFetching(false)
-        // toast.success("Deleted Successfully!");
         setDeleted(!deleted)
         window.reload()
       })
       .catch(function (error) {
-        // console.log("fileName", fileName);
         setIsFetching(false)
-        // if (error) {
-        //   toast.error("Cannot Delete Document");
-        // } else {
-        //   toast.error("Failed! Try again");
-
-        // }
-
       })
 
   }
@@ -180,20 +171,11 @@ export const ViewDocs = () => {
     axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
       .then(function (response) {
         setIsFetching(false)
-        // toast.success("Deleted Successfully!");
         setDeleted(!deleted)
         window.reload()
       })
       .catch(function (error) {
-        // console.log("fileName", fileName);
         setIsFetching(false)
-        // if (error) {
-        //   toast.error("Cannot Delete Document");
-        // } else {
-        //   toast.error("Failed! Try again");
-
-        // }
-
       })
 
   }
@@ -208,20 +190,11 @@ export const ViewDocs = () => {
     axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
       .then(function (response) {
         setIsFetching(false)
-        // toast.success("Deleted Successfully!");
         setDeleted(!deleted)
         window.reload()
       })
       .catch(function (error) {
-        // console.log("fileName", fileName);
         setIsFetching(false)
-        // if (error) {
-        //   toast.error("Cannot Delete Document");
-        // } else {
-        //   toast.error("Failed! Try again");
-
-        // }
-
       })
 
   }
@@ -236,20 +209,30 @@ export const ViewDocs = () => {
     axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
       .then(function (response) {
         setIsFetching(false)
-        // toast.success("Deleted Successfully!");
         setDeleted(!deleted)
         window.reload()
       })
       .catch(function (error) {
-        // console.log("fileName", fileName);
         setIsFetching(false)
-        // if (error) {
-        //   toast.error("Cannot Delete Document");
-        // } else {
-        //   toast.error("Failed! Try again");
+      })
 
-        // }
+  }
 
+  const DeleteExitStaffListY1 = (i) => {
+    setIsFetching(true)
+    const list = [...exitStaffL];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
       })
 
   }
@@ -354,7 +337,7 @@ export const ViewDocs = () => {
           {evidenceOfPayeR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/paye_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=> DeletePayeRemY1(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeletePayeRemY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -362,7 +345,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Exit staff list
         </div>
@@ -370,11 +353,11 @@ export const ViewDocs = () => {
           {exitStaffL.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exit_staff_list/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteExitStaffListY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
