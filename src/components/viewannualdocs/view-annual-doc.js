@@ -52,17 +52,15 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const monthlyPayrollSchedule = uploadedDocs.map(function (doc) {
-  //   let mthlyPaySched = doc.mnthly_pay_sched
-  //   return mthlyPaySched
-  // })
+  const monthlyPayrollSchedule = uploadedDocs.filter(c => c.doc_title === "mnthly_pay_sched")
+
   // const monthlyPayrollS = monthlyPayrollSchedule.filter(item => item !== null && item !== "")
 
-  // const payeRemittance = uploadedDocs.map(function (doc) {
-  //   let payeR = doc.paye_remittance
-  //   return payeR
-  // })
-  // const evidenceOfPayeR = payeRemittance.filter(item => item !== null && item !== "")
+  const payeRemittance = uploadedDocs.filter(c => c.doc_title === "paye_remittance")
+
+  const evidenceOfPayeR = payeRemittance.map((doc) => {
+    return doc.doc_name
+  })
 
   // const existStaffList = uploadedDocs.map(function (doc) {
   //   let exitStaf = doc.exit_staff_list
@@ -228,6 +226,34 @@ export const ViewDocs = () => {
 
   }
 
+  const DeletePayeRemY1 = (i) => {
+    setIsFetching(true)
+    const list = [...evidenceOfPayeR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        // toast.success("Deleted Successfully!");
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        // console.log("fileName", fileName);
+        setIsFetching(false)
+        // if (error) {
+        //   toast.error("Cannot Delete Document");
+        // } else {
+        //   toast.error("Failed! Try again");
+
+        // }
+
+      })
+
+  }
+
 
   return (
     <>
@@ -292,7 +318,7 @@ export const ViewDocs = () => {
           {expertriateL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exp_order_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=> DeleteExpLetterY1(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteExpLetterY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -319,7 +345,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of PAYE remittance
         </div>
@@ -328,11 +354,11 @@ export const ViewDocs = () => {
           {evidenceOfPayeR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/paye_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=> DeletePayeRemY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
