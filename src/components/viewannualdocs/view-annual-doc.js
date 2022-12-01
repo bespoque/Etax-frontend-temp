@@ -103,12 +103,11 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const sscl = uploadedDocs.map(function (doc) {
-  //   let ssclR = doc.sscl
-  //   return ssclR
-  // })
-  // const SSCLevy = sscl.filter(item => item !== null && item !== "")
-
+  const sscl = uploadedDocs.filter(c => c.doc_title === "sscl")
+ 
+  const SSCLevy = sscl.map((doc) => {
+    return doc.doc_name
+  })
   // const pensionRemittance = uploadedDocs.map(function (doc) {
   //   let pensionRem = doc.pension_remittance
   //   return pensionRem
@@ -363,6 +362,25 @@ export const ViewDocs = () => {
 
   }
 
+  const DeleteSocialServ = (i) => {
+    setIsFetching(true)
+    const list = [...SSCLevy];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
 
   return (
     <>
@@ -599,7 +617,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Social service contributions levy
         </div>
@@ -607,11 +625,11 @@ export const ViewDocs = () => {
           {SSCLevy.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/sscl/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=> DeleteSocialServ(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
