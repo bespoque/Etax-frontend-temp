@@ -125,13 +125,12 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const lapRemittance = uploadedDocs.map(function (doc) {
-  //   let lapRem = doc.lap_remittance
-  //   return lapRem
-  // })
-  // const lapR = lapRemittance.filter(item => item !== null && item !== "")
+  const lapRemittance = uploadedDocs.filter(c => c.doc_title === "lap_remittance")
+  const lapR = lapRemittance.map((doc) => {
+    return doc.doc_name
+  })
 
-  console.log("coverL", coverL);
+
   const DeleteSubmissionLetterY1 = (i) => {
     setIsFetching(true)
     const list = [...coverL];
@@ -421,6 +420,25 @@ export const ViewDocs = () => {
   const DeleteNHIS = (i) => {
     setIsFetching(true)
     const list = [...nhisR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+  
+  const DeleteLAP = (i) => {
+    setIsFetching(true)
+    const list = [...lapR];
     let fileName = list[i];
     let uploadFile = {
       doc_name: fileName
@@ -737,7 +755,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of LAP
         </div>
@@ -745,11 +763,11 @@ export const ViewDocs = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
