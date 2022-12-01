@@ -726,7 +726,7 @@ const AnnualDocsUploadForm = () => {
     formData.append('year', year);
     setAuthToken();
     setSubmitting4(true)
-    
+
     try {
       const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
         headers: {
@@ -1769,7 +1769,7 @@ const AnnualDocsUploadForm = () => {
 
           <form onSubmit={handleSubmit(onSubmit7)}>
             <div className="flex justify-between mb-5">
-              <p>List of expertriates </p>
+              <p>End of year trial balance </p>
               <input
                 id="customFile7"
                 type="file"

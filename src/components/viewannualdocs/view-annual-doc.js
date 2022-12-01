@@ -68,29 +68,25 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const TrialBal = uploadedDocs.map(function (doc) {
-  //   let trialB = doc.endyr_trial_bal
-  //   return trialB
-  // })
-  // const TrialBal21 = TrialBal.filter(item => item !== null && item !== "")
+  const TrialBal = uploadedDocs.filter(c => c.doc_title === "endyr_trial_bal")
+  const TrialBalance = TrialBal.map((doc) => {
+    return doc.doc_name
+  })
 
-  // const withHoldingTaxDeduct = uploadedDocs.map(function (doc) {
-  //   let withTax = doc.wht_tax_deduct
-  //   return withTax
-  // })
-  // const withTaxD = withHoldingTaxDeduct.filter(item => item !== null && item !== "")
+  const withHoldingTaxDeduct = uploadedDocs.filter(c => c.doc_title === "wht_tax_deduct")
+  const withTaxD = withHoldingTaxDeduct.map((doc) => {
+    return doc.doc_name
+  })
 
-  // const withHoldingTaxReceipt = uploadedDocs.map(function (doc) {
-  //   let withTaxRec = doc.wht_tax_receipts
-  //   return withTaxRec
-  // })
-  // const withTaxR = withHoldingTaxReceipt.filter(item => item !== null && item !== "")
+  const withHoldingTaxReceipt = uploadedDocs.filter(c => c.doc_title === "wht_tax_receipts")
+  const withTaxR = withHoldingTaxReceipt.map((doc) => {
+    return doc.doc_name
+  })
 
-  // const monthlyImmigrationReturn = uploadedDocs.map(function (doc) {
-  //   let monthlyImm = doc.mnthly_immi_returns
-  //   return monthlyImm
-  // })
-  // const monthlyImmR = monthlyImmigrationReturn.filter(item => item !== null && item !== "")
+  const monthlyImmigrationReturn = uploadedDocs.filter(c => c.doc_title === "mnthly_immi_returns")
+  const monthlyImmR = monthlyImmigrationReturn.map((doc) => {
+    return doc.doc_name
+  })
 
   // const devLevyReceipts = uploadedDocs.map(function (doc) {
   //   let devLevy = doc.dev_levy_receipts
@@ -237,6 +233,82 @@ export const ViewDocs = () => {
 
   }
 
+  const DeleteTrialBalY1 = (i) => {
+    setIsFetching(true)
+    const list = [...TrialBalance];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
+  const DeleteWthTaxDedY1 = (i) => {
+    setIsFetching(true)
+    const list = [...withTaxD];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
+  const DeleteWthTaxReY1 = (i) => {
+    setIsFetching(true)
+    const list = [...withTaxR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
+  const DeleteMnthImReY1 = (i) => {
+    setIsFetching(true)
+    const list = [...monthlyImmR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
 
   return (
     <>
@@ -361,23 +433,23 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
-          Trial balance for the year ended 31st Dec. 2021
+          Trial balance for Year ending
         </div>
         <div className="flex">
-          {TrialBal21.map((element, i) => (
+          {TrialBalance.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/endyr_trial_bal/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=> DeleteTrialBalY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Schedule of withholding tax deductions
         </div>
@@ -385,15 +457,15 @@ export const ViewDocs = () => {
           {withTaxD.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_deduct/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteWthTaxDedY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Withholding tax receipts
         </div>
@@ -401,15 +473,15 @@ export const ViewDocs = () => {
           {withTaxR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteWthTaxReY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly Immigration returns
         </div>
@@ -417,11 +489,11 @@ export const ViewDocs = () => {
           {monthlyImmR.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/mnthly_immi_returns/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteMnthImReY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
