@@ -27,16 +27,16 @@ const fields = [
 
 export const ViewAnnualTable = ({ remittance, totalemployees, totaltax, grosssum }) => {
   let items = remittance;
-  console.log(remittance)
-  remittance.map((remittance) => {
-    remittance["amount"] = formatNumber(remittance["amount"]);
-    if (remittance["status"] === 1) {
-      remittance["status"] = "success";
-    } else if (remittance["status"] === 0) {
-      remittance["status"] = "failed";
-    }
-    return remittance;
-  });
+  // console.log(remittance)
+  // remittance.map((remittance) => {
+  //   remittance["amount"] = formatNumber(remittance["amount"]);
+  //   if (remittance["status"] === 1) {
+  //     remittance["status"] = "success";
+  //   } else if (remittance["status"] === 0) {
+  //     remittance["status"] = "failed";
+  //   }
+  //   return remittance;
+  // });
 
   return (
     <>

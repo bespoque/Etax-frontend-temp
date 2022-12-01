@@ -7,8 +7,11 @@ import url from '../../config/url';
 import { FiX, FiCheck } from 'react-icons/fi';
 import setAuthToken from '../../functions/setAuthToken';
 import { ProcessorSpinner, Progress } from '../spiner/index';
-import { SelectAnnual, SelectMonth } from '../forms/selects';
+import { SelectAnnual, SelectMonth, SelectYearAnnual } from '../forms/selects';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+// import { toast, ToastContainer } from 'react-toastify';
+// import "react-toastify/dist/ReactToastify.css";
 
 const AnnualDocsUploadForm = () => {
   //handle file
@@ -103,8 +106,30 @@ const AnnualDocsUploadForm = () => {
   const [submitting17, setSubmitting17] = useState(false);
   const [submitting18, setSubmitting18] = useState(false);
   const { register, handleSubmit } = useForm();
+  const modalRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const router = useRouter()
 
+  const { palettes } = useSelector(
+    (state) => ({
+      palettes: state.palettes,
+    }),
+    shallowEqual
+  );
+  let { background } = {
+    ...palettes,
+  };
 
+  const show = () => {
+    setOpen(true);
+    const timer = setTimeout(() => router.push("/dashboard"), 3000);
+    return () => clearTimeout(timer);
+  };
+
+  const hide = () => {
+    setOpen(false);
+    router.push('/dashboard');
+  };
 
   const onChange = e => {
     const file = e.target.files[0]
@@ -558,43 +583,47 @@ const AnnualDocsUploadForm = () => {
 
   const onSubmit = async data => {
     let employer_id = localStorage.getItem("kgtin")
-    // const year = data.year
-    const year = "2022"
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('cover_letter', file);
-    formData.append('year', year);
-    setAuthToken();
-    setSubmitting(true)
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+    const year = data.year
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('cover_letter', file);
+      formData.append('year', year);
+      setAuthToken();
+      setSubmitting(true)
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting(false)
-      setUploadedFile(true);
-      setFile(null)
-      setDisabled(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting(false)
+        setUploadedFile(true);
         setFile(null)
         setDisabled(true)
-        setUploadPercentage(0)
-        setSubmitting(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile(null)
+          setDisabled(true)
+          setUploadPercentage(0)
+          setSubmitting(false)
+        }
       }
     }
   };
@@ -602,41 +631,46 @@ const AnnualDocsUploadForm = () => {
   const onSubmit2 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('indv_return_letter', file2);
-    formData.append('year', year);
-    setAuthToken();
-    setSubmitting2(true)
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage2(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('indv_return_letter', file2);
+      formData.append('year', year);
+      setAuthToken();
+      setSubmitting2(true)
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage2(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting2(false)
-      setUploadedFile2(true);
-      setFile2(null)
-      setDisabled2(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting2(false)
+        setUploadedFile2(true);
         setFile2(null)
         setDisabled2(true)
-        setUploadPercentage2(0)
-        setSubmitting2(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile2(null)
+          setDisabled2(true)
+          setUploadPercentage2(0)
+          setSubmitting2(false)
+        }
       }
     }
   };
@@ -1345,13 +1379,63 @@ const AnnualDocsUploadForm = () => {
   return (
     <>
 
-      {/* <TokenModalsOverlay>
-        <TokenModals />
-      </TokenModalsOverlay> */}
+      {open && (
+        <>
+          <div className="modal-backdrop fade-in"></div>
+          <div
+            className={`modal show ${background === 'dark' ? 'dark' : ''}`}
+            data-background={background}
+          >
+            <div
+              className="relative w-auto lg:my-4 mx-auto lg:max-w-lg max-w-sm"
+              ref={modalRef}
+            >
+              <div className="bg-white  text-gray-900 border-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-700 border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none">
+                <div className="relative p-4 flex-auto">
+                  <div className="flex items-start justify-start p-2 space-x-4">
+                    <div className="flex-shrink-0 w-12">
+
+
+
+                      <span className="h-10 w-10 bg-green-100 text-white flex items-center justify-center rounded-full text-lg font-display font-bold">
+                        <FiCheck
+                          size={18}
+                          className="stroke-current text-green-500"
+                        />
+                      </span>
+
+                    </div>
+                    <div className="w-full">
+                      <div className=" mb-2 font-bold">
+
+                        <span className="mb-2">Upload Successful!</span>
+                      </div>
+                      <p>An email notification will be sent to you upon approval of your uploaded documents.</p>
+                      <div className="overflow-auto max-h-64">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-end p-4 border-t border-gray-200 dark:border-gray-700 border-solid rounded-b space-x-2">
+                  <button
+                    className="btn btn-default btn-rounded bg-white hover:bg-gray-100 text-gray-900"
+                    type="button"
+                    onClick={hide}
+                  >
+                    Ok
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
 
       <div className="flex justify-center flex-col lg:flex-row lg:flex-wrap w-full lg:space-x-4">
         <div className="w-full lg:w-1/12">
-          <SelectAnnual
+          <SelectYearAnnual
             label="Select Year"
             required
             ref={register()}
@@ -2311,8 +2395,10 @@ const AnnualDocsUploadForm = () => {
           <button
             className="disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-white hover:bg-white-500 hover:border-green-500"
             type="submit"
+            onClick={show}
           >
-            <Link href={`/dashboard`}>Submit</Link>
+            {/* <Link href={`/dashboard`}>Submit</Link> */}
+            Submit
 
           </button>
         </div>

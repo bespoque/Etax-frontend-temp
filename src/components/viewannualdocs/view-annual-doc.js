@@ -10,6 +10,7 @@ import { FiTrash, FiTrash2 } from 'react-icons/fi';
 export const ViewDocs = () => {
   const [uploadedDocs, setDocuments] = useState([])
   const [isFetching, setIsFetching] = useState(() => true);
+  const [deleted, setDeleted] = useState(() => true);
   setAuthToken();
   useEffect(() => {
     const fetchDocs = async () => {
@@ -18,7 +19,8 @@ export const ViewDocs = () => {
       }
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
-        let docs = result.data.body;
+        let docs = result.data.body.uploads;
+        console.log("docs", docs);
         setDocuments(docs)
         setIsFetching(false);
       }
@@ -29,117 +31,200 @@ export const ViewDocs = () => {
       }
     };
     fetchDocs();
-  }, []);
+  }, [deleted]);
 
-  const coverLetter = uploadedDocs.map(function (doc) {
-    let cover = doc.cover_letter
-    return cover
+
+  const coverLetter = uploadedDocs.filter(c => c.doc_title === "cover_letter")
+
+  const coverL = coverLetter.map((doc) => {
+    return doc.doc_name
   })
-  const coverL = coverLetter.filter(item => item !== null && item !== "")
 
-  const indReturnLetter = uploadedDocs.map(function (doc) {
-    let indLet = doc.indv_return_letter
-    return indLet
+  const indReturnLetter = uploadedDocs.filter(c => c.doc_title === "indv_return_letter")
+
+  const indReturnL = indReturnLetter.map((doc) => {
+    return doc.doc_name
   })
-  const indReturnL = indReturnLetter.filter(item => item !== null && item !== "")
 
-  const expertriateLetter = uploadedDocs.map(function (doc) {
-    let expLet = doc.exp_order_letter
-    return expLet
+  const expertriateLetter = uploadedDocs.filter(c => c.doc_title === "exp_order_letter")
+
+  const expertriateL = expertriateLetter.map((doc) => {
+    return doc.doc_name
   })
-  const expertriateL = expertriateLetter.filter(item => item !== null && item !== "")
 
-  const monthlyPayrollSchedule = uploadedDocs.map(function (doc) {
-    let mthlyPaySched = doc.mnthly_pay_sched
-    return mthlyPaySched
-  })
-  const monthlyPayrollS = monthlyPayrollSchedule.filter(item => item !== null && item !== "")
+  // const monthlyPayrollSchedule = uploadedDocs.map(function (doc) {
+  //   let mthlyPaySched = doc.mnthly_pay_sched
+  //   return mthlyPaySched
+  // })
+  // const monthlyPayrollS = monthlyPayrollSchedule.filter(item => item !== null && item !== "")
 
-  const payeRemittance = uploadedDocs.map(function (doc) {
-    let payeR = doc.paye_remittance
-    return payeR
-  })
-  const evidenceOfPayeR = payeRemittance.filter(item => item !== null && item !== "")
+  // const payeRemittance = uploadedDocs.map(function (doc) {
+  //   let payeR = doc.paye_remittance
+  //   return payeR
+  // })
+  // const evidenceOfPayeR = payeRemittance.filter(item => item !== null && item !== "")
 
-  const existStaffList = uploadedDocs.map(function (doc) {
-    let exitStaf = doc.exit_staff_list
-    return exitStaf
-  })
-  const exitStaffL = existStaffList.filter(item => item !== null && item !== "")
+  // const existStaffList = uploadedDocs.map(function (doc) {
+  //   let exitStaf = doc.exit_staff_list
+  //   return exitStaf
+  // })
+  // const exitStaffL = existStaffList.filter(item => item !== null && item !== "")
 
-  const TrialBal = uploadedDocs.map(function (doc) {
-    let trialB = doc.endyr_trial_bal
-    return trialB
-  })
-  const TrialBal21 = TrialBal.filter(item => item !== null && item !== "")
+  // const TrialBal = uploadedDocs.map(function (doc) {
+  //   let trialB = doc.endyr_trial_bal
+  //   return trialB
+  // })
+  // const TrialBal21 = TrialBal.filter(item => item !== null && item !== "")
 
-  const withHoldingTaxDeduct = uploadedDocs.map(function (doc) {
-    let withTax = doc.wht_tax_deduct
-    return withTax
-  })
-  const withTaxD = withHoldingTaxDeduct.filter(item => item !== null && item !== "")
+  // const withHoldingTaxDeduct = uploadedDocs.map(function (doc) {
+  //   let withTax = doc.wht_tax_deduct
+  //   return withTax
+  // })
+  // const withTaxD = withHoldingTaxDeduct.filter(item => item !== null && item !== "")
 
-  const withHoldingTaxReceipt = uploadedDocs.map(function (doc) {
-    let withTaxRec = doc.wht_tax_receipts
-    return withTaxRec
-  })
-  const withTaxR = withHoldingTaxReceipt.filter(item => item !== null && item !== "")
+  // const withHoldingTaxReceipt = uploadedDocs.map(function (doc) {
+  //   let withTaxRec = doc.wht_tax_receipts
+  //   return withTaxRec
+  // })
+  // const withTaxR = withHoldingTaxReceipt.filter(item => item !== null && item !== "")
 
-  const monthlyImmigrationReturn = uploadedDocs.map(function (doc) {
-    let monthlyImm = doc.mnthly_immi_returns
-    return monthlyImm
-  })
-  const monthlyImmR = monthlyImmigrationReturn.filter(item => item !== null && item !== "")
+  // const monthlyImmigrationReturn = uploadedDocs.map(function (doc) {
+  //   let monthlyImm = doc.mnthly_immi_returns
+  //   return monthlyImm
+  // })
+  // const monthlyImmR = monthlyImmigrationReturn.filter(item => item !== null && item !== "")
 
-  const devLevyReceipts = uploadedDocs.map(function (doc) {
-    let devLevy = doc.dev_levy_receipts
-    return devLevy
-  })
-  const devLevyR = devLevyReceipts.filter(item => item !== null && item !== "")
+  // const devLevyReceipts = uploadedDocs.map(function (doc) {
+  //   let devLevy = doc.dev_levy_receipts
+  //   return devLevy
+  // })
+  // const devLevyR = devLevyReceipts.filter(item => item !== null && item !== "")
 
-  const busPremReceipts = uploadedDocs.map(function (doc) {
-    let busPrem = doc.bus_premises_receipt
-    return busPrem
-  })
-  const busPremisesR = busPremReceipts.filter(item => item !== null && item !== "")
+  // const busPremReceipts = uploadedDocs.map(function (doc) {
+  //   let busPrem = doc.bus_premises_receipt
+  //   return busPrem
+  // })
+  // const busPremisesR = busPremReceipts.filter(item => item !== null && item !== "")
 
-  const groundRentReceipts = uploadedDocs.map(function (doc) {
-    let groundRen = doc.grnd_rent_receipts
-    return groundRen
-  })
-  const groundRentR = groundRentReceipts.filter(item => item !== null && item !== "")
+  // const groundRentReceipts = uploadedDocs.map(function (doc) {
+  //   let groundRen = doc.grnd_rent_receipts
+  //   return groundRen
+  // })
+  // const groundRentR = groundRentReceipts.filter(item => item !== null && item !== "")
 
-  const sscl = uploadedDocs.map(function (doc) {
-    let ssclR = doc.sscl
-    return ssclR
-  })
-  const SSCLevy = sscl.filter(item => item !== null && item !== "")
+  // const sscl = uploadedDocs.map(function (doc) {
+  //   let ssclR = doc.sscl
+  //   return ssclR
+  // })
+  // const SSCLevy = sscl.filter(item => item !== null && item !== "")
 
-  const pensionRemittance = uploadedDocs.map(function (doc) {
-    let pensionRem = doc.pension_remittance
-    return pensionRem
-  })
-  const pensionR = pensionRemittance.filter(item => item !== null && item !== "")
+  // const pensionRemittance = uploadedDocs.map(function (doc) {
+  //   let pensionRem = doc.pension_remittance
+  //   return pensionRem
+  // })
+  // const pensionR = pensionRemittance.filter(item => item !== null && item !== "")
 
-  const nhfRemittance = uploadedDocs.map(function (doc) {
-    let nhfRem = doc.nhf_remittance
-    return nhfRem
-  })
-  const nhfR = nhfRemittance.filter(item => item !== null && item !== "")
+  // const nhfRemittance = uploadedDocs.map(function (doc) {
+  //   let nhfRem = doc.nhf_remittance
+  //   return nhfRem
+  // })
+  // const nhfR = nhfRemittance.filter(item => item !== null && item !== "")
 
-  const nhisRemittance = uploadedDocs.map(function (doc) {
-    let nhisRem = doc.nhis_remittance
-    return nhisRem
-  })
-  const nhisR = nhisRemittance.filter(item => item !== null && item !== "")
+  // const nhisRemittance = uploadedDocs.map(function (doc) {
+  //   let nhisRem = doc.nhis_remittance
+  //   return nhisRem
+  // })
+  // const nhisR = nhisRemittance.filter(item => item !== null && item !== "")
 
-  const lapRemittance = uploadedDocs.map(function (doc) {
-    let lapRem = doc.lap_remittance
-    return lapRem
-  })
-  const lapR = lapRemittance.filter(item => item !== null && item !== "")
+  // const lapRemittance = uploadedDocs.map(function (doc) {
+  //   let lapRem = doc.lap_remittance
+  //   return lapRem
+  // })
+  // const lapR = lapRemittance.filter(item => item !== null && item !== "")
 
-  const DeleteSubmissionLetter = () => {
+  console.log("coverL", coverL);
+  const DeleteSubmissionLetterY1 = (i) => {
+    setIsFetching(true)
+    const list = [...coverL];
+    let fileName = list[i];
+    console.log("fileName", fileName);
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        // toast.success("Deleted Successfully!");
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        // console.log("fileName", fileName);
+        setIsFetching(false)
+        // if (error) {
+        //   toast.error("Cannot Delete Document");
+        // } else {
+        //   toast.error("Failed! Try again");
+
+        // }
+
+      })
+
+  }
+
+  const DeleteIndReLetterY1 = (i) => {
+    setIsFetching(true)
+    const list = [...indReturnL];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        // toast.success("Deleted Successfully!");
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        // console.log("fileName", fileName);
+        setIsFetching(false)
+        // if (error) {
+        //   toast.error("Cannot Delete Document");
+        // } else {
+        //   toast.error("Failed! Try again");
+
+        // }
+
+      })
+
+  }
+
+  const DeleteExpLetterY1 = (i) => {
+    setIsFetching(true)
+    const list = [...expertriateL];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        // toast.success("Deleted Successfully!");
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        // console.log("fileName", fileName);
+        setIsFetching(false)
+        // if (error) {
+        //   toast.error("Cannot Delete Document");
+        // } else {
+        //   toast.error("Failed! Try again");
+
+        // }
+
+      })
 
   }
 
@@ -171,7 +256,7 @@ export const ViewDocs = () => {
           {coverL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/cover_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={() => DeleteSubmissionLetterY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -181,19 +266,16 @@ export const ViewDocs = () => {
       <hr />
 
       <div className="grid justify-items-start">
-
         <div>
           <div className="font-semibold">
             Individual tax returns letter
           </div>
         </div>
-
-
         <div className="flex">
           {indReturnL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/indv_return_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={() => DeleteIndReLetterY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -210,7 +292,7 @@ export const ViewDocs = () => {
           {expertriateL.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exp_order_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={()=> DeleteExpLetterY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -218,7 +300,7 @@ export const ViewDocs = () => {
       </div>
 
       <hr />
-
+      {/* 
       <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly payroll schedule
@@ -228,16 +310,16 @@ export const ViewDocs = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
 
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of PAYE remittance
         </div>
@@ -246,15 +328,15 @@ export const ViewDocs = () => {
           {evidenceOfPayeR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/paye_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Exit staff list
         </div>
@@ -262,15 +344,15 @@ export const ViewDocs = () => {
           {exitStaffL.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exit_staff_list/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Trial balance for the year ended 31st Dec. 2021
         </div>
@@ -278,15 +360,15 @@ export const ViewDocs = () => {
           {TrialBal21.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/endyr_trial_bal/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Schedule of withholding tax deductions
         </div>
@@ -294,15 +376,15 @@ export const ViewDocs = () => {
           {withTaxD.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_deduct/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Withholding tax receipts
         </div>
@@ -310,15 +392,15 @@ export const ViewDocs = () => {
           {withTaxR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly Immigration returns
         </div>
@@ -326,15 +408,15 @@ export const ViewDocs = () => {
           {monthlyImmR.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/mnthly_immi_returns/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Development levy receipts
         </div>
@@ -342,15 +424,15 @@ export const ViewDocs = () => {
           {devLevyR.map((element, i) => (
             <div key={i} className="p-2">
               <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/dev_levy_receipts/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Business premises receipts
         </div>
@@ -358,15 +440,15 @@ export const ViewDocs = () => {
           {busPremisesR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/bus_premises_receipt/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Ground rent receipts
         </div>
@@ -374,15 +456,15 @@ export const ViewDocs = () => {
           {groundRentR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/grnd_rent_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Social service contributions levy
         </div>
@@ -390,15 +472,15 @@ export const ViewDocs = () => {
           {SSCLevy.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/sscl/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of pension
         </div>
@@ -406,15 +488,15 @@ export const ViewDocs = () => {
           {pensionR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/pension_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of NHF
         </div>
@@ -422,15 +504,15 @@ export const ViewDocs = () => {
           {nhfR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhf_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of NHIS
         </div>
@@ -438,15 +520,15 @@ export const ViewDocs = () => {
           {nhisR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhis_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of LAP
         </div>
@@ -454,11 +536,11 @@ export const ViewDocs = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              {/* <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p> */}
+              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
@@ -474,7 +556,7 @@ export const ViewDocsYr2 = () => {
       }
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
-        let docs = result.data.body;
+        let docs = result.data.body.uploads;
         setDocuments(docs)
         setIsFetching(false);
       }
@@ -930,7 +1012,7 @@ export const ViewDocsYr3 = () => {
       }
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
-        let docs = result.data.body;
+        let docs = result.data.body.uploads;
         setDocuments(docs)
         setIsFetching(false);
       }
@@ -1385,7 +1467,7 @@ export const ViewDocsYr4 = () => {
       }
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
-        let docs = result.data.body;
+        let docs = result.data.body.uploads;
         setDocuments(docs)
         setIsFetching(false);
       }

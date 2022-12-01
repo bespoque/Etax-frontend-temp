@@ -45,9 +45,9 @@ const AnnualUploadForm = () => {
     setOpen(false);
     setUploadErrors([]);
     setUploadSuccessful(false);
-    if (uploadSuccessful) {
-      router.push('/view/annual');
-    }
+    // if (uploadSuccessful) {
+    //   router.push('/view/annual');
+    // }
   };
 
   useEffect(() => {
@@ -58,9 +58,9 @@ const AnnualUploadForm = () => {
       }
       setOpen(!open);
       setUploadErrors(() => []);
-      if (uploadSuccessful) {
-        router.push('/view/annual');
-      }
+      // if (uploadSuccessful) {
+      //   router.push('/view/annual');
+      // }
     };
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -93,13 +93,13 @@ const AnnualUploadForm = () => {
   };
 
   //handle submit
+  setAuthToken();
   const handleUpload = async (data) => {
     console.log(data.year)
     let payPeriod = `${data.year}-01-01`;
     const formData = new FormData();
     formData.append('payPeriod', payPeriod);
     formData.append('csv', file);
-    setAuthToken();
     setSubmitting(() => true);
     try {
       await axios.post(`${url.BASE_URL}annual/upload-annual`, formData, {

@@ -13,9 +13,21 @@ export const Select = React.forwardRef((props, ref) => (
 ));
 
 export const SelectAnnual = React.forwardRef((props, ref) => (
-  <div className={`form-element ${props.inline ? 'form-element-inline' : ''}`}>
+  <div>
     <div className="form-label">{props.label}</div>
     <select className="form-select" {...props} ref={ref}>
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+    </select>
+  </div>
+));
+export const SelectYearAnnual = React.forwardRef((props, ref) => (
+  <div>
+    <div className="form-label">{props.label}</div>
+    <select className="form-select" {...props} ref={ref}>
+      <option value="">Select year</option>
       <option value="2019">2019</option>
       <option value="2020">2020</option>
       <option value="2021">2021</option>
