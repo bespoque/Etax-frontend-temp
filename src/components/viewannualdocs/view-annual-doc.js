@@ -104,21 +104,20 @@ export const ViewDocs = () => {
   })
 
   const sscl = uploadedDocs.filter(c => c.doc_title === "sscl")
- 
+
   const SSCLevy = sscl.map((doc) => {
     return doc.doc_name
   })
-  // const pensionRemittance = uploadedDocs.map(function (doc) {
-  //   let pensionRem = doc.pension_remittance
-  //   return pensionRem
-  // })
-  // const pensionR = pensionRemittance.filter(item => item !== null && item !== "")
+  const pensionRemittance = uploadedDocs.filter(c => c.doc_title === "pension_remittance")
 
-  // const nhfRemittance = uploadedDocs.map(function (doc) {
-  //   let nhfRem = doc.nhf_remittance
-  //   return nhfRem
-  // })
-  // const nhfR = nhfRemittance.filter(item => item !== null && item !== "")
+  const pensionR = pensionRemittance.map((doc) => {
+    return doc.doc_name
+  })
+
+  const nhfRemittance = uploadedDocs.filter(c => c.doc_title === "nhf_remittance")
+  const nhfR = nhfRemittance.map((doc) => {
+    return doc.doc_name
+  })
 
   // const nhisRemittance = uploadedDocs.map(function (doc) {
   //   let nhisRem = doc.nhis_remittance
@@ -381,6 +380,44 @@ export const ViewDocs = () => {
 
   }
 
+  const DeletePension = (i) => {
+    setIsFetching(true)
+    const list = [...pensionR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
+  const DeleteNHF = (i) => {
+    setIsFetching(true)
+    const list = [...nhfR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
 
   return (
     <>
@@ -593,7 +630,7 @@ export const ViewDocs = () => {
           {busPremisesR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/bus_premises_receipt/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteBusPremY1(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteBusPremY1(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -609,7 +646,7 @@ export const ViewDocs = () => {
           {groundRentR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/grnd_rent_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=> DeleteGrndRent(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteGrndRent(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -625,7 +662,7 @@ export const ViewDocs = () => {
           {SSCLevy.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/sscl/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=> DeleteSocialServ(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteSocialServ(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -633,7 +670,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of pension
         </div>
@@ -641,15 +678,15 @@ export const ViewDocs = () => {
           {pensionR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/pension_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeletePension(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of NHF
         </div>
@@ -657,11 +694,11 @@ export const ViewDocs = () => {
           {nhfR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhf_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={()=>DeleteNHF(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
