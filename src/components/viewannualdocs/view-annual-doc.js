@@ -119,11 +119,11 @@ export const ViewDocs = () => {
     return doc.doc_name
   })
 
-  // const nhisRemittance = uploadedDocs.map(function (doc) {
-  //   let nhisRem = doc.nhis_remittance
-  //   return nhisRem
-  // })
-  // const nhisR = nhisRemittance.filter(item => item !== null && item !== "")
+  const nhisRemittance = uploadedDocs.filter(c => c.doc_title === "nhis_remittance")
+
+  const nhisR = nhisRemittance.map((doc) => {
+    return doc.doc_name
+  })
 
   // const lapRemittance = uploadedDocs.map(function (doc) {
   //   let lapRem = doc.lap_remittance
@@ -418,6 +418,25 @@ export const ViewDocs = () => {
 
   }
 
+  const DeleteNHIS = (i) => {
+    setIsFetching(true)
+    const list = [...nhisR];
+    let fileName = list[i];
+    let uploadFile = {
+      doc_name: fileName
+    }
+    axios.delete(`${url.BASE_URL}annual/delete-annual-doc`, { data: uploadFile })
+      .then(function (response) {
+        setIsFetching(false)
+        setDeleted(!deleted)
+        window.reload()
+      })
+      .catch(function (error) {
+        setIsFetching(false)
+      })
+
+  }
+
 
   return (
     <>
@@ -694,7 +713,7 @@ export const ViewDocs = () => {
           {nhfR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhf_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteNHF(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteNHF(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -702,7 +721,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      {/* <div className="grid justify-items-start">
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Evidence of remittance of NHIS
         </div>
@@ -710,11 +729,11 @@ export const ViewDocs = () => {
           {nhisR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhis_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={DeleteSubmissionLetter}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteNHIS(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
 
       <hr />
 
