@@ -104,6 +104,7 @@ const AnnualDocsUploadForm = () => {
   const [submitting16, setSubmitting16] = useState(false);
   const [submitting17, setSubmitting17] = useState(false);
   const [submitting18, setSubmitting18] = useState(false);
+  const [submitErr, setSubmitErr] = useState(false);
   const { register, handleSubmit, watch } = useForm();
   const modalRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -1436,6 +1437,10 @@ const AnnualDocsUploadForm = () => {
         .then(function (response) {
           show()
         }).catch(function (error) {
+          if (error.response) {
+            alert(error.response.data.message);
+            // alert(error.response)
+          }
           console.log(error);
         })
     }
