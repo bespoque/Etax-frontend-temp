@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import Widget from "../widget";
 import axios from 'axios';
 import url from "../../config/url";
-import Link from "next/link";
 import setAuthToken from '../../functions/setAuthToken';
 import Loader from 'react-loader-spinner';
-import { FiTrash, FiTrash2 } from 'react-icons/fi';
+import { FiTrash2 } from 'react-icons/fi';
 
 export const ViewDocs = () => {
   const [uploadedDocs, setDocuments] = useState([])
   const [isFetching, setIsFetching] = useState(() => true);
   const [deleted, setDeleted] = useState(() => true);
+  const [docStatus, setStatus] = useState("")
+  const [comment, setComment] = useState("")
+  const docYear = {
+    year: "2022"
+  }
+
   setAuthToken();
   useEffect(() => {
+    setIsFetching(true)
     const fetchDocs = async () => {
       const year = {
         "year": 2022
@@ -20,17 +25,32 @@ export const ViewDocs = () => {
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
         let docs = result.data.body.uploads;
-        console.log("docs", docs);
+        setIsFetching(false)
         setDocuments(docs)
-        setIsFetching(false);
       }
-
       catch (error) {
-        console.log('Error', error);
-        setIsFetching(false);
+        setIsFetching(false)
+        console.log(error);
       }
     };
     fetchDocs();
+
+
+    const fetStatus = async () => {
+      try {
+
+        let response = await axios.post(`${url.BASE_URL}annual/view-annual-status`, docYear)
+        let docStatus = response.data.body.status;
+        setStatus(docStatus)
+        let declinedComment = response.data.body.declinedComment
+        setComment(declinedComment)
+        
+      } catch (error) {
+
+        console.log(error)
+      }
+    };
+    fetStatus();
   }, [deleted]);
 
 
@@ -456,7 +476,7 @@ export const ViewDocs = () => {
       })
 
   }
-  
+
   const DeleteLAP = (i) => {
     setIsFetching(true)
     const list = [...lapR];
@@ -494,8 +514,14 @@ export const ViewDocs = () => {
         </div>
       )}
 
-      <div className="grid justify-items-start">
+      <p className="font-bold text-center">{docStatus}</p>
+      {/* {comment !== undefined
+      <div>
+        <p>{comment}</p>
+      </div>
+      } */}
 
+      <div className="grid justify-items-start">
         <div className="font-semibold">
           Submission letter
         </div>
@@ -548,7 +574,7 @@ export const ViewDocs = () => {
       </div>
 
       <hr />
-      
+
       <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly payroll schedule
@@ -558,7 +584,7 @@ export const ViewDocs = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -784,7 +810,7 @@ export const ViewDocs = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -797,6 +823,12 @@ export const ViewDocsYr2 = () => {
   const [uploadedDocs, setDocuments] = useState([])
   const [isFetching, setIsFetching] = useState(() => true);
   const [deleted, setDeleted] = useState(() => true);
+  const [docStatus, setStatus] = useState("")
+
+  const docYear = {
+    year: "2021"
+  }
+
   setAuthToken();
   useEffect(() => {
     const fetchDocs = async () => {
@@ -817,6 +849,21 @@ export const ViewDocsYr2 = () => {
       }
     };
     fetchDocs();
+    const fetStatus = async () => {
+      try {
+
+        let response = await axios.post(`${url.BASE_URL}annual/view-annual-status`, docYear)
+        let docStatus = response.data.body.status;
+        // let declinedComment = 
+       
+        setStatus(docStatus)
+      } catch (error) {
+
+        console.log(error)
+      }
+    };
+    fetStatus();
+
   }, [deleted]);
 
 
@@ -1242,7 +1289,7 @@ export const ViewDocsYr2 = () => {
       })
 
   }
-  
+
   const DeleteLAP = (i) => {
     setIsFetching(true)
     const list = [...lapR];
@@ -1280,8 +1327,8 @@ export const ViewDocsYr2 = () => {
         </div>
       )}
 
+      <p className="font-bold text-center">{docStatus}</p>
       <div className="grid justify-items-start">
-
         <div className="font-semibold">
           Submission letter
         </div>
@@ -1334,7 +1381,7 @@ export const ViewDocsYr2 = () => {
       </div>
 
       <hr />
-      
+
       <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly payroll schedule
@@ -1344,7 +1391,7 @@ export const ViewDocsYr2 = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -1570,7 +1617,7 @@ export const ViewDocsYr2 = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -2028,7 +2075,7 @@ export const ViewDocsYr3 = () => {
       })
 
   }
-  
+
   const DeleteLAP = (i) => {
     setIsFetching(true)
     const list = [...lapR];
@@ -2120,7 +2167,7 @@ export const ViewDocsYr3 = () => {
       </div>
 
       <hr />
-      
+
       <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly payroll schedule
@@ -2130,7 +2177,7 @@ export const ViewDocsYr3 = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -2356,7 +2403,7 @@ export const ViewDocsYr3 = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -2814,7 +2861,7 @@ export const ViewDocsYr4 = () => {
       })
 
   }
-  
+
   const DeleteLAP = (i) => {
     setIsFetching(true)
     const list = [...lapR];
@@ -2906,7 +2953,7 @@ export const ViewDocsYr4 = () => {
       </div>
 
       <hr />
-      
+
       <div className="grid justify-items-start">
         <div className="font-semibold">
           Monthly payroll schedule
@@ -2916,7 +2963,7 @@ export const ViewDocsYr4 = () => {
           {monthlyPayrollS.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>
@@ -3142,7 +3189,7 @@ export const ViewDocsYr4 = () => {
           {lapR.map((element, i) => (
             <div key={i} className="p-2">
               <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-              <p><button onClick={()=>DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+              <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
             </div>
           ))}
         </div>

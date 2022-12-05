@@ -34,17 +34,7 @@ const CodeStructureTab = () => (
   </div>
 )
 
-const FaqTab = () => (
-  <div className="w-full">
-    <Customization />
-  </div>
-)
 
-const CreditsTab = () => (
-  <div className="w-full">
-    <Credits />
-  </div>
-)
 
 const Year1Docs = () => (
   <div className="w-full">

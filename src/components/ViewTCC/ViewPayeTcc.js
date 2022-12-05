@@ -29,9 +29,9 @@ const ViewTccPaye = () => {
     shallowEqual
   );
 
-
   const decoded = jwt.decode(auth);
   const kgtin = decoded.kgtin
+  
   useEffect(() => {
     setAuthToken();
     const fetchPost = async () => {
