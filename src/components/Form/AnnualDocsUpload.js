@@ -1439,7 +1439,6 @@ const AnnualDocsUploadForm = () => {
         }).catch(function (error) {
           if (error.response) {
             alert(error.response.data.message);
-            // alert(error.response)
           }
           console.log(error);
         })
@@ -1480,7 +1479,7 @@ const AnnualDocsUploadForm = () => {
                       </div>
                       <ul>
                         <li>
-                         <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48hrs
+                         <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48 working hrs
                         </li>
                         <li>
                         <span className="font-bold">*</span> A notification will be sent to you upon approval of your uploaded documents
