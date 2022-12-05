@@ -10,8 +10,7 @@ import { ProcessorSpinner, Progress } from '../spiner/index';
 import { SelectAnnual, SelectMonth, SelectYearAnnual } from '../forms/selects';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-// import { toast, ToastContainer } from 'react-toastify';
-// import "react-toastify/dist/ReactToastify.css";
+
 
 const AnnualDocsUploadForm = () => {
   //handle file
@@ -105,7 +104,7 @@ const AnnualDocsUploadForm = () => {
   const [submitting16, setSubmitting16] = useState(false);
   const [submitting17, setSubmitting17] = useState(false);
   const [submitting18, setSubmitting18] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
   const modalRef = useRef(null);
   const [open, setOpen] = useState(false);
   const router = useRouter()
@@ -122,8 +121,6 @@ const AnnualDocsUploadForm = () => {
 
   const show = () => {
     setOpen(true);
-    const timer = setTimeout(() => router.push("/dashboard"), 3000);
-    return () => clearTimeout(timer);
   };
 
   const hide = () => {
@@ -678,41 +675,46 @@ const AnnualDocsUploadForm = () => {
   const onSubmit3 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('exp_order_letter', file3);
-    formData.append('employer_id', employer_id);
-    formData.append('year', year);
-    setAuthToken();
-    setSubmitting3(true)
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage3(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('exp_order_letter', file3);
+      formData.append('employer_id', employer_id);
+      formData.append('year', year);
+      setAuthToken();
+      setSubmitting3(true)
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage3(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting3(false)
-      setUploadedFile3(true);
-      setFile3(null)
-      setDisabled3(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting3(false)
+        setUploadedFile3(true);
         setFile3(null)
         setDisabled3(true)
-        setUploadPercentage3(0)
-        setSubmitting3(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile3(null)
+          setDisabled3(true)
+          setUploadPercentage3(0)
+          setSubmitting3(false)
+        }
       }
     }
   };
@@ -720,42 +722,47 @@ const AnnualDocsUploadForm = () => {
   const onSubmit4 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('mnthly_pay_sched', file4);
-    formData.append('year', year);
-    setAuthToken();
-    setSubmitting4(true)
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('mnthly_pay_sched', file4);
+      formData.append('year', year);
+      setAuthToken();
+      setSubmitting4(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage4(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage4(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting4(false)
-      setUploadedFile4(true);
-      setFile4(null)
-      setDisabled4(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting4(false)
+        setUploadedFile4(true);
         setFile4(null)
         setDisabled4(true)
-        setUploadPercentage4(0)
-        setSubmitting4(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile4(null)
+          setDisabled4(true)
+          setUploadPercentage4(0)
+          setSubmitting4(false)
+        }
       }
     }
   };
@@ -807,43 +814,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit6 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('exit_staff_list', file6);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('exit_staff_list', file6);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting6(true)
+      setAuthToken();
+      setSubmitting6(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage6(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage6(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting6(false)
-      setUploadedFile6(true);
-      setFile6(null)
-      setDisabled6(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting6(false)
+        setUploadedFile6(true);
         setFile6(null)
         setDisabled6(true)
-        setUploadPercentage6(0)
-        setSubmitting6(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile6(null)
+          setDisabled6(true)
+          setUploadPercentage6(0)
+          setSubmitting6(false)
+        }
       }
     }
   };
@@ -895,43 +907,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit8 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('wht_tax_deduct', file8);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('wht_tax_deduct', file8);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting8(true)
+      setAuthToken();
+      setSubmitting8(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage8(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage8(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting8(false)
-      setUploadedFile8(true);
-      setFile8(null)
-      setDisabled8(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting8(false)
+        setUploadedFile8(true);
         setFile8(null)
         setDisabled8(true)
-        setUploadPercentage8(0)
-        setSubmitting8(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile8(null)
+          setDisabled8(true)
+          setUploadPercentage8(0)
+          setSubmitting8(false)
+        }
       }
     }
   };
@@ -983,43 +1000,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit10 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('mnthly_immi_returns', file10);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('mnthly_immi_returns', file10);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting10(true)
+      setAuthToken();
+      setSubmitting10(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage10(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage10(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting10(false)
-      setUploadedFile10(true);
-      setFile10(null)
-      setDisabled10(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting10(false)
+        setUploadedFile10(true);
         setFile10(null)
         setDisabled10(true)
-        setUploadPercentage10(0)
-        setSubmitting10(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile10(null)
+          setDisabled10(true)
+          setUploadPercentage10(0)
+          setSubmitting10(false)
+        }
       }
     }
   };
@@ -1071,43 +1093,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit12 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('bus_premises_receipt', file12);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('bus_premises_receipt', file12);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting12(true)
+      setAuthToken();
+      setSubmitting12(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage12(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage12(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting12(false)
-      setUploadedFile12(true);
-      setFile12(null)
-      setDisabled12(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting12(false)
+        setUploadedFile12(true);
         setFile12(null)
         setDisabled12(true)
-        setUploadPercentage12(0)
-        setSubmitting12(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile12(null)
+          setDisabled12(true)
+          setUploadPercentage12(0)
+          setSubmitting12(false)
+        }
       }
     }
   };
@@ -1159,43 +1186,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit14 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('sscl', file14);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('sscl', file14);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting14(true)
+      setAuthToken();
+      setSubmitting14(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage14(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage14(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting14(false)
-      setUploadedFile14(true);
-      setFile14(null)
-      setDisabled14(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting14(false)
+        setUploadedFile14(true);
         setFile14(null)
         setDisabled14(true)
-        setUploadPercentage14(0)
-        setSubmitting14(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile14(null)
+          setDisabled14(true)
+          setUploadPercentage14(0)
+          setSubmitting14(false)
+        }
       }
     }
   };
@@ -1203,43 +1235,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit15 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('pension_remittance', file15);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('pension_remittance', file15);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting15(true)
+      setAuthToken();
+      setSubmitting15(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage15(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage15(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting15(false)
-      setUploadedFile15(true);
-      setFile15(null)
-      setDisabled15(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting15(false)
+        setUploadedFile15(true);
         setFile15(null)
         setDisabled15(true)
-        setUploadPercentage15(0)
-        setSubmitting15(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile15(null)
+          setDisabled15(true)
+          setUploadPercentage15(0)
+          setSubmitting15(false)
+        }
       }
     }
   };
@@ -1291,43 +1328,48 @@ const AnnualDocsUploadForm = () => {
   const onSubmit17 = async data => {
     let employer_id = localStorage.getItem("kgtin")
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('nhis_remittance', file17);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('nhis_remittance', file17);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting17(true)
+      setAuthToken();
+      setSubmitting17(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage17(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage17(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting17(false)
-      setUploadedFile17(true);
-      setFile17(null)
-      setDisabled17(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting17(false)
+        setUploadedFile17(true);
         setFile17(null)
         setDisabled17(true)
-        setUploadPercentage17(0)
-        setSubmitting17(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile17(null)
+          setDisabled17(true)
+          setUploadPercentage17(0)
+          setSubmitting17(false)
+        }
       }
     }
   };
@@ -1336,50 +1378,72 @@ const AnnualDocsUploadForm = () => {
     let employer_id = localStorage.getItem("kgtin")
     console.log(data.year);
     const year = data.year;
-    const formData = new FormData();
-    formData.append('employer_id', employer_id);
-    formData.append('lap_remittance', file18);
-    formData.append('year', year);
+    if (year === "") {
+      alert("Please select year")
+    }
+    else {
+      const formData = new FormData();
+      formData.append('employer_id', employer_id);
+      formData.append('lap_remittance', file18);
+      formData.append('year', year);
 
-    setAuthToken();
-    setSubmitting18(true)
+      setAuthToken();
+      setSubmitting18(true)
 
-    try {
-      const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage18(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-        }
+      try {
+        const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: progressEvent => {
+            setUploadPercentage18(
+              parseInt(
+                Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              )
+            );
+          }
 
-      });
+        });
 
-      setSubmitting18(false)
-      setUploadedFile18(true);
-      setFile18(null)
-      setDisabled18(true)
-      console.log(data.response.body);
-    } catch (err) {
-      if (err.response === 500) {
-        console.log('There was a problem with the server');
-      } else {
-        console.log(err);
+        setSubmitting18(false)
+        setUploadedFile18(true);
         setFile18(null)
         setDisabled18(true)
-        setUploadPercentage18(0)
-        setSubmitting18(false)
+        console.log(data.response.body);
+      } catch (err) {
+        if (err.response === 500) {
+          console.log('There was a problem with the server');
+        } else {
+          console.log(err);
+          setFile18(null)
+          setDisabled18(true)
+          setUploadPercentage18(0)
+          setSubmitting18(false)
+        }
       }
     }
   };
 
+  const SubmitUploads = (data) => {
+    let year = {
+      "year": data.year
+    }
+    if (data.year === "") {
+      alert("Please select Year")
+    }
+    else {
+      axios.post(`${url.BASE_URL}annual/submit-annual-returns`, year)
+        .then(function (response) {
+          show()
+        }).catch(function (error) {
+          console.log(error);
+        })
+    }
+  }
+
+
   return (
     <>
-
       {open && (
         <>
           <div className="modal-backdrop fade-in"></div>
@@ -1396,8 +1460,6 @@ const AnnualDocsUploadForm = () => {
                   <div className="flex items-start justify-start p-2 space-x-4">
                     <div className="flex-shrink-0 w-12">
 
-
-
                       <span className="h-10 w-10 bg-green-100 text-white flex items-center justify-center rounded-full text-lg font-display font-bold">
                         <FiCheck
                           size={18}
@@ -1411,7 +1473,15 @@ const AnnualDocsUploadForm = () => {
 
                         <span className="mb-2">Upload Successful!</span>
                       </div>
-                      <p>An email notification will be sent to you upon approval of your uploaded documents.</p>
+                      <ul>
+                        <li>
+                         <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48hrs
+                        </li>
+                        <li>
+                        <span className="font-bold">*</span> A notification will be sent to you upon approval of your uploaded documents
+                        </li>
+                      </ul>
+
                       <div className="overflow-auto max-h-64">
 
                       </div>
@@ -2392,15 +2462,12 @@ const AnnualDocsUploadForm = () => {
           </div>
         </form>
         <div className="flex justify-center">
-
           <button
             className="disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-white hover:bg-white-500 hover:border-green-500"
             type="submit"
-            onClick={show}
+            onClick={() => handleSubmit(SubmitUploads)()}
           >
-            {/* <Link href={`/dashboard`}>Submit</Link> */}
             Submit
-
           </button>
         </div>
       </Widget>

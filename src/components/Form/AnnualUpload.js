@@ -45,9 +45,9 @@ const AnnualUploadForm = () => {
     setOpen(false);
     setUploadErrors([]);
     setUploadSuccessful(false);
-    // if (uploadSuccessful) {
-    //   router.push('/view/annual');
-    // }
+    if (uploadSuccessful) {
+      router.push('/uploads/annualdocs');
+    }
   };
 
   useEffect(() => {
@@ -58,9 +58,9 @@ const AnnualUploadForm = () => {
       }
       setOpen(!open);
       setUploadErrors(() => []);
-      // if (uploadSuccessful) {
-      //   router.push('/view/annual');
-      // }
+      if (uploadSuccessful) {
+        router.push('/uploads/annualdocs');
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -120,8 +120,8 @@ const AnnualUploadForm = () => {
       setSubmitting(() => false);
       setUploadSuccessful(() => true);
       show();
-      const timer = setTimeout(() => router.push("/uploads/annualdocs"), 3000);
-      return () => clearTimeout(timer);
+      // const timer = setTimeout(() => router.push("/uploads/annualdocs"), 3000);
+      // return () => clearTimeout(timer);
       
     } catch (error) {
       setUploadPercentage(0);
