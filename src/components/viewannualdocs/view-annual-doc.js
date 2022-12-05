@@ -523,7 +523,7 @@ export const ViewDocs = () => {
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Submission letter
+          Cover letter for the submission of annual returns
         </div>
 
         <div className="flex">
@@ -539,7 +539,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div>
           <div className="font-semibold">
             Individual tax returns letter
@@ -553,13 +553,13 @@ export const ViewDocs = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Letter of expatriate order
+          Letter of expatriate quota
         </div>
 
         <div className="flex">
@@ -626,7 +626,7 @@ export const ViewDocs = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Trial balance for Year ending
         </div>
@@ -638,7 +638,7 @@ export const ViewDocs = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
@@ -1330,7 +1330,7 @@ export const ViewDocsYr2 = () => {
       <p className="font-bold text-center">{docStatus}</p>
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Submission letter
+          Cover letter for the submission of annual returns
         </div>
 
         <div className="flex">
@@ -1346,7 +1346,7 @@ export const ViewDocsYr2 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div>
           <div className="font-semibold">
             Individual tax returns letter
@@ -1360,13 +1360,13 @@ export const ViewDocsYr2 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Letter of expatriate order
+          Letter of expatriate quota
         </div>
 
         <div className="flex">
@@ -1433,7 +1433,7 @@ export const ViewDocsYr2 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Trial balance for Year ending
         </div>
@@ -1445,7 +1445,7 @@ export const ViewDocsYr2 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
@@ -2116,7 +2116,7 @@ export const ViewDocsYr3 = () => {
       <div className="grid justify-items-start">
 
         <div className="font-semibold">
-          Submission letter
+          Cover letter for the submission of annual returns
         </div>
 
         <div className="flex">
@@ -2132,7 +2132,7 @@ export const ViewDocsYr3 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div>
           <div className="font-semibold">
             Individual tax returns letter
@@ -2146,13 +2146,13 @@ export const ViewDocsYr3 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Letter of expatriate order
+          Letter of expatriate quota
         </div>
 
         <div className="flex">
@@ -2219,7 +2219,7 @@ export const ViewDocsYr3 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Trial balance for Year ending
         </div>
@@ -2231,7 +2231,7 @@ export const ViewDocsYr3 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
@@ -2902,7 +2902,7 @@ export const ViewDocsYr4 = () => {
       <div className="grid justify-items-start">
 
         <div className="font-semibold">
-          Submission letter
+          Cover letter for the submission of annual returns
         </div>
 
         <div className="flex">
@@ -2918,7 +2918,7 @@ export const ViewDocsYr4 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div>
           <div className="font-semibold">
             Individual tax returns letter
@@ -2932,13 +2932,13 @@ export const ViewDocsYr4 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
-          Letter of expatriate order
+          Letter of expatriate quota
         </div>
 
         <div className="flex">
@@ -3005,7 +3005,7 @@ export const ViewDocsYr4 = () => {
 
       <hr />
 
-      <div className="grid justify-items-start">
+      {/* <div className="grid justify-items-start">
         <div className="font-semibold">
           Trial balance for Year ending
         </div>
@@ -3017,7 +3017,7 @@ export const ViewDocsYr4 = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <hr />
 

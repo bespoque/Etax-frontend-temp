@@ -1479,10 +1479,10 @@ const AnnualDocsUploadForm = () => {
                       </div>
                       <ul>
                         <li>
-                         <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48 working hrs
+                          <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48 working hrs
                         </li>
                         <li>
-                        <span className="font-bold">*</span> A notification will be sent to you upon approval of your uploaded documents
+                          <span className="font-bold">*</span> A notification will be sent to you upon approval of your uploaded documents
                         </li>
                       </ul>
 
@@ -1525,7 +1525,7 @@ const AnnualDocsUploadForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className="flex justify-between mb-5">
-              <p>Cover letter of submission of annual returns <span className="font-bold" style={{ color: "red" }}> * </span><small>(pdf, jpg, png)</small> </p>
+              <p>Cover letter for the submission of annual returns <small>(pdf, jpg, png)</small> </p>
               <input
                 type="file"
                 className="hidden"
@@ -1571,11 +1571,11 @@ const AnnualDocsUploadForm = () => {
             </div>
           </form>
 
-          <hr className="mb-2" />
+          {/* <hr className="mb-2" />
 
           <form onSubmit={handleSubmit(onSubmit2)}>
             <div className="flex justify-between mb-5">
-              <p>Copy of letter mandating employees to file individual tax returns <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+              <p>Copy of letter mandating employees to file individual tax returns  <small>(pdf, jpg, png)</small></p>
               <input
                 type="file"
                 className="hidden"
@@ -1621,13 +1621,13 @@ const AnnualDocsUploadForm = () => {
 
               </div>
             </div>
-          </form>
+          </form> */}
 
           <hr className="mb-2" />
 
           <form onSubmit={handleSubmit(onSubmit3)}>
             <div className="flex justify-between mb-5">
-              <p>List of expertriates <small>[where applicable]</small> <span className="font-bold" style={{ color: "red" }}> * </span><small>(pdf, jpg, png)</small> </p>
+              <p>Letter of expatriate quota <small>[where applicable]</small> <small>(pdf, jpg, png)</small> </p>
               <input
                 type="file"
                 className="hidden"
@@ -1687,7 +1687,7 @@ const AnnualDocsUploadForm = () => {
         <div>
           <form onSubmit={handleSubmit(onSubmit4)}>
             <div className="flex justify-between mb-5">
-              <p>Monthly payroll schedule <span className="font-bold" style={{ color: "red" }}> * </span><small>(excel)</small> </p>
+              <p>Monthly payroll schedule <small>(excel)</small> </p>
               <input
                 required
                 type="file"
@@ -1739,7 +1739,7 @@ const AnnualDocsUploadForm = () => {
 
           <form onSubmit={handleSubmit(onSubmit5)}>
             <div className="flex justify-between mb-5">
-              <p>Evidence of PAYE remittance <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+              <p>Evidence of PAYE remittance  <small>(pdf, jpg, png)</small></p>
 
 
               <input
@@ -1840,8 +1840,7 @@ const AnnualDocsUploadForm = () => {
           </form>
           <hr className="mb-2" />
 
-
-          <form onSubmit={handleSubmit(onSubmit7)}>
+          {/* <form onSubmit={handleSubmit(onSubmit7)}>
             <div className="flex justify-between mb-5">
               <p>End of year trial balance </p>
               <input
@@ -1888,7 +1887,7 @@ const AnnualDocsUploadForm = () => {
 
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
       </Widget>
 
@@ -1900,8 +1899,7 @@ const AnnualDocsUploadForm = () => {
       <Widget>
         <form onSubmit={handleSubmit(onSubmit8)}>
           <div className="flex justify-between mb-5">
-            {/* <p>Schedule of withholding tax deductions <span className="font-bold" style={{ color: "red" }}> * </span> <small> (excel, pdf)</small><br /><span className="flex justify-end" style={{ color: "blue" }}><Link href="/csv/wht.csv"> download </Link></span></p> */}
-            <p>Schedule of withholding tax deductions <span className="font-bold" style={{ color: "red" }}> * </span> <small> (excel, pdf)</small><br /><span className="flex justify-end" style={{ color: "blue" }}></span></p>
+            <p>Schedule of withholding tax deductions  <small> (excel, pdf)</small><br /><span className="flex justify-end" style={{ color: "blue" }}></span></p>
             <input
               id="customFile8"
               type="file"
@@ -1953,7 +1951,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit9)}>
           <div className="flex justify-between mb-5">
-            <p>Withholding tax receipts (corporate & Individual) <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Withholding tax receipts (corporate & Individual)  <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile9"
               type="file"
@@ -2003,7 +2001,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit10)}>
           <div className="flex justify-between mb-5">
-            <p>Monthly Immigration returns <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Monthly Immigration returns  <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile10"
               type="file"
@@ -2059,7 +2057,7 @@ const AnnualDocsUploadForm = () => {
       <Widget>
         <form onSubmit={handleSubmit(onSubmit11)}>
           <div className="flex justify-between mb-5">
-            <p>Development levy receipts (corporate & Individual)  <span className="font-bold" style={{ color: "red" }}> * </span> <small> (jpg, pdf, png)</small><br /><span className="flex justify-end" style={{ color: "blue" }}></span></p>
+            <p>Development levy receipts (corporate & Individual)   <small> (jpg, pdf, png)</small><br /><span className="flex justify-end" style={{ color: "blue" }}></span></p>
             <input
               id="customFile11"
               type="file"
@@ -2111,7 +2109,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit12)}>
           <div className="flex justify-between mb-5">
-            <p>Business premises receipts (corporate & Individual) <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Business premises receipts (corporate & Individual)  <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile12"
               type="file"
@@ -2162,7 +2160,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit13)}>
           <div className="flex justify-between mb-5">
-            <p>Ground rent receipts (corporate & Individual)  <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Ground rent receipts (corporate & Individual)   <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile13"
               type="file"
@@ -2213,7 +2211,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit14)}>
           <div className="flex justify-between mb-5">
-            <p>Social service contributions levy (SSCL) (corporate & Individual)  <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Social service contributions levy (SSCL) (corporate & Individual)   <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile14"
               type="file"
@@ -2266,7 +2264,7 @@ const AnnualDocsUploadForm = () => {
       <Widget>
         <form onSubmit={handleSubmit(onSubmit15)}>
           <div className="flex justify-between mb-5">
-            <p>Evidence of remittance of pension <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Evidence of remittance of pension  <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile15"
               type="file"
@@ -2317,7 +2315,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit16)}>
           <div className="flex justify-between mb-5">
-            <p>Evidence of remittance of NHF <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Evidence of remittance of NHF  <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile16"
               type="file"
@@ -2368,7 +2366,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit17)}>
           <div className="flex justify-between mb-5">
-            <p>Evidence of remittance of NHIS  <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Evidence of remittance of NHIS   <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile17"
               type="file"
@@ -2419,7 +2417,7 @@ const AnnualDocsUploadForm = () => {
 
         <form onSubmit={handleSubmit(onSubmit18)}>
           <div className="flex justify-between mb-5">
-            <p>Evidence of remittance of LAP  <span className="font-bold" style={{ color: "red" }}> * </span> <small>(pdf, jpg, png)</small></p>
+            <p>Evidence of remittance of LAP   <small>(pdf, jpg, png)</small></p>
             <input
               id="customFile18"
               type="file"
