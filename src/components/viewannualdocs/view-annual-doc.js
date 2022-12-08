@@ -4,6 +4,8 @@ import url from "../../config/url";
 import setAuthToken from '../../functions/setAuthToken';
 import Loader from 'react-loader-spinner';
 import { FiTrash2 } from 'react-icons/fi';
+import { shallowEqual, useSelector } from 'react-redux';
+import jwt from "jsonwebtoken";
 
 export const ViewDocs = () => {
   const [uploadedDocs, setDocuments] = useState([])
@@ -11,8 +13,18 @@ export const ViewDocs = () => {
   const [deleted, setDeleted] = useState(() => true);
   const [docStatus, setStatus] = useState("")
   const [comment, setComment] = useState("")
+  const { auth } = useSelector(
+    (state) => ({
+      auth: state.authentication.auth,
+    }),
+    shallowEqual
+  );
+
+  const decoded = jwt.decode(auth);
+  const kgtin = decoded.kgtin
+
   const docYear = {
-    year: "2022"
+    year: "2022",
   }
 
   setAuthToken();
@@ -20,7 +32,7 @@ export const ViewDocs = () => {
     setIsFetching(true)
     const fetchDocs = async () => {
       const year = {
-        "year": 2022
+        "year": 2022,
       }
       try {
         const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, year);
@@ -44,7 +56,7 @@ export const ViewDocs = () => {
         setStatus(docStatus)
         let declinedComment = response.data.body.declinedComment
         setComment(declinedComment)
-        
+
       } catch (error) {
 
         console.log(error)
@@ -514,12 +526,16 @@ export const ViewDocs = () => {
         </div>
       )}
 
-      <p className="font-bold text-center">{docStatus}</p>
-      {/* {comment !== undefined
-      <div>
-        <p>{comment}</p>
+      <div className="flex justify-around mb-4">
+        {comment === "" || comment === null || comment === undefined ? "" :
+          <div>
+            <p>Comment</p>
+            <p>{comment}</p>
+          </div>
+        }
+        <p className="font-bold text-center">{docStatus}</p>
       </div>
-      } */}
+
 
       <div className="grid justify-items-start">
         <div className="font-semibold">
@@ -855,7 +871,7 @@ export const ViewDocsYr2 = () => {
         let response = await axios.post(`${url.BASE_URL}annual/view-annual-status`, docYear)
         let docStatus = response.data.body.status;
         // let declinedComment = 
-       
+
         setStatus(docStatus)
       } catch (error) {
 

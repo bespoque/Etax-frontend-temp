@@ -24,6 +24,8 @@ const ViewAnnualSingle = () => {
   const [query, setQuery] = useState(() => "");
   const router = useRouter();
 
+  
+
   useEffect(() => {
     if (router && router.query) {
       let year = router.query.ref;
@@ -38,6 +40,7 @@ const ViewAnnualSingle = () => {
           let res = await axios.post(
             `${url.BASE_URL}annual/view-annual`, yearValue
           );
+          console.log("res", res);
           res = res.data.body.annualYr;
           let sum = {};
           let records = [];

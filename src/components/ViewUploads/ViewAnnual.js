@@ -28,8 +28,8 @@ const ViewAnnual = () => {
     const fetchPost = async () => {
       try {
         let res = await axios.get(`${url.BASE_URL}annual/view-annual`);
+        console.log("res", res)
         res = res.data.body.summaryAnnual;
-        console.log(res)
         let employeessTotal = res.length
         setTotalemp(employeessTotal)
         let records = [];
