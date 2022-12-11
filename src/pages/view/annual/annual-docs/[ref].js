@@ -29,7 +29,7 @@ const ViewDocs = () => {
             console.log("routerData", routeData);
             const fetchDocs = async () => {
                 const docYear = {
-                    "year": 2019,
+                    "year": documentYear,
                 }
                 try {
                     const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, docYear);
