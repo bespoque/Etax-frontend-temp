@@ -167,6 +167,7 @@ const ViewMonthlySingle = () => {
           </div>
           {post[0]?.status === "Unpaid" ? (
             <>
+            
               <div className="lg:flex md:flex justify-between">
                 <div className="w-32 mb-2">
                   <Link href={`/pending-payment/${post[0]?.assessmentId}`}>

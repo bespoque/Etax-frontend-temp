@@ -269,22 +269,12 @@ const AnnualUploadForm = () => {
             <SampleCsv />
             <div className="flex justify-center">
               <div className="">
-                {/* <NewButton
-                  title={`Download csv sheet`}
-                  icon={<FiArrowDown size="16" />}
-                  color="green"
-                  type="button"
-                /> */}
                 <Link href="/csv/annual_returns_csv.csv">
                   <a className="flex overflow-hidden btn btn-default btn-outlined  mr-4 bg-transparent text-green-500 hover:text-green-700 border-green-500 hover:border-green-700">
                     <FiArrowDown size="16" className="animate-bounce" />
                     Download sample CSV
                   </a>
                 </Link>
-
-                {/* <NewButton title="user guide" color="blue" type="button" /> */}
-
-
               </div>
             </div>
           </div>

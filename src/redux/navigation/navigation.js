@@ -73,14 +73,16 @@ const initialState = [
           {
             title: 'PAYE Annual',
             items: [
-              { title: 'Upload CSV', url: '/uploads/annual', items: [] },
-              {
-                title: 'View',
-                url: '/view/annual',
-                items: [],
-              },
-              { title: 'Upload Document', url: '/uploads/annualdocs', items: [] },
-              { title: 'View document', url: '/view/viewdocuments', items: [] },
+              { title: 'File Returns', url: '/file-annual-returns', items: [] },
+              { title: 'List Returns', url: '/list-annual-returns', items: [] },
+              // { title: 'Upload CSV', url: '/uploads/annual', items: [] },
+              // {
+              //   title: 'View',
+              //   url: '/view/annual',
+              //   items: [],
+              // },
+              // { title: 'Upload Document', url: '/uploads/annualdocs', items: [] },
+              // { title: 'View document', url: '/view/viewdocuments', items: [] },
 
             ],
           },

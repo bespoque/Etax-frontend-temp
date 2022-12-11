@@ -21,14 +21,20 @@ const ViewAnnualSingle = () => {
   const [isFetching, setIsFetching] = useState(() => true);
   const [currentPage, setCurrentPage] = useState(() => 1);
   const [postPerPage, setPostPerPage] = useState(10);
+  const [uploadYear, setUploadYear] = useState(10);
   const [query, setQuery] = useState(() => "");
+  const [status, setStatus] = useState(() => "");
   const router = useRouter();
 
-  
+
 
   useEffect(() => {
     if (router && router.query) {
-      let year = router.query.ref;
+      let routeData = String(router.query.ref);
+      let year = routeData.split("_").shift()
+      let status = routeData.split("_").pop()
+      setStatus(status)
+      setUploadYear(year)
       year = `${year}-01-01`
       console.log(year);
       let yearValue = {
@@ -80,7 +86,7 @@ const ViewAnnualSingle = () => {
             rec.name = rec.staff_names;
             records.push(rec);
           }
-        
+
           const totalSalary = salarySum.reduce(
             (preVal, curVal) => preVal + curVal,
             0
@@ -151,9 +157,48 @@ const ViewAnnualSingle = () => {
 
   const searchedPost = search(post).slice(indexOfFirstPost, indexOfLastPost);
 
+  const deleteHandler = async () => {
+    let year = {
+        "year": uploadYear
+    }
+    setIsFetching(true)
+    try {
+        let res = await axios.delete(
+            `${url.BASE_URL}annual/delete-annual-returns`, { data: year }
+        );
+        setIsFetching(false)
+        console.log(res.data);
+        alert(res.data.message);
+        router.push("/list-annual-returns");
+    } catch (e) {
+      setIsFetching(false)
+        if (e.response) {
+            alert(e.response.message);
+        }
+    }
+};
+
+const deletePrompt = () => {
+    if (window.confirm("Are you sure? This action will delete both schedule and supporting documents")) {
+        deleteHandler();
+    }
+};
 
   return (
     <>
+      {status === "Submitted" || status === "Draft" ?
+        <div className="lg:flex md:flex justify-end">
+          <div className="w-32">
+            <DeleteButton
+              onClick={() => deletePrompt()}
+            >
+              Delete
+            </DeleteButton>
+          </div>
+        </div>
+        : ""
+      }
+      <p className="font-bold text-center"> Year {uploadYear} - {status}</p>
       <SectionTitle title="View Uploads" subtitle="Annual PAYE Returns" />
       {isFetching && (
         <div className="flex justify-center item mb-2">

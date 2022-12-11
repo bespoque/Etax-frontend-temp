@@ -68,6 +68,7 @@ export const ViewAssessmentTable = ({ remittance, total }) => {
                       </p>
                     </td>
                   ))}
+                   
                 </tr>
               ))}
               {/* {items.length > 0 && (

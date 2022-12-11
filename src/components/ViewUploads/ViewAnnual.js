@@ -16,46 +16,24 @@ import * as Icons from '../../components/Icons/index';
 
 const ViewAnnual = () => {
   const [post, setPost] = useState(() => []);
-  const [sum, setSum] = useState(() => null);
-  const [totalemp, setTotalemp] = useState('');
   const [isFetching, setIsFetching] = useState(() => true);
   const [currentPage, setCurrentPage] = useState(() => 1);
   const [postPerPage, setPostPerPage] = useState(() => 10);
-  const [year, setYear] = useState('');
   const [query, setQuery] = useState(() => "");
   useEffect(() => {
     setAuthToken();
     const fetchPost = async () => {
       try {
-        let res = await axios.get(`${url.BASE_URL}annual/view-annual`);
+        let res = await axios.get(`${url.BASE_URL}annual/view-annual-year`);
         console.log("res", res)
-        res = res.data.body.summaryAnnual;
-        let employeessTotal = res.length
-        setTotalemp(employeessTotal)
+        res = res.data.body;
         let records = [];
-        let sum = [];
         for (let i = 0; i < res.length; i++) {
           let rec = res[i];
-          // console.log(rec.tax_pay_cal);
-          sum.push(rec.tax_pay_cal);
-          rec.tax_pay_cal = formatNumber(rec.tax_pay_cal);
-          rec.net_tax_ded = formatNumber(rec.net_tax_ded);
-          rec.con_rel_cal = formatNumber(rec.con_rel_cal);
-          rec.gross_income = formatNumber(rec.gross_income);
-          rec.nhf = formatNumber(rec.nhf);
-          rec.tax_pay_cal = formatNumber(rec.tax_pay_cal);
-          rec.basicSalary = formatNumber(rec.basicSalary);
-          rec.netTaxDeduct = formatNumber(rec.netTaxDeduct);
-          rec.totalSalary = formatNumber(rec.totalSalary);
-          rec.totalChargeable = rec.totalChargeable / 12;
-          rec.totalChargeable = formatNumber(rec.totalChargeable);
-          rec.period = rec.payPeriod;
-          rec.year = dateformat(rec.year, "yyyy");
+          rec.createTime = dateformat(rec.createTime, "dd - mmm - yyyy");
           records.push(rec);
         }
-        let sumOfTax = sum.reduce((preVal, curVal) => preVal + curVal);
         setIsFetching(false);
-        setSum(() => sumOfTax);
         setPost(() => records);
       } catch (e) {
         setIsFetching(false);
@@ -133,7 +111,7 @@ const ViewAnnual = () => {
             </>
           ) : (
             <>
-              <ViewAnnualTable remittance={currentPosts} totalemployees={totalemp} totaltax={sum} />
+              <ViewAnnualTable remittance={currentPosts} />
               <CustomPagination
                 paginate={paginate}
                 totalPosts={post.length}

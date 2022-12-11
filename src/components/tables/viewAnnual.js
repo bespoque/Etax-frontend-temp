@@ -7,12 +7,32 @@ import Link from 'next/link';
 
 const fields = [
   {
+    name: "kgtin",
+    key: "employerId",
+  },
+  {
+    name: "name",
+    key: "taxpayerName",
+  },
+  {
+    name: "Number of employee",
+    key: "employeeCount",
+  },
+  {
+    name: "Number of Documents",
+    key: "docCount",
+  },
+  {
     name: "Year",
     key: "year",
   },
   {
-    name: "Gross Basic Salary",
-    key: "basicSalary",
+    name: "status",
+    key: "status",
+  },
+  {
+    name: "Created time",
+    key: "createTime",
   },
   // {
   //   name: "Net Tax deducted",
@@ -25,19 +45,8 @@ const fields = [
 
 ];
 
-export const ViewAnnualTable = ({ remittance, totalemployees, totaltax, grosssum }) => {
+export const ViewAnnualTable = ({ remittance }) => {
   let items = remittance;
-  // console.log(remittance)
-  // remittance.map((remittance) => {
-  //   remittance["amount"] = formatNumber(remittance["amount"]);
-  //   if (remittance["status"] === 1) {
-  //     remittance["status"] = "success";
-  //   } else if (remittance["status"] === 0) {
-  //     remittance["status"] = "failed";
-  //   }
-  //   return remittance;
-  // });
-
   return (
     <>
       <Widget>
@@ -56,49 +65,31 @@ export const ViewAnnualTable = ({ remittance, totalemployees, totaltax, grosssum
               <tr key={i} className="">
                 {fields.map((field, j) => (
                   <td key={j} className="">
-                    {/* {remittance[field.key]} */}
-                    <Link href={`/view/annual/${remittance.year}`}>
-                      <a className="hover:text-blue-500">
-                        {remittance[field.key]}
-                      </a>
-                    </Link>
+                    {remittance[field.key]}
                   </td>
                 ))}
+                <Link href={`/view/annual/${remittance.year}_${remittance.status}`}>
+                  <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
+                   CSV
+                  </a>
+                </Link>
+                <Link href={`/view/annual/annual-docs/${remittance.year}_${remittance.status}`}>
+                  <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
+                   Doc
+                  </a>
+                </Link>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="mt-16"></div>
         <hr />
-        {/* <div className="flex justify-end">
-          <p className="px-6 font-semibold">Total</p>
-
-          <div className="flex flex-col">
-            <p className="px-6 pb-1">employees</p>
-            <p className="self-center font-semibold">{totalemployees}</p>
-          </div>
-
-          <div className="flex flex-col">
-            <p className="px-6 pb-1">Gross Salary</p>
-            <p className="self-center font-semibold">{formatNumber(grosssum)}</p>
-          </div>
-
-          <div className="flex flex-col">
-            <p className="px-6 pb-1">Expected</p>
-            <p className="self-center font-semibold">{formatNumber(totaltax)}</p>
-          </div>
-
-          <p className="px-6">Variance</p>
-        </div> */}
-        {/* <div>{total}</div> */}
       </Widget>
     </>
   );
 };
 
 const singleFields = [
-  // { name: 'Status', key: 'status' },
-
   {
     name: 'Staff Name',
     key: 'staff_names',
