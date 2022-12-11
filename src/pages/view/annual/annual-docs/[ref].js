@@ -545,7 +545,7 @@ const ViewDocs = () => {
             )}
 
             <div className="flex justify-around mb-4">
-                <p className="font-bold text-center">{docStatus}</p>
+                <p className="font-bold text-center">Year {documentYear} {docStatus}</p>
             </div>
 
 
