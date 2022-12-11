@@ -11,8 +11,8 @@ const ViewDocs = () => {
     const [uploadedDocs, setDocuments] = useState([])
     const [isFetching, setIsFetching] = useState(() => true);
     const [deleted, setDeleted] = useState(() => true);
-    const [docStatus, setStatus] = useState("")
-    const [documentYear, setDocumentYear] = useState("")
+    const [docStatus, setStatus] = useState(()=> "")
+    const [documentYear, setDocumentYear] = useState(()=> "")
     const router = useRouter()
     console.log("documentYear", documentYear);
 
@@ -23,8 +23,8 @@ const ViewDocs = () => {
             let routyear = routeData.split("_").shift()
             let status = routeData.split("_").pop()
             console.log(routyear, status);
-            setStatus(status)
-            setDocumentYear(routyear);
+            setStatus(()=>status)
+            setDocumentYear(()=> routyear);
             setIsFetching(true)
             console.log("routerData", routeData);
             const fetchDocs = async () => {
@@ -545,7 +545,7 @@ const ViewDocs = () => {
             )}
 
             <div className="flex justify-around mb-4">
-                <p className="font-bold text-center">Year {documentYear} {docStatus}</p>
+                <p className="font-bold text-center">Year {documentYear} - {docStatus}</p>
             </div>
 
 

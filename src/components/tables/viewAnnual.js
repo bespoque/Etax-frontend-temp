@@ -73,7 +73,7 @@ export const ViewAnnualTable = ({ remittance }) => {
                    CSV
                   </a>
                 </Link>
-                <Link href={`/view/annual/annual-docs/${remittance.year}_${remittance.status}`}>
+                <Link href={`/view/annual/docs/${remittance.year}_${remittance.status}`}>
                   <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
                    Doc
                   </a>
