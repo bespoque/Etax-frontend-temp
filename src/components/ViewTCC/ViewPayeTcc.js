@@ -31,13 +31,15 @@ const ViewTccPaye = () => {
 
   const decoded = jwt.decode(auth);
   const kgtin = decoded.kgtin
-  
+  console.log("tcc", tcc);
   useEffect(() => {
     setAuthToken();
     const fetchPost = async () => {
       try {
         let res = await axios.get(`${url.BASE_URL}user/paye/list-tp-tcc?kgtin=${kgtin}`);
+        console.log("res", res);
         res = res.data.body.tccPrint;
+
         let records = [];
         for (let i = 0; i < res.length; i++) {
           let rec = res[i];

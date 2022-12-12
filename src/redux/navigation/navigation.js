@@ -150,23 +150,23 @@ const initialState = [
           }
         ],
       },
-      // {
-      //   url: '/',
-      //   icon: <PAYE />,
-      //   title: 'PAYE',
-      //   items: [
-      //     {
-      //       title: 'TCC',
-      //       items: [
-      //         {
-      //           title: 'View',
-      //           url: '/view/paye-tcc',
-      //           items: []
-      //         }
-      //       ],
-      //     },
-      //   ],
-      // },
+      {
+        url: '/',
+        icon: <PAYE />,
+        title: 'PAYE',
+        items: [
+          {
+            title: 'TCC',
+            items: [
+              {
+                title: 'View',
+                url: '/view/paye-tcc',
+                items: []
+              }
+            ],
+          },
+        ],
+      },
 
       {
         url: '#',

@@ -1186,7 +1186,7 @@ const AnnualSupDocs = () => {
         formData.append('employer_id', kgtin);
         formData.append('pension_remittance', file15);
         formData.append('year', year);
-       setSubmitting15(true)
+        setSubmitting15(true)
 
         try {
             const res = await axios.post(`${url.BASE_URL}annual/upload-annual-doc`, formData, {
@@ -1346,20 +1346,21 @@ const AnnualSupDocs = () => {
     };
 
     const SubmitUploads = () => {
-        show()
-        // let kgtinyear = {
-        //     "year": year
-        // }
-
-        // axios.post(`${url.BASE_URL}annual/submit-annual-returns`, kgtinyear)
-        //     .then(function (response) {
-        //         show()
-        //     }).catch(function (error) {
-        //         if (error.response) {
-        //             alert(`${error.response.data.message} for ${year}`);
-        //         }
-        //         console.log(error);
-        //     })
+        let kgtinyear = {
+            "year": year
+        }
+        setSubmitting(true)
+        axios.post(`${url.BASE_URL}annual/submit-annual-returns`, kgtinyear)
+            .then(function (response) {
+                setSubmitting(false)
+                show()
+            }).catch(function (error) {
+                setSubmitting(false)
+                if (error.response) {
+                    alert(`${error.response.data.message} for ${year}`);
+                }
+                console.log(error);
+            })
 
     }
 

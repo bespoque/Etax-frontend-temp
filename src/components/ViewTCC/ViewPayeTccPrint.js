@@ -11,7 +11,7 @@ import { PrintSinglePayeTcc } from "../tables/viewtccPayeTable";
 
 const PrintSingleTccPaye = () => {
   const [PayeTccData, setPayeTccData] = useState(() => []);
-  const [isFetching, setIsFetching] = useState(() => true); 
+  const [isFetching, setIsFetching] = useState(() => true);
   const [tccID, setTccID] = useState(() => []);
   const router = useRouter();
   useEffect(() => {
@@ -26,6 +26,7 @@ const PrintSingleTccPaye = () => {
         try {
           let res = await axios.post(`${url.BASE_URL}user/paye/view-tp-tcc`, id);
           let fetctTcc = res.data.body.tcc;
+          console.log("fetctTcc", fetctTcc);
           setPayeTccData(fetctTcc)
           setIsFetching(false);
         } catch (e) {
@@ -41,7 +42,6 @@ const PrintSingleTccPaye = () => {
   return (
     <>
       <SectionTitle subtitle="Print PAYE TCC" />
-
       <Widget>
 
         <>
@@ -62,11 +62,16 @@ const PrintSingleTccPaye = () => {
             <PrintSinglePayeTcc
               PayeTccData={PayeTccData}
               tccID={tccID}
-               />
+            />
           }
         </>
       </Widget>
+      {/* <PrintSinglePayeTcc
+        PayeTccData={PayeTccData}
+        tccID={tccID}
+      /> */}
     </>
+
   );
 };
 

@@ -9,6 +9,7 @@ import setAuthToken from "../../functions/setAuthToken";
 import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature } from "../Images/Images";
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
+import Image from 'next/image'
 
 const fields = [
   {
@@ -99,19 +100,18 @@ export const PrintSinglePayeTcc = ({
 
   let picUpload = ""
   let signature = ""
- 
+
   let printPrintTime
 
 
-  PayeTccData.forEach((ind, i) => {
-    picUpload = ind.passport.data
-  })
-  PayeTccData.forEach((ind, i) => {
-    signature = ind.signature.data
-  })
+  // PayeTccData.forEach((ind, i) => {
+  //   picUpload = ind.passport.data
+  // })
+  // PayeTccData.forEach((ind, i) => {
+  //   signature = ind.signature.data
+  // })
 
   console.log("PayeTccData", PayeTccData);
-  console.log("picUpload", picUpload);
 
   const base64StringPic = Buffer.from(picUpload).toString('base64')
   const base64StringSig = Buffer.from(signature).toString('base64')
@@ -151,13 +151,14 @@ export const PrintSinglePayeTcc = ({
     }
   }
 
+  console.log("PayeTccData", PayeTccData);
 
   return (
     <>
       <div className="m-3 flex justify-end">
         <div onClick={ChangePrint}>
           <ReactToPrint
-            pageStyle="@page { size: 7.5in 13in  }"
+            // pageStyle="@page { size: 7.5in 13in  }"
             trigger={() => <button className="btn w-32 bg-green-600 btn-default text-white
             btn-outlined bg-transparent rounded-md"
               type="submit"
@@ -169,21 +170,59 @@ export const PrintSinglePayeTcc = ({
         </div>
 
       </div>
+      {/* <Image
+        // loader={myLoader}
+        src="/images/KGIRS_TCC.jpg"
+        alt="Picture of the author"
+        // layout="fill"
+        width={500}
+        height={500}
+      /> */}
       {PayeTccData.map((ind, i) => (
-
-        <section>
-          <div ref={componentRef}>
-            <div className="flex justify-around">
-              <div>
-
-                <div className="flex mb-8">
-                  <KgirsLogo />
-                  <p className="self-center w-48 font-bold">KOGI STATE INTERNAL REVENUE SERVICE</p>
+        <section ref={componentRef}>
+          <div className="w-2/3 h-screen">
+            <div className=" justify-around object-fill" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              <div>Test</div>
+              {/* <div className="border-4 p-4 mt-5">
+                <div className="flex justify-between">
+                  <div>
+                    <h4>KOGI STATE GOVERNMENT</h4>
+                    <h6>TAX CLEARANCE CERTIFICATE</h6>
+                  </div>
+                  <div className="flex mb-8">
+                    <KgirsLogo />
+                    <div>
+                      <p className="self-center w-48 font-bold">KOGI STATE INTERNAL REVENUE SERVICE</p>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex justify-end">
                   <p className="border font-bold p-2 text-center w-64">{`File No - ${ind.file_ref}`}</p>
                 </div>
+
 
                 <div>
                   <div className="flex justify-between my-3">
@@ -245,13 +284,11 @@ export const PrintSinglePayeTcc = ({
                     </div>
                   </div>
 
-
                   <div className="w-10"></div>
                   <div>
-                    <table className="table divide-y mb-4 striped">
+                    <table className="table divide-y mb-4">
                       <thead >
                         <tr style={{ backgroundColor: "#d3fbc6" }}>
-                        
                           <th>
                             Tax Year
                           </th>
@@ -270,7 +307,7 @@ export const PrintSinglePayeTcc = ({
                       <tbody >
                         {ind.taxYr_1 === "" || ind.taxYr_1 === null ? "" :
                           <tr>
-                          
+
                             <td className="">
                               <p className="font-bold">{ind.assmtYr_1}</p>
                             </td>
@@ -287,7 +324,7 @@ export const PrintSinglePayeTcc = ({
                         }
                         {ind.taxYr_2 === "" || ind.taxYr_2 === null ? "" :
                           <tr>
-                         
+
                             <td className="">
                               <p className="font-bold">{ind.assmtYr_2}</p>
                             </td>
@@ -306,7 +343,6 @@ export const PrintSinglePayeTcc = ({
                         }
                         {ind.taxYr_3 === "" === "" || ind.taxYr_3 === null ? "" :
                           <tr>
-                          
                             <td className="">
                               <p className="font-bold">{ind.assmtYr_3}</p>
                             </td>
@@ -319,9 +355,7 @@ export const PrintSinglePayeTcc = ({
                             <td className="">
                               <p>PAYE</p>
                             </td>
-
                           </tr>
-
                         }
 
                       </tbody>
@@ -332,11 +366,8 @@ export const PrintSinglePayeTcc = ({
                   <p className="mb-2"><span className="font-bold">3.</span> His/her known source(s) of income are: <span>Employment, Trade/Professional</span> </p>
                   <p><span className="font-bold">4.</span> This certificate expires on: <span>{expiry}</span> </p>
                 </div>
-
-
-
-
-                <div className="flex justify-between mt-2">
+                <div className="flex justify-between my-4">
+                  <div></div>
                   <div>
                     <QRCode
                       value={`https://irs.kg.gov.ng/verify/fetch_tcc.php?ref=${ind.ref}`}
@@ -352,14 +383,20 @@ export const PrintSinglePayeTcc = ({
                     </div>
                   </div>
                 </div>
-
-              </div>
-
+                <div >
+                  <p>To verify certificate</p>
+                  <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
+                </div>
+                <div className="flex justify-between">
+                  <p></p>
+                  <div className="font-bold">
+                    PAYE - {ind.id}
+                  </div>
+                  <p></p>
+                </div>
+              </div> */}
             </div>
-
-
           </div>
-
         </section>
       ))}
     </>
