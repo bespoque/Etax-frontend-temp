@@ -179,30 +179,57 @@ export const PrintSinglePayeTcc = ({
       </div> */}
 
       {PayeTccData.map((ind, i) => (
-        <section ref={componentRef} className="flex justify-center">
+        <section ref={componentRef} className="flex justify-center mt-5">
           <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
-            <div >
+            <div className="px-20">
               <div >
-                <div className="flex justify-center mt-10">
+                <div className="flex justify-center mt-16">
                   <CoatOfArms />
                   <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
                   <KogiGov />
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-center">
                   <div>
-                    <h4>KOGI STATE GOVERNMENT</h4>
-                    <h6>TAX CLEARANCE CERTIFICATE</h6>
+                    <h4 className="text-green-600">KOGI STATE GOVERNMENT</h4>
+                    <div className="text-center">
+                      <h6 className="text-red-600">TAX CLEARANCE CERTIFICATE</h6>
+                    </div>
                   </div>
-                  <div className="flex mb-8">
+                </div>
+                <div className="grid justify-items-center mt-5">
+                  <div className="flex">
                     <KgirsLogo />
                     <div>
-                      <p className="self-center w-48 font-bold">KOGI STATE INTERNAL REVENUE SERVICE</p>
+                      <p className="self-center w-48 font-bold text-green-600">KOGI STATE INTERNAL REVENUE SERVICE</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <p className="border font-bold p-2 text-center w-64">{`File No - ${ind.file_ref}`}</p>
+                  <div>
+                    <div>
+                      <small className="leading-none block">File No</small>
+                      <small>{`${ind.file_ref}`}</small>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 place-items-start">
+                      <div className="">
+                        <small className="leading-none block">TCC ID </small>
+                        <small className="font-bold">{ind.ref}</small>
+                      </div>
+                      <div className="">
+                        <small className="leading-none block">ISSUE DATE </small>
+                        <small className="font-bold">{dateIssue}</small>
+                      </div>
+                      <div className="">
+                        <small className="leading-none block">TAX ID </small>
+                        <small className="font-bold">{ind.tp_id}</small>
+                      </div>
+                      <div className="">
+                        <small className="leading-none block">TAX OFFICE </small>
+                        <small className="font-bold">{ind.tax_station}</small>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
 
@@ -224,11 +251,7 @@ export const PrintSinglePayeTcc = ({
                         />
                       </div>
                     </div>
-                    <div className="flex">
-                      <CoatOfArms />
-                      <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
-                      <KogiGov />
-                    </div>
+
                   </div>
                   <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span></p>
                   <div>
@@ -244,7 +267,7 @@ export const PrintSinglePayeTcc = ({
                 </div>
                 <div className="flex justify-center mb-5">
 
-                  <div>
+                  {/* <div>
                     <div>
                       <small className="leading-none block">TCC ID </small>
                       <small className="font-bold">{ind.ref}</small>
@@ -266,7 +289,8 @@ export const PrintSinglePayeTcc = ({
                     </div>
                   </div>
 
-                  <div className="w-10"></div>
+                  <div className="w-10"></div> */}
+
                   <div>
                     <table className="table divide-y mb-4">
                       <thead >
@@ -348,6 +372,7 @@ export const PrintSinglePayeTcc = ({
                   <p className="mb-2"><span className="font-bold">3.</span> His/her known source(s) of income are: <span>Employment, Trade/Professional</span> </p>
                   <p><span className="font-bold">4.</span> This certificate expires on: <span>{expiry}</span> </p>
                 </div>
+                <h3 className="text-red-600">INCOME TAX CLEARANCE CERTIFICATE</h3>
                 <div className="flex justify-between my-4">
                   <div></div>
                   <div>
@@ -365,17 +390,17 @@ export const PrintSinglePayeTcc = ({
                     </div>
                   </div>
                 </div>
-                <div >
+                <div className="mb-12">
                   <p>To verify certificate</p>
                   <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <p></p>
                   <div className="font-bold">
                     PAYE - {ind.id}
                   </div>
                   <p></p>
-                </div>
+                </div> */}
 
               </div>
             </div>
