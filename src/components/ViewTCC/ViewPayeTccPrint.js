@@ -42,34 +42,27 @@ const PrintSingleTccPaye = () => {
   return (
     <>
       <SectionTitle subtitle="Print PAYE TCC" />
-      <Widget>
 
-        <>
-          {isFetching ? (
-            <div className="flex justify-center item mb-2">
-              <Loader
-                visible={isFetching}
-                type="BallTriangle"
-                color="#00FA9A"
-                height={19}
-                width={19}
-                timeout={0}
-                className="ml-2"
-              />
-              <p>Fetching data...</p>
-            </div>
-          ) :
-            <PrintSinglePayeTcc
-              PayeTccData={PayeTccData}
-              tccID={tccID}
-            />
-          }
-        </>
-      </Widget>
-      {/* <PrintSinglePayeTcc
-        PayeTccData={PayeTccData}
-        tccID={tccID}
-      /> */}
+      {isFetching ? (
+        <div className="flex justify-center item mb-2">
+          <Loader
+            visible={isFetching}
+            type="BallTriangle"
+            color="#00FA9A"
+            height={19}
+            width={19}
+            timeout={0}
+            className="ml-2"
+          />
+          <p>Fetching data...</p>
+        </div>
+      ) :
+        <PrintSinglePayeTcc
+          PayeTccData={PayeTccData}
+          tccID={tccID}
+        />
+      }
+
     </>
 
   );

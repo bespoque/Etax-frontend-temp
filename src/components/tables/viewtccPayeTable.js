@@ -168,44 +168,26 @@ export const PrintSinglePayeTcc = ({
             content={() => componentRef.current}
           />
         </div>
-
       </div>
-      {/* <Image
-        // loader={myLoader}
-        src="/images/KGIRS_TCC.jpg"
-        alt="Picture of the author"
-        // layout="fill"
-        width={500}
-        height={500}
-      /> */}
+
+      {/* <div ref={componentRef} className="flex justify-center">
+        <div className="bg-cover w-max bg-center h-max" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)`, minWidth:"580px", minHeight:"820px" }}>
+      
+
+        
+        </div>
+      </div> */}
+
       {PayeTccData.map((ind, i) => (
-        <section ref={componentRef}>
-          <div className="w-2/3 h-screen">
-            <div className=" justify-around object-fill" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              <div>Test</div>
-              {/* <div className="border-4 p-4 mt-5">
+        <section ref={componentRef} className="flex justify-center">
+          <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
+            <div >
+              <div >
+                <div className="flex justify-center mt-10">
+                  <CoatOfArms />
+                  <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
+                  <KogiGov />
+                </div>
                 <div className="flex justify-between">
                   <div>
                     <h4>KOGI STATE GOVERNMENT</h4>
@@ -394,8 +376,10 @@ export const PrintSinglePayeTcc = ({
                   </div>
                   <p></p>
                 </div>
-              </div> */}
+
+              </div>
             </div>
+
           </div>
         </section>
       ))}
