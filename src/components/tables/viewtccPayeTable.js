@@ -104,12 +104,12 @@ export const PrintSinglePayeTcc = ({
   let printPrintTime
 
 
-  // PayeTccData.forEach((ind, i) => {
-  //   picUpload = ind.passport.data
-  // })
-  // PayeTccData.forEach((ind, i) => {
-  //   signature = ind.signature.data
-  // })
+  PayeTccData.forEach((ind, i) => {
+    picUpload = ind.passport.data
+  })
+  PayeTccData.forEach((ind, i) => {
+    signature = ind.signature.data
+  })
 
   console.log("PayeTccData", PayeTccData);
 
@@ -205,7 +205,23 @@ export const PrintSinglePayeTcc = ({
                   </div>
                 </div>
 
-                <div className="flex justify-end">
+                <div className="flex justify-between">
+                <div className="ml-4">
+                      <div>
+                        <img
+                          src={`data:image/png;base64,${base64StringPic}`}
+                          alt=""
+                          className="rounded h-16 w-16"
+                        />
+                      </div>
+                      {/* <div className="self-end ml-2">
+                        <img
+                          src={`data:image/png;base64,${base64StringSig}`}
+                          alt=""
+                          className="rounded h-10 w-24"
+                        />
+                      </div> */}
+                    </div>
                   <div>
                     <div>
                       <small className="leading-none block">File No</small>
@@ -235,22 +251,7 @@ export const PrintSinglePayeTcc = ({
 
                 <div>
                   <div className="flex justify-between my-3">
-                    <div className="flex">
-                      <div>
-                        <img
-                          src={`data:image/png;base64,${base64StringPic}`}
-                          alt=""
-                          className="rounded h-16 w-16"
-                        />
-                      </div>
-                      <div className="self-end ml-2">
-                        <img
-                          src={`data:image/png;base64,${base64StringSig}`}
-                          alt=""
-                          className="rounded h-10 w-24"
-                        />
-                      </div>
-                    </div>
+                    
 
                   </div>
                   <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span></p>
