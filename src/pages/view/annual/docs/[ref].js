@@ -44,7 +44,7 @@ const ViewDocs = () => {
             };
             fetchDocs();
         }
-    }, [deleted]);
+    }, [deleted, router]);
 
 
     const coverLetter = uploadedDocs.filter(c => c.doc_title === "cover_letter")
