@@ -11,8 +11,8 @@ const ViewDocs = () => {
     const [uploadedDocs, setDocuments] = useState([])
     const [isFetching, setIsFetching] = useState(() => true);
     const [deleted, setDeleted] = useState(() => true);
-    const [docStatus, setStatus] = useState(()=> "")
-    const [documentYear, setDocumentYear] = useState(()=> "")
+    const [docStatus, setStatus] = useState(() => "")
+    const [documentYear, setDocumentYear] = useState("")
     const router = useRouter()
     console.log("documentYear", documentYear);
 
@@ -22,25 +22,22 @@ const ViewDocs = () => {
             let routeData = String(router.query.ref);
             let routyear = routeData.split("_").shift()
             let status = routeData.split("_").pop()
-            console.log(routyear, status);
-            setStatus(()=>status)
-            setDocumentYear(()=> routyear);
+            setStatus(() => status)
+            setDocumentYear(() => routyear);
             setIsFetching(true)
-            console.log("routerData", routeData);
-            const fetchDocs = async () => {
-                const docYear = {
-                    "year": documentYear,
-                }
-                try {
-                    const result = await axios.post(`${url.BASE_URL}annual/view-annual-uploads`, docYear);
-                    let docs = result.data.body.uploads;
-                    setIsFetching(false)
-                    setDocuments(docs)
-                }
-                catch (error) {
-                    setIsFetching(false)
-                    console.log(error);
-                }
+            console.log("routyear", routyear);
+            const fetchDocs = () => {
+                axios.post(`${url.BASE_URL}annual/view-annual-uploads`, {"year": documentYear})
+                    .then(function (response) {
+                        let docs = response.data.body.uploads;
+                        setIsFetching(false)
+                        setDocuments(docs)
+                    })
+                    .catch(function (error) {
+                        setIsFetching(false)
+                        console.log(error);
+                    })
+
             };
             fetchDocs();
         }
@@ -516,7 +513,6 @@ const ViewDocs = () => {
 
     return (
         <>
-            <div></div>
             {docStatus === "Submitted" || docStatus === "Draft" ?
                 <div className="lg:flex md:flex justify-end">
                     <div className="w-32">
