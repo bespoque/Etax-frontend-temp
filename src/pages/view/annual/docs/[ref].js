@@ -12,22 +12,22 @@ const ViewDocs = () => {
     const [isFetching, setIsFetching] = useState(() => true);
     const [deleted, setDeleted] = useState(() => true);
     const [docStatus, setStatus] = useState(() => "")
-    const [documentYear, setDocumentYear] = useState("")
+    const [documentYear, setDocumentYear] = useState(() => "")
     const router = useRouter()
     console.log("documentYear", documentYear);
 
     setAuthToken();
     useEffect(() => {
         if (router && router.query) {
-            let routeData = String(router.query.ref);
-            let routyear = routeData.split("_").shift()
-            let status = routeData.split("_").pop()
-            setStatus(() => status)
-            setDocumentYear(() => routyear);
+            let routerData = String(router.query.ref);
+            let routyear = routerData.split("_").shift()
+            let status = routerData.split("_").pop()
+            setStatus(status)
+            setDocumentYear(routyear);
             setIsFetching(true)
             console.log("routyear", routyear);
             const fetchDocs = () => {
-                axios.post(`${url.BASE_URL}annual/view-annual-uploads`, {"year": documentYear})
+                axios.post(`${url.BASE_URL}annual/view-annual-uploads`, {"year": routyear})
                     .then(function (response) {
                         let docs = response.data.body.uploads;
                         setIsFetching(false)
