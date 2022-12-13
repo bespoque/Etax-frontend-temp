@@ -542,6 +542,15 @@ const ViewDocs = () => {
                 <p className="font-bold text-center">Year {documentYear} - {docStatus}</p>
             </div>
 
+            <div className="m-3">
+                <button className="btn w-32 bg-green-600 btn-default text-white
+                btn-outlined bg-transparent rounded-md mr-5"
+                    type="button"
+                    onClick={() => router.back()}
+                >
+                    Back
+                </button>
+            </div>
 
             <div className="grid justify-items-start">
                 <div className="font-semibold">

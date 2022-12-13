@@ -159,30 +159,30 @@ const ViewAnnualSingle = () => {
 
   const deleteHandler = async () => {
     let year = {
-        "year": uploadYear
+      "year": uploadYear
     }
     setIsFetching(true)
     try {
-        let res = await axios.delete(
-            `${url.BASE_URL}annual/delete-annual-returns`, { data: year }
-        );
-        setIsFetching(false)
-        console.log(res.data);
-        alert(res.data.message);
-        router.push("/list-annual-returns");
+      let res = await axios.delete(
+        `${url.BASE_URL}annual/delete-annual-returns`, { data: year }
+      );
+      setIsFetching(false)
+      console.log(res.data);
+      alert(res.data.message);
+      router.push("/list-annual-returns");
     } catch (e) {
       setIsFetching(false)
-        if (e.response) {
-            alert(e.response.message);
-        }
+      if (e.response) {
+        alert(e.response.message);
+      }
     }
-};
+  };
 
-const deletePrompt = () => {
+  const deletePrompt = () => {
     if (window.confirm("Are you sure? This action will delete both schedule and supporting documents")) {
-        deleteHandler();
+      deleteHandler();
     }
-};
+  };
 
   return (
     <>
@@ -200,6 +200,21 @@ const deletePrompt = () => {
       }
       <p className="font-bold text-center"> Year {uploadYear} - {status}</p>
       <SectionTitle title="View Uploads" subtitle="Annual PAYE Returns" />
+      <div className="flex justify-between m-4">
+        <button
+          className="btn bg-green-600 mr-2 btn-default text-white btn-outlined bg-transparent rounded-md"
+          type="submit"
+          onClick={() => router.back()}
+        >
+          Back
+        </button>
+        <button
+          className="btn bg-green-600 mr-2 btn-default text-white btn-outlined bg-transparent rounded-md"
+          type="submit"
+        >
+          <Link href={`/view/annual/docs/${uploadYear}_${status}`}> View Documents</Link>
+        </button>
+      </div>
       {isFetching && (
         <div className="flex justify-center item mb-2">
           <Loader

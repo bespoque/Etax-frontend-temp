@@ -70,12 +70,12 @@ export const ViewAnnualTable = ({ remittance }) => {
                 ))}
                 <Link href={`/view/annual/${remittance.year}_${remittance.status}`}>
                   <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
-                   CSV
+                    CSV
                   </a>
                 </Link>
                 <Link href={`/view/annual/docs/${remittance.year}_${remittance.status}`}>
                   <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
-                   Doc
+                    Doc
                   </a>
                 </Link>
               </tr>
@@ -141,10 +141,10 @@ const singleFields = [
 
 export const ViewAnnualTableSingle = ({ remittance, total }) => {
   const items = remittance;
-  // console.log("Items", remittance);
 
   return (
     <>
+   
       <Widget>
         <div className="overflow-x-auto">
           <table className="table divide-y">
