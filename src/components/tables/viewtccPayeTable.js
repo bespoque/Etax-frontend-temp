@@ -74,7 +74,7 @@ export const ViewPayeTableTCC = ({ tccData }) => {
                 {fields.map((field, j) => (
                   <td key={j} className="">
                     {/* {remittance[field.key]} */}
-                    <Link href={`/view/paye-tcc/${tccData.id}`}>
+                    <Link href={`/view/paye-tcc/${tccData.ref}`}>
                       <a className="hover:text-blue-500">
                         {tccData[field.key]}
                       </a>
