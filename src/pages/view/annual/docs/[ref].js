@@ -14,8 +14,6 @@ const ViewDocs = () => {
     const [docStatus, setStatus] = useState(() => "")
     const [documentYear, setDocumentYear] = useState(() => "")
     const router = useRouter()
-    console.log("documentYear", documentYear);
-
     setAuthToken();
     useEffect(() => {
         if (router && router.query) {
@@ -27,7 +25,7 @@ const ViewDocs = () => {
             setIsFetching(true)
             console.log("routyear", routyear);
             const fetchDocs = () => {
-                axios.post(`${url.BASE_URL}annual/view-annual-uploads`, {"year": routyear})
+                axios.post(`${url.BASE_URL}annual/view-annual-uploads`, { "year": routyear })
                     .then(function (response) {
                         let docs = response.data.body.uploads;
                         setIsFetching(false)
@@ -554,7 +552,9 @@ const ViewDocs = () => {
                     {coverL.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/cover_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteSubmissionLetterY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteSubmissionLetterY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -572,7 +572,9 @@ const ViewDocs = () => {
                     {expertriateL.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exp_order_letter/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteExpLetter(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteExpLetter(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -590,7 +592,9 @@ const ViewDocs = () => {
                     {monthlyPayrollS.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.devportal-live/uploads/annual-returns/mnthly_pay_sched/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteMonthlyPaySch(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -608,7 +612,9 @@ const ViewDocs = () => {
                     {evidenceOfPayeR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/paye_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeletePayeRem(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeletePayeRem(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -624,7 +630,9 @@ const ViewDocs = () => {
                     {exitStaffL.map((element, i) => (
                         <div key={i} className="p-2">
                             <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/exit_staff_list/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteExitStaffListY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteExitStaffListY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -640,7 +648,9 @@ const ViewDocs = () => {
                     {withTaxD.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_deduct/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteWthTaxDedY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteWthTaxDedY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -656,7 +666,9 @@ const ViewDocs = () => {
                     {withTaxR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/wht_tax_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteWthTaxReY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteWthTaxReY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -672,7 +684,9 @@ const ViewDocs = () => {
                     {monthlyImmR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/mnthly_immi_returns/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteMnthImReY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteMnthImReY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -688,7 +702,9 @@ const ViewDocs = () => {
                     {devLevyR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a target="_blank" href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/dev_levy_receipts/${element}`} className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteDevLeReY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteDevLeReY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -704,7 +720,9 @@ const ViewDocs = () => {
                     {busPremisesR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/bus_premises_receipt/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteBusPremY1(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteBusPremY1(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -720,7 +738,9 @@ const ViewDocs = () => {
                     {groundRentR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/grnd_rent_receipts/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteGrndRent(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteGrndRent(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -736,7 +756,9 @@ const ViewDocs = () => {
                     {SSCLevy.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/sscl/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteSocialServ(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteSocialServ(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -752,7 +774,9 @@ const ViewDocs = () => {
                     {pensionR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/pension_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeletePension(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeletePension(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -768,7 +792,9 @@ const ViewDocs = () => {
                     {nhfR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhf_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteNHF(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteNHF(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -784,7 +810,9 @@ const ViewDocs = () => {
                     {nhisR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/nhis_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteNHIS(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteNHIS(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
@@ -800,7 +828,9 @@ const ViewDocs = () => {
                     {lapR.map((element, i) => (
                         <div key={i} className="p-2">
                             <a href={`https://annualuploads.bespoque.dev/portal-live/uploads/annual-returns/lap_remittance/${element}`} target="_blank" className="underline underline-offset-4 text-blue-600">Download</a>
-                            <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+                            {docStatus === "Approved" || docStatus === "Verified" ? "" :
+                                <p><button onClick={() => DeleteLAP(i)}><FiTrash2 color="red" /></button></p>
+                            }
                         </div>
                     ))}
                 </div>
