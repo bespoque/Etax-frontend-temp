@@ -6,7 +6,7 @@ import dateformat from "dateformat";
 import Link from 'next/link';
 import { useRef } from "react";
 import setAuthToken from "../../functions/setAuthToken";
-import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature } from "../Images/Images";
+import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature, SignatureCol } from "../Images/Images";
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
 import Image from 'next/image'
@@ -241,7 +241,7 @@ const router = useRouter()
 
       <section ref={componentRef} className="flex justify-center mt-5">
         <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
-          <div className="px-20">
+          <div className="px-16">
             <div >
               <div className="flex justify-center mt-16">
                 <CoatOfArms />
@@ -256,7 +256,7 @@ const router = useRouter()
                   </div>
                 </div>
               </div>
-              <div className="grid justify-items-center mt-5">
+              <div className="grid justify-items-center mt-5 ml-12">
                 <div className="flex">
                   <KgirsLogo />
                   <div>
@@ -452,9 +452,9 @@ const router = useRouter()
                 <p><span className="font-bold">4.</span> This certificate expires on: <span>31st Dec {dueDateYear}</span> </p>
               </div>
               <h3 className="text-red-600">INCOME TAX CLEARANCE CERTIFICATE</h3>
-              <div className="flex justify-between my-4">
-                <div></div>
-                <div>
+              <div className="flex justify-end mt-16">
+                {/* <div></div> */}
+                <div className="mr-24">
                   <QRCode
                     value={`https://irs.kg.gov.ng/verify/fetch_tcc.php?ref=${PayeTccData.ref}`}
                     size={120}
@@ -462,14 +462,14 @@ const router = useRouter()
                 </div>
                 <div className="flex justify-between mt-4">
                   <div className="flex flex-col">
-                    <Signature />
+                    <SignatureCol />
                     <hr />
                     <p className="font-bold text-center">Sule Salihu Enehe</p>
                     <p className="font-bold text-center">Ag. Executive Chairman</p>
                   </div>
                 </div>
               </div>
-              <div className="mb-32">
+              <div className="mb-10">
                 <p>To verify certificate</p>
                 <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
               </div>
