@@ -276,13 +276,13 @@ const router = useRouter()
                           className="rounded h-16 w-16"
                         />
                       </div>
-                      {/* <div className="self-end ml-2">
+                      <div className="self-end ml-2">
                         <img
                           src={`data:image/png;base64,${base64StringSig}`}
                           alt=""
                           className="rounded h-10 w-24"
                         />
-                      </div> */}
+                      </div>
                     </div>
                     :
                     <div className="flex">
@@ -293,13 +293,13 @@ const router = useRouter()
                           className="rounded h-16 w-16"
                         />
                       </div>
-                      {/* <div className="self-end ml-2">
+                      <div className="self-end ml-2">
                         <img
                           src={`${basdocurl}${signature}`}
                           alt=""
                           className="rounded h-10 w-24"
                         />
-                      </div> */}
+                      </div>
                     </div>
                   }
 
@@ -346,7 +346,8 @@ const router = useRouter()
 
 
               <div>
-                <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{PayeTccData.taxpayer_name}</span></p>
+                <p> <span className="font-bold">1.</span> This is to Certify that <span className="font-bold">{PayeTccData.taxpayer_name}</span></p>
+                <p><span className="font-bold">of</span> {PayeTccData.address}</p>
                 <div>
                   <p>fully paid his/her Personal Income Tax for the past years, that is: <span>
                     {`${year2 !== "" ? `${PayeTccData.assmtYr_1},` : PayeTccData.assmtYr_1} ${year3 !== "" ? `${year2},` : year2} ${year3}`}
