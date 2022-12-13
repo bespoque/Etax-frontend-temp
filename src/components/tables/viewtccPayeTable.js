@@ -93,49 +93,109 @@ export const ViewPayeTableTCC = ({ tccData }) => {
 
 export const PrintSinglePayeTcc = ({
   tccID,
-  PayeTccData
+  yrOnePaySl,
+  yrTwoPaySl,
+  yrThreePaySl,
+  PayeTccData,
+  passport,
+  signature,
+  oldPass,
+  oldSign
 }) => {
 
-  const componentRef = useRef();
 
-  let picUpload = ""
-  let signature = ""
+  // const componentRef = useRef();
 
-  let printPrintTime
+  // let picUpload = ""
+  // let signature = ""
 
-
-  PayeTccData.forEach((ind, i) => {
-    picUpload = ind.passport.data
-  })
-  PayeTccData.forEach((ind, i) => {
-    signature = ind.signature.data
-  })
-
-  console.log("PayeTccData", PayeTccData);
-
-  const base64StringPic = Buffer.from(picUpload).toString('base64')
-  const base64StringSig = Buffer.from(signature).toString('base64')
-
-  PayeTccData.forEach((ind, i) => {
-    printPrintTime = ind.aprvPrint_time
-  })
-
-  if (printPrintTime === undefined) {
-    printPrintTime = new Date()
-  } else {
-    printPrintTime = printPrintTime
-  }
+  // let printPrintTime
 
 
-  let date = printPrintTime
+  // PayeTccData.forEach((ind, i) => {
+  //   picUpload = ind.passport.data
+  // })
+  // PayeTccData.forEach((ind, i) => {
+  //   signature = ind.signature.data
+  // })
+
+  // console.log("PayeTccData", PayeTccData);
+
+  // const base64StringPic = Buffer.from(picUpload).toString('base64')
+  // const base64StringSig = Buffer.from(signature).toString('base64')
+
+  // PayeTccData.forEach((ind, i) => {
+  //   printPrintTime = ind.aprvPrint_time
+  // })
+
+  // if (printPrintTime === undefined) {
+  //   printPrintTime = new Date()
+  // } else {
+  //   printPrintTime = printPrintTime
+  // }
+
+
+  // let date = printPrintTime
+  // let due_date = new Date(date)
+  // due_date.setDate(due_date.getDate() + 365);
+  // let expiry = dateformat(due_date, "dd mmm yyyy")
+
+  // let Issdate = new Date()
+  // let Issdue_date = new Date(Issdate)
+  // let dateIssue = dateformat(Issdue_date, "dd mmm yyyy")
+
+
+
+  let basdocurl = 'https://annualuploads.bespoque.dev/rhm-live/uploads/paye/tcc/'
+
+  let date = PayeTccData.aprvPrint_time
   let due_date = new Date(date)
-  due_date.setDate(due_date.getDate() + 365);
-  let expiry = dateformat(due_date, "dd mmm yyyy")
+  let dueDateYear = due_date.getFullYear()
 
   let Issdate = new Date()
   let Issdue_date = new Date(Issdate)
   let dateIssue = dateformat(Issdue_date, "dd mmm yyyy")
+  const componentRef = useRef();
 
+  if (oldPass === null) {
+    oldPass = ""
+  }
+  if (oldSign === null) {
+    oldSign = ""
+  }
+  const base64StringPic = Buffer.from(oldPass).toString('base64')
+  const base64StringSig = Buffer.from(oldSign).toString('base64')
+
+  let year2 = PayeTccData.assmtYr_2
+  let year3 = PayeTccData.assmtYr_3
+  if (year2 === null) {
+    year2 = ""
+  }
+  if (year3 === null) {
+    year3 = ""
+  }
+  let year2ConRel
+  let year2OtherRelief
+  let year3ConRel
+  let year3OtherRelief
+
+  if (yrTwoPaySl[0] == undefined) {
+    year2ConRel = 0
+    year2OtherRelief = 0
+  }
+  else {
+    year2ConRel = yrTwoPaySl[0].consolidated_relief
+    year2OtherRelief = yrTwoPaySl[0].other_relief
+  }
+
+  if (yrThreePaySl[0] == undefined) {
+    year3ConRel = 0
+    year3OtherRelief = 0
+  }
+  else {
+    year3ConRel = yrThreePaySl[0].consolidated_relief
+    year3OtherRelief = yrThreePaySl[0].other_relief
+  }
 
   setAuthToken();
   let ChangePrint = (e) => {
@@ -170,15 +230,248 @@ export const PrintSinglePayeTcc = ({
         </div>
       </div>
 
-      {/* <div ref={componentRef} className="flex justify-center">
-        <div className="bg-cover w-max bg-center h-max" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)`, minWidth:"580px", minHeight:"820px" }}>
-      
+      <section ref={componentRef} className="flex justify-center mt-5">
+        <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
+          <div className="px-20">
+            <div >
+              <div className="flex justify-center mt-16">
+                <CoatOfArms />
+                <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
+                <KogiGov />
+              </div>
+              <div className="flex justify-center">
+                <div>
+                  <h4 className="text-green-600">KOGI STATE GOVERNMENT</h4>
+                  <div className="text-center">
+                    <h6 className="text-red-600">TAX CLEARANCE CERTIFICATE</h6>
+                  </div>
+                </div>
+              </div>
+              <div className="grid justify-items-center mt-5">
+                <div className="flex">
+                  <KgirsLogo />
+                  <div>
+                    <p className="self-center w-48 font-bold text-green-600">KOGI STATE INTERNAL REVENUE SERVICE</p>
+                  </div>
+                </div>
+              </div>
 
-        
+              <div className="flex justify-between">
+                <div className="ml-4">
+                  {oldPass.type || oldSign.type ?
+                    <div className="flex">
+                      <div>
+                        <img
+                          src={`data:image/png;base64,${base64StringPic}`}
+                          alt=""
+                          className="rounded h-16 w-16"
+                        />
+                      </div>
+                      {/* <div className="self-end ml-2">
+                        <img
+                          src={`data:image/png;base64,${base64StringSig}`}
+                          alt=""
+                          className="rounded h-10 w-24"
+                        />
+                      </div> */}
+                    </div>
+                    :
+                    <div className="flex">
+                      <div>
+                        <img
+                          src={`${basdocurl}${passport}`}
+                          alt=""
+                          className="rounded h-16 w-16"
+                        />
+                      </div>
+                      {/* <div className="self-end ml-2">
+                        <img
+                          src={`${basdocurl}${signature}`}
+                          alt=""
+                          className="rounded h-10 w-24"
+                        />
+                      </div> */}
+                    </div>
+                  }
+
+                  {/* <div>
+                    <img
+                      src={`data:image/png;base64,${base64StringPic}`}
+                      alt=""
+                      className="rounded h-16 w-16"
+                    />
+                  </div>
+                  <div className="self-end ml-2">
+                    <img
+                      src={`data:image/png;base64,${base64StringSig}`}
+                      alt=""
+                      className="rounded h-10 w-24"
+                    />
+                  </div> */}
+                </div>
+                <div>
+                  <div>
+                    <small className="leading-none block">File No</small>
+                    <small>{PayeTccData.file_ref}</small>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 place-items-start">
+                    <div className="">
+                      <small className="leading-none block">TCC ID </small>
+                      <small className="font-bold">{PayeTccData.ref}</small>
+                    </div>
+                    <div className="">
+                      <small className="leading-none block">ISSUE DATE </small>
+                      <small className="font-bold">{dateIssue}</small>
+                    </div>
+                    <div className="">
+                      <small className="leading-none block">TAX ID </small>
+                      <small className="font-bold">{PayeTccData.tp_id}</small>
+                    </div>
+                    <div className="">
+                      <small className="leading-none block">TAX OFFICE </small>
+                      <small className="font-bold">{PayeTccData.tax_station}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div>
+                <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{PayeTccData.taxpayer_name}</span></p>
+                <div>
+                  <p>fully paid his/her Personal Income Tax for the past years, that is: <span>
+                    {`${year2 !== "" ? `${PayeTccData.assmtYr_1},` : PayeTccData.assmtYr_1} ${year3 !== "" ? `${year2},` : year2} ${year3}`}
+                  </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="my-4">
+                <p><span className="font-bold">2.</span> Details of his/her assessments are as follows:</p>
+              </div>
+              <div className="flex justify-center mb-5">
+                <div>
+                  <table className="table divide-y mb-4  ">
+                    <thead >
+                      <tr style={{ backgroundColor: "#d3fbc6" }}>
+                        <th>
+                          Year
+                        </th>
+                        <th>
+                          Gross Emoluments
+                        </th>
+                        <th className="">
+                          Taxable Income
+                        </th>
+                        <th className="">
+                          Tax Paid
+                        </th>
+                        <th className="">
+                          Assessment Type
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody >
+
+                      <tr>
+                        <td className="">
+                          <p className="font-bold">{PayeTccData.assmtYr_1}</p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.incYr_1)}</p>
+                        </td>
+
+                        <td className="">
+                          <p className="font-bold"> {formatNumber(Number(PayeTccData.incYr_1) - (Number(year2ConRel) + Number(year2OtherRelief)))} </p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.taxYr_1)}</p>
+                        </td>
+                        <td className="">
+                          <p>PAYE</p>
+                        </td>
+                      </tr>
+
+
+                      <tr>
+                        <td className="">
+                          <p className="font-bold">{PayeTccData.assmtYr_2}</p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.incYr_2)}</p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(Number(PayeTccData.incYr_2) - (Number(year3ConRel) + Number(year3ConRel)))}</p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.taxYr_2)}</p>
+                        </td>
+                        <td className="">
+                          <p>PAYE</p>
+                        </td>
+
+                      </tr>
+
+
+                      <tr>
+                        <td className="">
+                          <p className="font-bold">{PayeTccData.assmtYr_3}</p>
+                        </td>
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.incYr_3)}</p>
+                        </td>
+
+                        <td className="">
+                          <p className="font-bold"> {formatNumber(Number(PayeTccData.incYr_3) - (Number(year3ConRel) + Number(year3OtherRelief)))} </p>
+                        </td>
+
+                        <td className="">
+                          <p className="font-bold">{formatNumber(PayeTccData.taxYr_3)}</p>
+                        </td>
+                        <td className="">
+                          <p>PAYE</p>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <p className="mb-2"><span className="font-bold">3.</span> His/her known source(s) of income are: <span>Employment, Trade/Professional</span> </p>
+                <p><span className="font-bold">4.</span> This certificate expires on: <span>31st Dec {dueDateYear}</span> </p>
+              </div>
+              <h3 className="text-red-600">INCOME TAX CLEARANCE CERTIFICATE</h3>
+              <div className="flex justify-between my-4">
+                <div></div>
+                <div>
+                  <QRCode
+                    value={`https://irs.kg.gov.ng/verify/fetch_tcc.php?ref=${PayeTccData.ref}`}
+                    size={120}
+                  />
+                </div>
+                <div className="flex justify-between mt-4">
+                  <div className="flex flex-col">
+                    <Signature />
+                    <hr />
+                    <p className="font-bold text-center">Sule Salihu Enehe</p>
+                    <p className="font-bold text-center">Ag. Executive Chairman</p>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-32">
+                <p>To verify certificate</p>
+                <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </div> */}
+      </section>
 
-      {PayeTccData.map((ind, i) => (
+
+      {/* {PayeTccData.map((ind, i) => (
         <section ref={componentRef} className="flex justify-center mt-5">
           <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
             <div className="px-20">
@@ -206,22 +499,22 @@ export const PrintSinglePayeTcc = ({
                 </div>
 
                 <div className="flex justify-between">
-                <div className="ml-4">
-                      <div>
-                        <img
-                          src={`data:image/png;base64,${base64StringPic}`}
-                          alt=""
-                          className="rounded h-16 w-16"
-                        />
-                      </div>
-                      {/* <div className="self-end ml-2">
-                        <img
-                          src={`data:image/png;base64,${base64StringSig}`}
-                          alt=""
-                          className="rounded h-10 w-24"
-                        />
-                      </div> */}
+                  <div className="ml-4">
+                    <div>
+                      <img
+                        src={`data:image/png;base64,${base64StringPic}`}
+                        alt=""
+                        className="rounded h-16 w-16"
+                      />
                     </div>
+                    <div className="self-end ml-2">
+                      <img
+                        src={`data:image/png;base64,${base64StringSig}`}
+                        alt=""
+                        className="rounded h-10 w-24"
+                      />
+                    </div>
+                  </div>
                   <div>
                     <div>
                       <small className="leading-none block">File No</small>
@@ -251,7 +544,7 @@ export const PrintSinglePayeTcc = ({
 
                 <div>
                   <div className="flex justify-between my-3">
-                    
+
 
                   </div>
                   <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span></p>
@@ -267,40 +560,18 @@ export const PrintSinglePayeTcc = ({
                   <p><span className="font-bold">2.</span> Details of his/her assessments are as follows:</p>
                 </div>
                 <div className="flex justify-center mb-5">
-
-                  {/* <div>
-                    <div>
-                      <small className="leading-none block">TCC ID </small>
-                      <small className="font-bold">{ind.ref}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">TAX ID </small>
-                      <small className="font-bold">{ind.tp_id}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">DATE OF ISSUE </small>
-                      <small className="font-bold">{dateIssue}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">Tax OFFICE</small>
-                      <small className="font-bold">{ind.tax_station}</small>
-                    </div>
-                  </div>
-
-                  <div className="w-10"></div> */}
-
                   <div>
                     <table className="table divide-y mb-4">
                       <thead >
-                        <tr style={{ backgroundColor: "#d3fbc6" }}>
+                        <tr style={{ backgroundColor: "#5eeaef" }} >
                           <th>
                             Tax Year
                           </th>
                           <th className="">
-                            Assessed Income
+                            Gross Emoluments
+                          </th>
+                          <th className="">
+                            Taxable Income
                           </th>
                           <th className="">
                             Tax Paid
@@ -391,24 +662,16 @@ export const PrintSinglePayeTcc = ({
                     </div>
                   </div>
                 </div>
-                <div className="mb-12">
+                <div className="mb-32">
                   <p>To verify certificate</p>
                   <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
                 </div>
-                {/* <div className="flex justify-between">
-                  <p></p>
-                  <div className="font-bold">
-                    PAYE - {ind.id}
-                  </div>
-                  <p></p>
-                </div> */}
-
               </div>
             </div>
 
           </div>
         </section>
-      ))}
+      ))} */}
     </>
   );
 };
