@@ -10,6 +10,7 @@ import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature } from "../Images
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
 import Image from 'next/image'
+import { useRouter } from "next/router";
 
 const fields = [
   {
@@ -102,8 +103,7 @@ export const PrintSinglePayeTcc = ({
   oldPass,
   oldSign
 }) => {
-
-
+const router = useRouter()
   // const componentRef = useRef();
 
   // let picUpload = ""
@@ -215,7 +215,15 @@ export const PrintSinglePayeTcc = ({
 
   return (
     <>
-      <div className="m-3 flex justify-end">
+      <div className="m-3 flex justify-center">
+        <button className="btn w-32 bg-blue-600 btn-default text-white
+            btn-outlined bg-transparent rounded-md mr-5"
+          type="button"
+          onClick={()=> router.back()}
+        >
+          Back
+        </button>
+
         <div onClick={ChangePrint}>
           <ReactToPrint
             // pageStyle="@page { size: 7.5in 13in  }"
@@ -228,6 +236,7 @@ export const PrintSinglePayeTcc = ({
             content={() => componentRef.current}
           />
         </div>
+
       </div>
 
       <section ref={componentRef} className="flex justify-center mt-5">

@@ -91,7 +91,7 @@ const PrintSingleTccPaye = () => {
 
   return (
     <>
-      <SectionTitle subtitle="Print PAYE TCC" />
+      {/* <SectionTitle subtitle="Print PAYE TCC" /> */}
 
       {isFetching ? (
         <div className="flex justify-center item mb-2">

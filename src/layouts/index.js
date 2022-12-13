@@ -20,6 +20,7 @@ const Layouts = ({ children }) => {
       '/reset-password',
       '/verify-tcc',
       '/reset-password/update',
+      '/print-tcc/[ref]',
       '/forgot-password',
       '/lock-screen',
       '/subscribe',
@@ -29,7 +30,7 @@ const Layouts = ({ children }) => {
   ) {
     return <Centered>{children}</Centered>;
   } else if (
-    ['/landing', '/login-1', '/login-2', '/login-3'].includes(pathname)
+    ['/landing', '/login-1', '/view/paye-tcc/[ref]', '/login-2', '/login-3'].includes(pathname)
   ) {
     return <Empty>{children}</Empty>;
   }
