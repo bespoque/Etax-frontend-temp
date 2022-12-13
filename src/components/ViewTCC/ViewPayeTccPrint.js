@@ -26,11 +26,11 @@ const PrintSingleTccPaye = () => {
       let tCCId = router.query.ref;
       setTccID(tCCId)
       let id = {
-        id: `${tCCId}`
+        id: tCCId
       }
       // setAuthToken();
       const fetchPost = () => {
-        axios.get(`${url.BASE_URL}paye/view-tp-tcc`, id,
+        axios.post(`${url.BASE_URL}user/paye/view-tp-tcc`, id,
           {
             headers: {
               "clientId": "kogistateinternalrevenue"
