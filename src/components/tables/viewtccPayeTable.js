@@ -197,19 +197,19 @@ const router = useRouter()
     year3OtherRelief = yrThreePaySl[0].other_relief
   }
 
-  setAuthToken();
-  let ChangePrint = (e) => {
-    e.preventDefault()
-    let statusObj = {
-      id: tccID,
-      status: "Printed"
-    }
-    try {
-      let res = axios.post(`${url.BASE_URL}forma/tcc-status`, statusObj);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // setAuthToken();
+  // let ChangePrint = (e) => {
+  //   e.preventDefault()
+  //   let statusObj = {
+  //     id: tccID,
+  //     status: "Printed"
+  //   }
+  //   try {
+  //     let res = axios.post(`${url.BASE_URL}forma/tcc-status`, statusObj);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   console.log("PayeTccData", PayeTccData);
 
@@ -224,7 +224,7 @@ const router = useRouter()
           Back
         </button>
 
-        <div onClick={ChangePrint}>
+        <div>
           <ReactToPrint
             // pageStyle="@page { size: 7.5in 13in  }"
             trigger={() => <button className="btn w-32 bg-green-600 btn-default text-white
@@ -454,7 +454,7 @@ const router = useRouter()
               <h3 className="text-red-600">INCOME TAX CLEARANCE CERTIFICATE</h3>
               <div className="flex justify-end mt-16">
                 {/* <div></div> */}
-                <div className="mr-24">
+                <div className="mr-20">
                   <QRCode
                     value={`https://irs.kg.gov.ng/verify/fetch_tcc.php?ref=${PayeTccData.ref}`}
                     size={120}
