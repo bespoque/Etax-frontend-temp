@@ -26,15 +26,15 @@ const PrintSingleTccPaye = () => {
       let tCCId = router.query.ref;
       setTccID(tCCId)
       let id = {
-        id: `${tCCId}`
+        ref: `${tCCId}`
       }
       let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicHJpbmNlLnVAYmVzcG9xdWUubmciLCJzdGFmZk5hbWUiOiJQcmluY2UiLCJncm91cHMiOls0MSwxXSwic3RhdGlvbiI6IkhlYWQgT2ZmaWNlIiwiaWF0IjoxNjcwODgyNTQ4LCJleHAiOjE2NzA4OTY5NDh9.sM2Vx4VKZqxpgMadFiOohg1UikK9ebrR4B22sgtERyY"
       // setAuthToken();
       const fetchPost = () => {
-        axios.post(`https://rhmlive.bespoque.dev/api/v1/paye/view-tcc`, id,
+        axios.get(`${url.BASE_URL}paye/view-tp-tcc`, id,
           {
             headers: {
-              'Authorization': `Bearer ${token}`
+              "clientId": "kogistateinternalrevenue"
             }
           }
         )
