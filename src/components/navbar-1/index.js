@@ -7,6 +7,7 @@ import Dropdown4 from './dropdown-4';
 import Dropdown5 from './dropdown-5';
 import Dropdown6 from './dropdown-6';
 import Search from './search';
+import Dropdownmsg from './dropdown-msg';
 
 const Navbar = () => {
   const { config } = useSelector(
@@ -35,6 +36,7 @@ const Navbar = () => {
 
         <span className="ml-auto"></span>
 
+        <Dropdownmsg />
         <Dropdown5 />
         <button
           className="btn-transparent flex items-center justify-center h-16 w-8 mx-4"
