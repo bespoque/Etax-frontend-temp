@@ -6,7 +6,7 @@ import dateformat from "dateformat";
 import Link from 'next/link';
 import { useRef } from "react";
 import setAuthToken from "../../functions/setAuthToken";
-import { CoatOfArms, KgirsLogo2, KogiGov, Signature } from "../Images/Images";
+import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature, SignatureCol } from "../Images/Images";
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
 
@@ -181,8 +181,7 @@ export const PrintSingleTcc = ({
 
   let date = printPrintTime
   let due_date = new Date(date)
-  due_date.setDate(due_date.getDate() + 365);
-  let expiry = dateformat(due_date, "dd mmm yyyy")
+  let dueDateYear = due_date.getFullYear()
 
   let Issdate = new Date()
   let Issdue_date = new Date(Issdate)
@@ -209,7 +208,7 @@ export const PrintSingleTcc = ({
         <div onClick={ChangePrint}>
           <ReactToPrint
             // pageStyle='@page { size: auto; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; padding: 40px !important; } }'
-            pageStyle="@page { size: 7.5in 13in  }"
+            // pageStyle="@page { size: 7.5in 13in  }"
             trigger={() => <button className="btn w-32 bg-green-600 btn-default text-white
             btn-outlined bg-transparent rounded-md"
               type="submit"
@@ -222,88 +221,114 @@ export const PrintSingleTcc = ({
 
       </div>
 
-      <section>
-        <div ref={componentRef}>
-          <div className="flex justify-around">
-            <div>
-
-              <div className="flex mb-8">
-                <KgirsLogo2 />
-                <p className="self-center w-48 font-bold">KOGI STATE INTERNAL REVENUE SERVICE</p>
+      <section ref={componentRef} className="flex justify-center mt-5">
+        <div className="bg-cover bg-center" style={{ backgroundImage: `url(/images/KGIRS_TCC.jpg)` }}>
+          <div className="px-16">
+            <div >
+              <div className="flex justify-center mt-16">
+                <CoatOfArms />
+                <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
+                <KogiGov />
               </div>
-
-              <div className="flex justify-end">
-                <p className="border font-bold p-2 text-center w-64">{`REF - ${fileRef}`}</p>
-              </div>
-
-              {payerDetails.map((ind, i) => (
+              <div className="flex justify-center">
                 <div>
-                  <div className="flex justify-between my-3">
-                    <div className="flex">
-                      <div>
-                        <img
-                          src={`${basdocurl}${picUpload}`}
-                          alt=""
-                          className="rounded h-16 w-16"
-                        />
-                      </div>
-                      <div className="self-end ml-2">
-                        <img
-                          src={`${basdocurl}${signature}`}
-                          alt=""
-                          className="rounded h-10 w-24"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex">
-                      <CoatOfArms />
-                      <p className="border-r-2 ml-2 border-black h-8 self-center"></p>
-                      <KogiGov />
-                    </div>
-                  </div>
-                  <p> <span className="font-bold">1.</span> This is to Verify that <span className="font-bold">{ind.taxpayer_name}</span> of</p>
-                  <p className="font-bold">{ind.address}</p>
-                  <div>
-                    <p>fully paid his/her Personal Income Tax for the past years, that is: <span>
-                      {`${secondYear !== "" ? `${firstYear},` : firstYear} ${thirdYear !== "" ? `${secondYear},` : secondYear} ${thirdYear}`}
-                    </span>
-                    </p>
+                  <h4 className="text-green-600">KOGI STATE GOVERNMENT</h4>
+                  <div className="text-center">
+                    <h6 className="text-red-600">TAX CLEARANCE CERTIFICATE</h6>
                   </div>
                 </div>
-              ))}
+              </div>
+              <div className="grid justify-items-center mt-5 ml-12">
+                <div className="flex">
+                  <KgirsLogo />
+                  <div>
+                    <p className="self-center w-48 font-bold text-green-600">KOGI STATE INTERNAL REVENUE SERVICE</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <div className="ml-4">
+                  <div className="flex">
+                    <div>
+                      <img
+                        src={`${basdocurl}${picUpload}`}
+                        alt=""
+                        className="rounded h-16 w-16"
+                      />
+                    </div>
+                    <div className="self-end ml-2">
+                      <img
+                        src={`${basdocurl}${signature}`}
+                        alt=""
+                        className="rounded h-10 w-24"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <small className="leading-none block">File No</small>
+                    {payerDetails.map((data, i) => (
+                      <small>{data.file_ref}</small>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 place-items-start">
+                    <div className="">
+                      <small className="leading-none block">TCC ID </small>
+                      {payerDetails.map((data, i) => (
+                        <small className="font-bold">{data.ref}</small>
+                      ))}
+                    </div>
+                    <div className="">
+                      <small className="leading-none block">ISSUE DATE </small>
+                      <small className="font-bold">{dateIssue}</small>
+                    </div>
+
+                    <div className="">
+                      <small className="leading-none block">TAX ID </small>
+                      {payerDetails.map((data, i) => (
+                        <small className="font-bold">{data.tp_id}</small>
+                      ))}
+                    </div>
+                    <div className="">
+                      <small className="leading-none block">TAX OFFICE </small>
+                      {payerDetails.map((data, i) => (
+                        <small className="font-bold">{data.tax_office}</small>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                {payerDetails.map((data, i) => (
+                  <p>
+                    <span className="font-bold">1.</span> This is to Certify that <span className="font-bold">{data.taxpayer_name}</span>
+                  </p>
+                ))}
+                {payerDetails.map((data, i) => (
+                  <p><span>of <span className="font-bold"> {data.address}</span></span></p>
+                ))}
+                <div>
+                  <p>fully paid his/her Personal Income Tax for the past years, that is: <span>
+                    {`${secondYear !== "" ? `${firstYear},` : firstYear} ${thirdYear !== "" ? `${secondYear},` : secondYear} ${thirdYear}`}
+                  </span>
+                  </p>
+                </div>
+              </div>
+
               <div className="my-4">
                 <p><span className="font-bold">2.</span> Details of his/her assessments are as follows:</p>
               </div>
               <div className="flex justify-center mb-5">
-                {payerDetails.map((ind, i) => (
-                  <div>
-                    <div>
-                      <small className="leading-none block">TCC ID </small>
-                      <small className="font-bold">{ind.ref}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">TAX ID </small>
-                      <small className="font-bold">{ind.tp_id}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">DATE OF ISSUE </small>
-                      <small className="font-bold">{dateIssue}</small>
-                    </div>
-
-                    <div className="mt-1">
-                      <small className="leading-none block">Tax OFFICE</small>
-                      <small className="font-bold">{ind.tax_office}</small>
-                    </div>
-                  </div>
-                ))}
-
-                <div className="w-10"></div>
                 <div>
-                  <table className="table divide-y mb-4 striped">
+                  <table className="table divide-y mb-4  ">
                     <thead >
                       <tr style={{ backgroundColor: "#d3fbc6" }}>
+                        <th>
+                          Assessment ID
+                        </th>
                         <th>
                           Tax Year
                         </th>
@@ -320,8 +345,15 @@ export const PrintSingleTcc = ({
                     </thead>
 
                     <tbody >
+
                       {assessmentData === "" || assessmentData === undefined ? "" :
                         <tr>
+                          <td className="">
+                            {payerDetails.map((ind, i) => (
+                              <p className="font-bold">{ind.assmt_1}</p>
+
+                            ))}
+                          </td>
                           <td className="">
                             {assessmentData.map((ind, i) => (
                               <p className="font-bold">{ind.year}</p>
@@ -346,6 +378,12 @@ export const PrintSingleTcc = ({
                       }
                       {assessmentData2 === "" || assessmentData2 === undefined ? "" :
                         <tr>
+                          <td className="">
+                            {payerDetails.map((ind, i) => (
+                              <p className="font-bold">{ind.assmt_2}</p>
+
+                            ))}
+                          </td>
                           <td className="">
                             {assessmentData2.map((ind, i) => (
                               <p className="font-bold">{ind.year}</p>
@@ -373,6 +411,12 @@ export const PrintSingleTcc = ({
                       {assessmentData3 === "" || assessmentData3 === undefined ? "" :
                         <tr>
                           <td className="">
+                            {payerDetails.map((ind, i) => (
+                              <p className="font-bold">{ind.assmt_3}</p>
+
+                            ))}
+                          </td>
+                          <td className="">
                             {assessmentData3.map((ind, i) => (
                               <p className="font-bold">{ind.year}</p>
 
@@ -394,21 +438,19 @@ export const PrintSingleTcc = ({
                           </td>
 
                         </tr>
-
                       }
-
                     </tbody>
                   </table>
                 </div>
               </div>
               <div>
                 <p className="mb-2"><span className="font-bold">3.</span> His/her known source(s) of income are: <span>Employment, Trade/Professional</span> </p>
-                {/* <p><span className="font-bold">4.</span> This certificate expires on: <span>{expiry}</span> </p> */}
-                <p><span className="font-bold">4.</span> This certificate expires on: <span>{expiry}</span> </p>
+                <p><span className="font-bold">4.</span> This certificate expires on: <span>31st Dec {dueDateYear}</span> </p>
               </div>
-
-              <div className="flex justify-between mt-2">
-                <div>
+              <h3 className="text-red-600">INCOME TAX CLEARANCE CERTIFICATE</h3>
+              <div className="flex justify-end mt-16">
+                {/* <div></div> */}
+                <div className="mr-20">
                   <QRCode
                     value={`https://irs.kg.gov.ng/verify/fetch_tcc.php?ref=${fileRef}`}
                     size={120}
@@ -416,21 +458,21 @@ export const PrintSingleTcc = ({
                 </div>
                 <div className="flex justify-between mt-4">
                   <div className="flex flex-col">
-                    <Signature />
+                    <SignatureCol />
                     <hr />
                     <p className="font-bold text-center">Sule Salihu Enehe</p>
                     <p className="font-bold text-center">Ag. Executive Chairman</p>
                   </div>
                 </div>
               </div>
-
+              <div className="mb-12">
+                <p>To verify certificate</p>
+                <p>-visit: <span><a href="https://irs.kg.gov.ng/verify-tcc/" target="_blank">  www.irs.kg.gov.ng/verify-tcc</a></span></p>
+              </div>
             </div>
-
           </div>
 
-
         </div>
-
       </section>
 
     </>

@@ -35,7 +35,7 @@ const ViewTcc = () => {
     setAuthToken();
     const fetchPost = async () => {
       try {
-        let res = await axios.get(`${url.BASE_URL}user/paye/list-tp-tcc?kgtin=${kgtin}`);
+        let res = await axios.get(`${url.BASE_URL}user/da/list-tp-tcc?kgtin=${kgtin}`);
         res = res.data.body.tccPrint;
         console.log("res", res);
         let records = [];

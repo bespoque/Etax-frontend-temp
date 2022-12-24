@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react'
-import {FiMessageSquare} from 'react-icons/fi'
+import React, { useState, useEffect, useRef } from 'react'
+import { FiMessageSquare } from 'react-icons/fi'
 import NoticeMsg from './notice-msg'
 import ProjectStatus from './project-status'
 
@@ -33,22 +33,23 @@ const Dropdownmsg = () => {
   return (
     <div className="hidden lg:flex relative">
       <button
-        ref={buttonRef}
-        onClick={handleDropdownClick}
+        // ref={buttonRef}
+        // onClick={handleDropdownClick}
+        // onClick={()=> alert("Clicked")}
         className="flex items-center justify-center h-16 w-12 relative">
         <FiMessageSquare size={18} />
-        <span
+        {/* <span
           className="absolute uppercase font-bold inline-flex text-center p-0 leading-none text-2xs h-4 w-4 inline-flex items-center justify-center rounded-full bg-blue-500 text-white"
-          style={{top: 14, right: 8}}>
+          style={{ top: 14, right: 8 }}>
           3
-        </span>
+        </span> */}
       </button>
-      <div ref={dropdownRef} 
-          className={`dropdown absolute top-0 right-0 mt-16 ${hidden ? '' : 'open'}`}>
-          <div className="dropdown-content w-64 bottom-start">
-            <NoticeMsg />
-          </div>
+      {/* <div ref={dropdownRef}
+        className={`dropdown absolute top-0 right-0 mt-16 ${hidden ? '' : 'open'}`}>
+        <div className="dropdown-content w-64 bottom-start">
+          <NoticeMsg />
         </div>
+      </div> */}
     </div>
   )
 }

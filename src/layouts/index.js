@@ -18,7 +18,6 @@ const Layouts = ({ children }) => {
       '/email-confirmation',
       '/logout',
       '/reset-password',
-      '/verify-tcc',
       '/reset-password/update',
       '/print-tcc/[ref]',
       '/forgot-password',
@@ -30,7 +29,7 @@ const Layouts = ({ children }) => {
   ) {
     return <Centered>{children}</Centered>;
   } else if (
-    ['/landing', '/login-1', '/view/paye-tcc/[ref]', '/login-2', '/login-3'].includes(pathname)
+    ['/landing', '/login-1', '/view/paye-tcc/[ref]','/collection-receipt', '/login-2', '/login-3'].includes(pathname)
   ) {
     return <Empty>{children}</Empty>;
   }
