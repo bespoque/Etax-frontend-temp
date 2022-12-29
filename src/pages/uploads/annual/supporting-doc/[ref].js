@@ -7,7 +7,6 @@ import url from '../../../../config/url';
 import { FiX, FiCheck } from 'react-icons/fi';
 import setAuthToken from '../../../../functions/setAuthToken';
 import { ProcessorSpinner, Progress } from '../../../../components/spiner/index';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import jwt from "jsonwebtoken";
 
@@ -219,14 +218,15 @@ const AnnualSupDocs = () => {
 
     const onChange4 = e => {
         const file4 = e.target.files[0]
+        const filetype = ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
         if (file4) {
             if (!file4) {
                 setFile4(null);
                 setDisabled4(true);
                 return;
             }
-            if (file4.type !== "application/vnd.ms-excel") {
-                alert("file type not allowed. only excel is allowed");
+            if (!filetype.includes(file4.type)) {
+                alert("file type not allowed. only excel/CSV is allowed");
                 setFile4(null);
                 setDisabled4(true);
                 return;
@@ -269,14 +269,21 @@ const AnnualSupDocs = () => {
 
     const onChange6 = e => {
         const file6 = e.target.files[0]
+        const filetype = ['text/csv',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ];
         if (file6) {
             if (!file6) {
                 setFile6(null);
                 setDisabled6(true);
                 return;
             }
-            if (file6.type !== "application/vnd.ms-excel" && file6.type !== "application/pdf" && file6.type !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                alert("file type not allowed. only pdf word or excel are allowed");
+            if (!filetype.includes(file6.type)) {
+                alert("file type not allowed. only pdf, word, excel or csv are allowed");
                 setFile6(null);
                 setDisabled6(true);
                 return;
@@ -1601,7 +1608,7 @@ const AnnualSupDocs = () => {
                 <div>
                     <form onSubmit={handleSubmit(onSubmit4)}>
                         <div className="flex justify-between mb-5">
-                            <p>Monthly payroll schedule <small>(excel)</small> </p>
+                            <p>Monthly payroll schedule <small>(excel/CSV)</small> </p>
                             <input
                                 required
                                 type="file"
@@ -1706,7 +1713,7 @@ const AnnualSupDocs = () => {
 
                     <form onSubmit={handleSubmit(onSubmit6)}>
                         <div className="flex justify-between mb-5">
-                            <p>List of exit staff  <small>(pdf, word, excel)</small> </p>
+                            <p>List of exit staff  <small>(pdf, word, excel/CSV)</small> </p>
                             <input
                                 id="customFile6"
                                 type="file"

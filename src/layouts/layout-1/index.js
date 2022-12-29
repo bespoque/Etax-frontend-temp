@@ -47,9 +47,14 @@ const Layout1 = ({ children }) => {
         "/uploads/monthly",
         "/uploads/withholding",
         "/view",
-        "/view/annual",
+        "/view/annual/[ref]",
+        "/view/annual/docs/[ref]",
         "/view/monthly",
         "/view/withholding",
+        "/file-annual-returns",
+        "/list-annual-returns",
+        "/uploads/annual/csv/[ref]",
+        "/uploads/annual/supporting-doc/[ref]",
       ].includes(pathname) &&
       decoded?.type === "Individual"
     ) {
