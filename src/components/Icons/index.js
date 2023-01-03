@@ -109,6 +109,17 @@ export const PendingIcon = () => {
     />
   );
 };
+export const OpenMailIcon = () => {
+  return (
+    <Image
+      layout="fixed"
+      src="/images/icons/mailopen.png"
+      alt=""
+      width={23}
+      height={23}
+    />
+  );
+};
 
 //dashboard icons
 export const TotalRemittance = () => {

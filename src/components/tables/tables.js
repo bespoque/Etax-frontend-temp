@@ -38,6 +38,8 @@ const fields = [
 export const Table = (remittance) => {
   let items = remittance.recentRemittance;
 
+  console.log("items", remittance);
+
   items?.map((remittance) => {
     remittance['amount'] = formatNumber(remittance['amount']);
     if (remittance['status'] === 1 || remittance['status'] === 0) {
