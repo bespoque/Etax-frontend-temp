@@ -1,14 +1,11 @@
 import Widget from "../widget";
 import { formatNumber } from "../../functions/numbers";
-import * as Icons from '../Icons/index';
-import Widget1 from "../dashboard/widget-1";
-import dateformat from "dateformat";
-import Link from 'next/link';
-import { FiCheck, FiMail } from "react-icons/fi";
-import { OpenMailIcon } from '../Icons';
 import { FaEnvelope, FaRegEnvelopeOpen } from 'react-icons/fa'
 import { shallowEqual, useSelector } from "react-redux";
 import { useRef, useState } from "react";
+import axios from 'axios';
+import url from '../../config/url';
+import setAuthToken from "../../functions/setAuthToken";
 
 
 const fields = [
@@ -29,6 +26,10 @@ const fields = [
 export const ViewMessageTable = ({ remittance }) => {
   const [open, setOpen] = useState(false);
   const modalRef = useRef(null);
+  const [read, setRead] = useState(() => false);
+  const [message, setMessage] = useState(() => "");
+  const [subject, setSubject] = useState(() => "");
+  const [isFetching, setIsFetching] = useState(() => false);
 
   let items = remittance;
   items?.map((message) => {
@@ -57,7 +58,27 @@ export const ViewMessageTable = ({ remittance }) => {
 
   const hide = () => {
     setOpen(false);
-    // router.push('/dashboard');
+  };
+
+  setAuthToken()
+  const handleView = async (id) => {
+    setIsFetching(() => true);
+    try {
+      let res = await axios.get(`${url.BASE_URL}user/notification?id=${id}`);
+      setRead(() => true)
+      setSubject(() => res.data.body.subject)
+      setMessage(() => res.data.body.message)
+      setIsFetching(() => false);
+      show();
+    } catch (error) {
+      setIsFetching(() => false);
+      setRead(() => false)
+      // if (error.response) {
+      //   console.log(error.response.data);
+      //   setUploadErrors(() => error.response.data.body);
+      //   show();
+      // }
+    }
   };
 
   return (
@@ -87,20 +108,22 @@ export const ViewMessageTable = ({ remittance }) => {
 
                     </div>
                     <div className="w-full">
-                      <div className=" mb-2 font-bold">
-
-                        <span className="mb-2">message!</span>
-                      </div>
-                      <ul>
-                        <li>
-                          <span className="font-bold">*</span> Acknowledgment evidence will be sent via email within 48 working hrs
-                        </li>
-                      </ul>
-
-                      <div className="overflow-auto max-h-64">
-
-                      </div>
+                      {read ?
+                        <div>
+                          <div className=" mb-2 font-bold">
+                            <span className="mb-2">{subject}</span>
+                          </div>
+                          <ul>
+                            <li>
+                              <span className="font-bold">*</span> {message}
+                            </li>
+                          </ul>
+                          <div className="overflow-auto max-h-64">
+                          </div>
+                        </div>
+                        : ""}
                     </div>
+
                   </div>
                 </div>
                 <div className="flex items-center justify-end p-4 border-t border-gray-200 dark:border-gray-700 border-solid rounded-b space-x-2">
@@ -119,15 +142,6 @@ export const ViewMessageTable = ({ remittance }) => {
       )}
       <Widget>
         <table className="table divide-y">
-          <thead>
-            {/* <tr className="">
-              {fields.map((field, i) => (
-                <th key={i} className="">
-                  {field.name}
-                </th>
-              ))}
-            </tr> */}
-          </thead>
           <tbody className="divide-y">
             {items?.length === 0 && (
               <tr className="">
@@ -148,7 +162,7 @@ export const ViewMessageTable = ({ remittance }) => {
                   </td>
                 ))}
                 {/* <Link href={`/view/annual/${remittance.year}_${remittance.status}`}> */}
-                <a onClick={() => show()} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
+                <a onClick={() => handleView(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
 
                   <span>{remittance['icon']}</span>
 
