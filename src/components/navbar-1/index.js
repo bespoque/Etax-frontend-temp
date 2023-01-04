@@ -36,7 +36,7 @@ const Navbar = () => {
 
         <span className="ml-auto"></span>
 
-        <Dropdownmsg />
+        {/* <Dropdownmsg /> */}
         <Dropdown5 />
         <button
           className="btn-transparent flex items-center justify-center h-16 w-8 mx-4"
