@@ -125,12 +125,12 @@ const AnnualSupDocs = () => {
         }),
         shallowEqual
     );
+    const decoded = jwt.decode(auth);
+    const kgtin = decoded.kgtin
+    
     let { background } = {
         ...palettes,
     };
-    const decoded = jwt.decode(auth);
-    const kgtin = decoded.kgtin
-
 
     const show = () => {
         setOpen(true);

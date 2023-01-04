@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useState, useEffect, useRef } from 'react'
 import { FiMessageSquare } from 'react-icons/fi'
 import NoticeMsg from './notice-msg'
@@ -5,7 +6,7 @@ import ProjectStatus from './project-status'
 
 const Dropdownmsg = () => {
   const [hidden, setHidden] = useState(true)
-
+const router = useRouter()
   const buttonRef = useRef(null)
   const dropdownRef = useRef(null)
 
@@ -35,7 +36,7 @@ const Dropdownmsg = () => {
       <button
         // ref={buttonRef}
         // onClick={handleDropdownClick}
-        // onClick={()=> alert("Clicked")}
+        onClick={()=> router.push("/message")}
         className="flex items-center justify-center h-16 w-12 relative">
         <FiMessageSquare size={18} />
         {/* <span
