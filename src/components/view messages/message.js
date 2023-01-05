@@ -46,6 +46,10 @@ const ViewMessages = () => {
   }, []);
 
 
+
+ 
+
+
   // Get current post
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -56,11 +60,9 @@ const ViewMessages = () => {
   const previous = (currentPage) => setCurrentPage(() => currentPage - 1);
 
 
-
   return (
     <>
       <SectionTitle title="Inbox" />
-
       {isFetching && (
         <div className="flex justify-center item mb-2">
           <Loader

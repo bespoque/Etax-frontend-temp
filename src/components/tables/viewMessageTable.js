@@ -1,6 +1,6 @@
 import Widget from "../widget";
 import { formatNumber } from "../../functions/numbers";
-import { FaEnvelope, FaRegEnvelopeOpen } from 'react-icons/fa'
+import { FaEnvelope, FaTrash, FaRegEnvelopeOpen } from 'react-icons/fa'
 import { shallowEqual, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import axios from 'axios';
@@ -78,6 +78,30 @@ export const ViewMessageTable = ({ remittance }) => {
       //   setUploadErrors(() => error.response.data.body);
       //   show();
       // }
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    // setIsFetching(true)
+    try {
+      let res = await axios.delete(
+        `${url.BASE_URL}user/delete-notification?id=${id}`
+      );
+      // setIsFetching(false)
+      // console.log(res.data);
+      // alert(res.data.message);
+      window.location.reload(true)
+    } catch (e) {
+      // setIsFetching(false)
+      // if (e.response) {
+      //   alert(e.response.message);
+      // }
+    }
+  };
+
+  const deletePrompt = (id) => {
+    if (window.confirm("Are you sure? This action cannot be undone")) {
+      deleteHandler(id);
     }
   };
 
@@ -161,17 +185,12 @@ export const ViewMessageTable = ({ remittance }) => {
 
                   </td>
                 ))}
-                {/* <Link href={`/view/annual/${remittance.year}_${remittance.status}`}> */}
                 <a onClick={() => handleView(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
-
                   <span>{remittance['icon']}</span>
-
                 </a>
-                {/* </Link> */}
-                {/* <Link href={`/view/annual/docs/${remittance.year}_${remittance.status}`}>
-                  <a className="flex items-center">
-                  </a>
-                </Link> */}
+                <a onClick={() => deletePrompt(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
+                  <span><FaTrash /></span>
+                </a>
               </tr>
             ))}
           </tbody>
