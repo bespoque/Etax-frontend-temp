@@ -154,15 +154,9 @@ export default function index() {
                   </div>
                 </div>
                 <div className="grid grid-cols-6 gap-2">
-                  <p>DESCRIPTION:</p>
-                  <div className="col-span-3">
-                    <p className="font-bold"> {colData.description} </p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-6 gap-2">
                   <p>DETAILS:</p>
                   <div className="col-span-3">
-                    <p className="font-bold"> {colData.details} </p>
+                    <p className="font-bold"> {colData.description} </p>
                   </div>
                 </div>
                 <div className="grid grid-cols-6 gap-2">
