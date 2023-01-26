@@ -41,9 +41,9 @@ const Index = () => {
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  let ref = router.query.ref;
+  let ref = router.query;
   const { data, isLoading, error } = UseFetcher(
-    `${url.BASE_URL}user/invoice-details/${ref}`
+    `${url.BASE_URL}user/invoice-details/${ref.ref}`
   );
 
   const show = (data) => {
