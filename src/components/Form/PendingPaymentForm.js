@@ -293,7 +293,7 @@ const NewPaymentForm = () => {
                 >
                   <option value="">Select Payment Channel</option>
                   {/* <option value="Remita">Remita</option> */}
-                  <option value="eTransact">eTransact</option>
+                  <option value="eTransact">eTranzact</option>
                 </select>
               </div>
             </div>

@@ -35,7 +35,7 @@ const Index = () => {
     { key: "WebPay", value: "Interswitch" },
     { key: "Bank", value: "Bank" },
     { key: "Remita", value: "Remita" },
-    { key: "eTransact", value: "eTransact" },
+    { key: "eTranzact", value: "eTransact" },
   ]);
 
   const [openBank, setOpenBank] = useState(false);

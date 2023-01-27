@@ -29,7 +29,7 @@ const NewPaymentForm = () => {
     { key: "WebPay", value: "Interswitch" },
     { key: "Bank", value: "Bank" },
     { key: "Remita", value: "Remita" },
-    { key: "eTransact", value: "eTransact" },
+    { key: "eTranzact", value: "eTransact" },
   ]);
 
   const [loadingState, setLoadingState] = useState("");
