@@ -461,7 +461,7 @@ export const PrintSingleTcc = ({
                     <SignatureCol />
                     <hr />
                     <p className="font-bold text-center">Sule Salihu Enehe</p>
-                    <p className="font-bold text-center">Ag. Executive Chairman</p>
+                    <p className="font-bold text-center">Executive Chairman</p>
                   </div>
                 </div>
               </div>
