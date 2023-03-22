@@ -9,7 +9,6 @@ import Loader from 'react-loader-spinner';
 import { formatNumber } from '../../functions/numbers';
 import ReactToPrint from 'react-to-print';
 
-
 export default function index() {
   const [colData, setColData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
