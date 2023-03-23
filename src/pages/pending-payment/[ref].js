@@ -35,15 +35,15 @@ const Index = () => {
     { key: "WebPay", value: "Interswitch" },
     { key: "Bank", value: "Bank" },
     { key: "Remita", value: "Remita" },
-    { key: "eTransact", value: "eTransact" },
+    { key: "eTranzact", value: "eTransact" },
   ]);
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  let ref = router.query.ref;
+  let ref = router.query;
   const { data, isLoading, error } = UseFetcher(
-    `${url.BASE_URL}user/invoice-details/${ref}`
+    `${url.BASE_URL}user/invoice-details/${ref.ref}`
   );
 
   const show = (data) => {
