@@ -2,5 +2,5 @@
     "editor.fontFamily": "Fira Code , 'Courier New', monospace",
     "editor.fontSize": 15,
     "scm.inputFontFamily": "Fira Code",
-    "terminal.integrated.fontFamily": "Fira Code"
+    "terminal.integrated.fontFamily": "monospace"
 }
