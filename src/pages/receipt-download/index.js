@@ -19,7 +19,6 @@ const Index = () => {
     useEffect(() => {
         if (router && router.query) {
             let paymentID = router.query?.reference || "";
-            console.log("paymentID", router.query);
             const fetchPost = () => {
                 setIsFetching(true)
                 if (paymentID.includes("FA")) {
