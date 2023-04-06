@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import SectionTitle from "../section-title";
 import Widget from "../widget";
@@ -26,10 +26,8 @@ const NewPaymentForm = () => {
 
   const [modalData, setModalData] = useState(() => []);
   const [channel, setChannel] = useState([
-    { key: "WebPay", value: "Interswitch" },
-    { key: "Bank", value: "Bank" },
-    { key: "Remita", value: "Remita" },
-    { key: "eTranzact", value: "eTransact" },
+    { key: "Monnify", value: "Monnify" },
+    { key: "Monnify offline", value: "Offline" }
   ]);
 
   const [loadingState, setLoadingState] = useState("");
@@ -37,12 +35,46 @@ const NewPaymentForm = () => {
   const [pdfMessage, setPdfMessage] = useState("");
   const [item, setItem] = useState(() => []);
   const [open, setOpen] = useState(false);
+  const [globalRef, setGlobalRef] = useState(() => "");
+  const [modalUrl, setModalUrl] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const show = () => {
     setOpen(true);
   };
   const hide = () => {
     setOpen(false);
+  };
+
+  // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
+  const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
+
+  useEffect(() => {
+    const date = new Date();
+    const timestamp = date.getTime().toString();
+    const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
+    const result = parsedTimestamp;
+    setGlobalRef(String(result))
+  }, []);
+
+  const handleModalOpen = (url) => {
+    setIsModalOpen(true);
+    setModalUrl(url);
+  };
+
+
+  const Modal = ({ isOpen, url }) => {
+
+    return (
+      <>
+        {isOpen && (
+          <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+            <iframe src={url} className="w-full h-full lg:h-100vw border-0"></iframe>
+          </div>
+
+        )}
+      </>
+    );
   };
 
   const mySet = new Set();
@@ -77,19 +109,7 @@ const NewPaymentForm = () => {
   //submit handler
   const SubmitHandler = (data) => {
     console.log(data);
-    const year = new Date().getFullYear();
-    let month = new Date().getMonth() + 1;
-    let day = new Date().getDate();
-    if (day < 10) {
-      day = `0${day}`;
-    }
 
-    if (month < 10) {
-      month = `0${month}`;
-    }
-    const date = `${year}-${month}-${day}`;
-
-    data.transactionDate = date;
     const agency = data.revenueItem.split("/")[0];
     data.agency = agency;
     data.itemName = dataArray?.filter(
@@ -104,43 +124,27 @@ const NewPaymentForm = () => {
   const submit = async (data) => {
     setLoadingState("Submitting...");
     setLoading(true);
+    console.log("data", data);
+    let formData = {};
+    formData.name = data.name;
+    formData.email = data.email;
+    formData.phoneNumber = data.phoneNumber;
+    formData.station = data.taxOffice;
+    formData.amount = data.amount;
+    formData.channel = data.channel;
+    formData.KGTIN = data.KGTIN;
+    formData.revenueSub = data.revenueItem;
+    formData.agency = data.agency;
+    formData.description = data.description;
+    formData.paymentRef = globalRef;
+    formData.paymentgateway = data.channel;
+    formData.paygatewayclient = "etax";
+
+    const queryParams = new URLSearchParams(formData).toString();
     try {
-      const res = await axios.post(`${url.BASE_URL}payment/new-payment`, {
-        transactionDate: data.transactionDate,
-        agency: data.agency,
-        revenueSub: data.revenueItem,
-        taxPayer: data.KGTIN,
-        amount: data.amount,
-        station: data.taxOffice,
-        description: data.description,
-        status: "2",
-        paymentMethod: data.channel,
-        name: data.name,
-        phone: data.phoneNumber,
-        email: data.email,
-      });
 
-      const { channel, assessmentId, assessment_id, taxId, ref } = res.data.body;
-
-      if (res.data.status === 200) {
-        if (channel === "Remita") {
-          router.push(
-            `${url.PAY_URL}remita/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-          );
-        } else if (channel === "eTransact") {
-          console.log(assessmentId, taxId, channel, ref, assessment_id);
-          router.push(
-            `${url.PAY_URL}etransact/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-          );
-        } else if (channel === "WebPay") {
-          router.push(
-            `${url.PAY_URL}interswitch/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-          );
-        } else if (channel === "Bank") {
-          setLoadingState("Generating Pdf...");
-          await fetchBankPrint(ref);
-        }
-      }
+      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
     } catch (e) {
       setLoading(false);
       setLoadingState("");
@@ -150,32 +154,10 @@ const NewPaymentForm = () => {
       }
     }
   };
-  //get bank print
-  const fetchBankPrint = async (ref) => {
-    try {
-      const res = await axios.get(`${url.BASE_URL}user/bank-print/${ref}`, {
-        responseType: "blob",
-      });
-      const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-      saveAs(pdfBlob, `${ref}__bankPrint.pdf`);
-      setLoading(false);
-      setLoadingState("");
-      setPdfMessage(
-        "Pdf successfully generated. Tender this at the bank to process payment"
-      );
-      setTimeout(() => {
-        setPdfMessage("");
-        router.push("/payment/pending-invoice");
-      }, 6000);
-    } catch (err) {
-      alert("Unable to generate pdf. Please try again");
-      setLoading(false);
-      setLoadingState("");
-    }
-  };
 
   return (
     <>
+      <Modal isOpen={isModalOpen} url={modalUrl} />
       {isLoading && <Spinner />}
       <SectionTitle title="Make Payment" subtitle="New Payment" />
 
@@ -438,6 +420,10 @@ const NewPaymentForm = () => {
                             <table className="table-fixed w-full">
                               <tbody className="divide-y">
                                 <tr>
+                                  <td>Payment ID</td>
+                                  <td>{globalRef}</td>
+                                </tr>
+                                <tr>
                                   <td>KGTIN</td>
                                   <td>{dat.KGTIN}</td>
                                 </tr>
@@ -487,6 +473,7 @@ const NewPaymentForm = () => {
                       timeout={0}
                       className="ml-2"
                     />
+
                   </SubmitButton>
 
                   <button
@@ -503,6 +490,12 @@ const NewPaymentForm = () => {
           </div>
         </>
       )}
+      {/* <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={handleModalOpen}
+      >
+        Open Modal
+      </button> */}
     </>
   );
 };

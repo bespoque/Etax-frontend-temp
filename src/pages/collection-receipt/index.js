@@ -18,7 +18,7 @@ export default function index() {
   useEffect(() => {
     if (router && router.query) {
       let paymentID = router.query.id;
-      setAuthToken();
+      // setAuthToken();
       const fetchPost = () => {
         setIsFetching(true)
         axios.get(`${url.BASE_URL}web/noauth/invoice/${paymentID}`,
@@ -160,7 +160,7 @@ export default function index() {
                   <div className="grid grid-cols-6 gap-2">
                     <p>AGENCY:</p>
                     <div className="col-span-3">
-                      <p className="font-bold"> INTERNAL REVENUE SERVICE </p>
+                      <p className="font-bold">INTERNAL REVENUE SERVICE </p>
                     </div>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
