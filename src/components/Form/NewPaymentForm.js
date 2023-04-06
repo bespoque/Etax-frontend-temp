@@ -50,8 +50,9 @@ const NewPaymentForm = () => {
 
   useEffect(() => {
     const date = new Date();
-    const timestamp = date.getTime().toString().substring(3);
-    const result = timestamp;
+    const timestamp = date.getTime().toString();
+    const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
+    const result = parsedTimestamp;
     setGlobalRef(String(result))
   }, []);
 
