@@ -8,6 +8,7 @@ const UseFetcher = (url) => {
     const res = await axios(url);
     return res.data.body;
   });
+  
   return {
     data,
     isLoading: !error && !data,
