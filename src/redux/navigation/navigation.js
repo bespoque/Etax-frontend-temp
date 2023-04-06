@@ -37,7 +37,7 @@ const initialState = [
         title: 'PAYMENT',
         items: [
           {
-            url: '/payment/new-payment',
+            url: 'https://quickpay-live-alt.vercel.app/',
             title: 'New Payment',
             items: [],
           },

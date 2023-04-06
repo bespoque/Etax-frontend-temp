@@ -18,7 +18,7 @@ export default function index() {
   useEffect(() => {
     if (router && router.query) {
       let paymentID = router.query.id;
-      setAuthToken();
+      // setAuthToken();
       const fetchPost = () => {
         setIsFetching(true)
         axios.get(`${url.BASE_URL}web/noauth/invoice/${paymentID}`,
