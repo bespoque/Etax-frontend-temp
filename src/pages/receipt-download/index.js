@@ -14,7 +14,8 @@ const Index = () => {
     const [isFetching, setIsFetching] = useState(false);
     const router = useRouter();
     const componentRef = useRef();
-    const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
+    // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
+    const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
     useEffect(() => {
         if (router && router.query) {
             let paymentID = router.query?.reference || "";
