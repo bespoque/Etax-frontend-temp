@@ -46,7 +46,7 @@ const NewPaymentForm = () => {
     setOpen(false);
   };
 
-  const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
+  const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
 
   useEffect(() => {
     const date = new Date();
@@ -60,15 +60,8 @@ const NewPaymentForm = () => {
     setModalUrl(url);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setModalUrl("");
-  };
 
-  const Modal = ({ isOpen, onClose, url }) => {
-    const handleClose = () => {
-      onClose();
-    };
+  const Modal = ({ isOpen, url }) => {
 
     return (
       <>
@@ -127,8 +120,8 @@ const NewPaymentForm = () => {
   };
 
   const submit = async (data) => {
-    // setLoadingState("Submitting...");
-    // setLoading(true);
+    setLoadingState("Submitting...");
+    setLoading(true);
     console.log("data", data);
     let formData = {};
     formData.name = data.name;
@@ -148,89 +141,21 @@ const NewPaymentForm = () => {
     const queryParams = new URLSearchParams(formData).toString();
     try {
 
-      fetch(`${urlNew}recordpayment.php?${queryParams}`)
-        .then(handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`))
-        .catch(error => console.error(error));
-      // let result = axios.get(`${urlNew}recordpayment.php?${queryParams}`);
-      // if (channel === "Bank") {
-      //   setLoadingState("Generating Pdf...");
-      //   await fetchBankPrint(ref);
-      // }
-      // else {
-
-      // }
-      // const res = await axios.post(`${url.BASE_URL}payment/new-payment`, {
-      //   transactionDate: data.transactionDate,
-      //   agency: data.agency,
-      //   revenueSub: data.revenueItem,
-      //   taxPayer: data.KGTIN,
-      //   amount: data.amount,
-      //   station: data.taxOffice,
-      //   description: data.description,
-      //   status: "2",
-      //   paymentMethod: data.channel,
-      //   name: data.name,
-      //   phone: data.phoneNumber,
-      //   email: data.email,
-      // });
-
-      // const { channel, assessmentId, assessment_id, taxId, ref } = res.data.body;
-
-      // if (res.data.status === 200) {
-      //   if (channel === "Remita") {
-      //     router.push(
-      //       `${url.PAY_URL}remita/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-      //     );
-      //   } else if (channel === "eTransact") {
-      //     console.log(assessmentId, taxId, channel, ref, assessment_id);
-      //     router.push(
-      //       `${url.PAY_URL}etransact/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-      //     );
-      //   } else if (channel === "WebPay") {
-      //     router.push(
-      //       `${url.PAY_URL}interswitch/initialize.php?assessmentId=${assessment_id}&taxId=${taxId}`
-      //     );
-      //   } else if (channel === "Bank") {
-      //     setLoadingState("Generating Pdf...");
-      //     await fetchBankPrint(ref);
-      //   }
-      // }
+      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
     } catch (e) {
-      // setLoading(false);
-      // setLoadingState("");
+      setLoading(false);
+      setLoadingState("");
       console.log(e);
       if (e.response) {
         console.log(e.response);
       }
     }
   };
-  //get bank print
-  const fetchBankPrint = async (ref) => {
-    try {
-      const res = await axios.get(`${url.BASE_URL}user/bank-print/${ref}`, {
-        responseType: "blob",
-      });
-      const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-      saveAs(pdfBlob, `${ref}__bankPrint.pdf`);
-      setLoading(false);
-      setLoadingState("");
-      setPdfMessage(
-        "Pdf successfully generated. Tender this at the bank to process payment"
-      );
-      setTimeout(() => {
-        setPdfMessage("");
-        router.push("/payment/pending-invoice");
-      }, 6000);
-    } catch (err) {
-      alert("Unable to generate pdf. Please try again");
-      setLoading(false);
-      setLoadingState("");
-    }
-  };
 
   return (
     <>
-    <Modal isOpen={isModalOpen} url={modalUrl} />
+      <Modal isOpen={isModalOpen} url={modalUrl} />
       {isLoading && <Spinner />}
       <SectionTitle title="Make Payment" subtitle="New Payment" />
 
@@ -534,9 +459,9 @@ const NewPaymentForm = () => {
                 <div className="flex items-center justify-end p-4  dark:border-gray-700 border-solid rounded-b space-x-2">
                   <SubmitButton
                     onClick={() => submit(modalData[0])}
-                  // disabled={loading}
+                    disabled={loading}
                   >
-                    {/* {loadingState !== "" ? loadingState : "Confirm Payment"}
+                    {loadingState !== "" ? loadingState : "Confirm Payment"}
                     <Loader
                       visible={loading}
                       type="TailSpin"
@@ -545,8 +470,8 @@ const NewPaymentForm = () => {
                       width={19}
                       timeout={0}
                       className="ml-2"
-                    /> */}
-                    Confirm Payment
+                    />
+
                   </SubmitButton>
 
                   <button
@@ -563,12 +488,12 @@ const NewPaymentForm = () => {
           </div>
         </>
       )}
-        <button
+      {/* <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         onClick={handleModalOpen}
       >
         Open Modal
-      </button>
+      </button> */}
     </>
   );
 };
