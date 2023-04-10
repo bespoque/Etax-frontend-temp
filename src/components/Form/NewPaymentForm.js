@@ -27,6 +27,7 @@ const NewPaymentForm = () => {
   const [modalData, setModalData] = useState(() => []);
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
+    { key: "Credo", value: "Credo" },
     { key: "Monnify offline", value: "Offline" }
   ]);
 
@@ -370,8 +371,8 @@ const NewPaymentForm = () => {
               >
                 <option value="">Select Payment Channel</option>
                 {channel.map((channel) => (
-                  <option value={channel.key} key={channel.key}>
-                    {channel.value}
+                  <option value={channel.value} key={channel.key}>
+                    {channel.key}
                   </option>
                 ))}
               </select>
