@@ -275,7 +275,6 @@ const Index = () => {
         </div>
       )}
    
-      {/* <Modal isOpen={isModalOpen} url={modalUrl} /> */}
       <Modal isOpen={isModalOpen} url={modalUrl} />
       {data?.length > 0 &&
         data.map((da) => (
