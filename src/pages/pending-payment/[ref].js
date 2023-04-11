@@ -274,12 +274,7 @@ const Index = () => {
           <p>Fetching data...</p>
         </div>
       )}
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleModalOpen}
-      >
-        Open Modal
-      </button>
+   
       {/* <Modal isOpen={isModalOpen} url={modalUrl} /> */}
       <Modal isOpen={isModalOpen} url={modalUrl} />
       {data?.length > 0 &&
