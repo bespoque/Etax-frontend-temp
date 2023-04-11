@@ -2,7 +2,7 @@ import SectionTitle from "../../components/section-title";
 import Widget from "../../components/widget";
 import { formatNumber } from "../../functions/numbers";
 import dateformat from "dateformat";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import setAuthToken from "../../functions/setAuthToken";
 import url from "../../config/url";
@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { taxStation } from "../../json/taxOffice";
 import UseFetcher from "../../components/fetcher/useFetcher";
 import { saveAs } from "file-saver";
+import UseFetcherNoAuth from "../../components/fetcher/useFetcherNoAuth";
 
 const Index = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -31,20 +32,61 @@ const Index = () => {
   const [updatRef, setUpdateRef] = useState(false);
   const [updateRefErrMessage, setUpdateRefErrMessage] = useState("");
   const [updateSuccMsg, setUpdateSuccMsg] = useState("");
+  const [globalRef, setGlobalRef] = useState(() => "");
+  const [modalUrl, setModalUrl] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [channel, setChannel] = useState([
-    { key: "WebPay", value: "Interswitch" },
-    { key: "Bank", value: "Bank" },
-    { key: "Remita", value: "Remita" },
-    { key: "eTranzact", value: "eTransact" },
+    // { key: "WebPay", value: "Interswitch" },
+    // { key: "Bank", value: "Bank" },
+    // { key: "Remita", value: "Remita" },
+    // { key: "eTranzact", value: "eTransact" },
+    { key: "Monnify", value: "Monnify" },
+    { key: "Credo", value: "Credo" },
+    { key: "Moniepoint POS", value: "Offline" }
   ]);
+  useEffect(() => {
+    const date = new Date();
+    const timestamp = date.getTime().toString();
+    const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
+    const result = parsedTimestamp;
+    setGlobalRef(String(result))
+  }, []);
+
+  // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
+  const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   let ref = router.query;
+  // const { data, isLoading, error } = UseFetcherNoAuth(
+  //   `${urlNew}findpartpayment.php?assessment=${ref.ref}`
+  // );
+
   const { data, isLoading, error } = UseFetcher(
     `${url.BASE_URL}user/invoice-details/${ref.ref}`
   );
+
+  const handleModalOpen = (url) => {
+    setIsModalOpen(true);
+    setModalUrl(url);
+  };
+  const Modal = ({ isOpen, url }) => {
+
+    return (
+      <>
+
+        {isOpen && (
+          <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+            <iframe src={url} className="w-full h-full lg:h-100vw border-0"></iframe>
+          </div>
+
+        )}
+      </>
+    );
+  };
+
+  console.log("data", data);
 
   const show = (data) => {
     if (data.mdaName !== "INTERNAL REVENUE SERVICE") {
@@ -64,39 +106,58 @@ const Index = () => {
   }
 
   const PaymentHandler = async (paymentData) => {
-    paymentData.ref = data[0].ref;
-    paymentData.assessmentId = data[0].assessment_id;
-    paymentData.taxId = data[0].t_payer;
-    paymentData.name = data[0].taxPayerName;
+    // paymentData.ref = data[0].ref;
+    // paymentData.assessmentId = data[0].assessment_id;
+    // paymentData.taxId = data[0].t_payer;
+    // paymentData.name = data[0].taxPayerName;
+    let formData = {};
+    formData.name = data[0].taxPayerName;
+    formData.email = paymentData.email;
+    formData.phoneNumber = paymentData.phoneNumber;
+    formData.station = paymentData.station;
+    formData.amount = paymentData.amount;
+    formData.channel = paymentData.channel;
+    formData.KGTIN = data[0].t_payer;
+    formData.revenueSub = data[0].rev_sub;
+    formData.agency = data[0].agency;
+    formData.description = paymentData.description;
+    formData.paymentRef = globalRef;
+    formData.paymentgateway = paymentData.channel;
+    formData.paygatewayclient = "etax";
     setLoadingState("Submitting...");
     setLoading(true);
+    const queryParams = new URLSearchParams(formData).toString();
+    console.log("formdata", formData);
+    console.log("paymentData", paymentData);
     try {
-      const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
-        station: paymentData.station,
-        ref: paymentData.description,
-        channel: paymentData.channel,
-        phone: paymentData.phoneNumber,
-        email: paymentData.email,
-        name: paymentData.name,
-      });
-      if (res.data.status === 200) {
-        if (paymentData.channel === "Remita") {
-          router.push(
-            `${url.PAY_URL}remita/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-          );
-        } else if (paymentData.channel === "eTransact") {
-          router.push(
-            `${url.PAY_URL}etransact/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-          );
-        } else if (paymentData.channel === "WebPay") {
-          router.push(
-            `${url.PAY_URL}interswitch/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-          );
-        } else if (paymentData.channel === "Bank") {
-          setLoadingState("Generating Pdf...");
-          await fetchBankPrint(paymentData.ref);
-        }
-      }
+      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      // const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
+      //   station: paymentData.station,
+      //   ref: paymentData.description,
+      //   channel: paymentData.channel,
+      //   phone: paymentData.phoneNumber,
+      //   email: paymentData.email,
+      //   name: paymentData.name,
+      // });
+      // if (res.data.status === 200) {
+      //   if (paymentData.channel === "Remita") {
+      //     router.push(
+      //       `${url.PAY_URL}remita/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
+      //     );
+      //   } else if (paymentData.channel === "eTransact") {
+      //     router.push(
+      //       `${url.PAY_URL}etransact/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
+      //     );
+      //   } else if (paymentData.channel === "WebPay") {
+      //     router.push(
+      //       `${url.PAY_URL}interswitch/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
+      //     );
+      //   } else if (paymentData.channel === "Bank") {
+      //     setLoadingState("Generating Pdf...");
+      //     await fetchBankPrint(paymentData.ref);
+      //   }
+      // }
     } catch (e) {
       setLoading(false);
       setLoadingState("");
@@ -213,6 +274,14 @@ const Index = () => {
           <p>Fetching data...</p>
         </div>
       )}
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={handleModalOpen}
+      >
+        Open Modal
+      </button>
+      {/* <Modal isOpen={isModalOpen} url={modalUrl} /> */}
+      <Modal isOpen={isModalOpen} url={modalUrl} />
       {data?.length > 0 &&
         data.map((da) => (
           <div key={da.idpymt}>
@@ -395,6 +464,13 @@ const Index = () => {
                       <form onSubmit={handleSubmit(PaymentHandler)}>
                         <div className="w-full px-8">
                           <NewFormInput
+                            label="Payment ID"
+                            value={globalRef}
+                            required
+                            ref={register}
+                            name="paymentRef"
+                          />
+                          <NewFormInput
                             label="MDA"
                             value={data[0].mdaName}
                             required
@@ -514,8 +590,8 @@ const Index = () => {
                           >
                             <option value="">Select Payment Channel</option>
                             {channel.map((channel) => (
-                              <option value={channel.key} key={channel.key}>
-                                {channel.value}
+                              <option value={channel.value} key={channel.key}>
+                                {channel.key}
                               </option>
                             ))}
                           </select>
