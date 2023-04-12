@@ -7,6 +7,7 @@ import QRCode from 'react-qr-code';
 import Loader from 'react-loader-spinner';
 import { formatNumber } from '../../functions/numbers';
 import ReactToPrint from 'react-to-print';
+import { CoatOfArms, KgirsLogo2, KogiGov, SignatureCol } from '../../components/Images/Images';
 
 
 const Index = () => {
@@ -101,11 +102,11 @@ const Index = () => {
                                 <p className="font-bold">REVENUE RECEIPT</p>
                                 <p className="font-bold">{`Ref - ${colData?.assessment_id || ""}`}</p>
                             </section>
-                            {/* <section className="flex justify-end mt-8">
+                            <section className="flex justify-end mt-8">
                                 <CoatOfArms />
                                 <KogiGov />
                                 <KgirsLogo2 />
-                            </section> */}
+                            </section>
                             <div className="flex justify-between">
                                 <div>
                                     <div className="grid grid-cols-6 gap-2">
@@ -199,7 +200,7 @@ const Index = () => {
                             <div className="flex justify-between">
                                 <div></div>
                                 <div className="mt-2">
-                                    {/* <Signature /> */}
+                                    <SignatureCol />
                                     <hr />
                                     Authorized Signatory
                                 </div>

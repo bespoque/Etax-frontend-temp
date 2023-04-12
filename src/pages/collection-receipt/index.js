@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature } from '../../components/Images/Images'
+import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature, SignatureCol } from '../../components/Images/Images'
 import axios from 'axios';
 import url from '../../config/url';
 import { useRouter } from 'next/router';
@@ -174,7 +174,7 @@ export default function index() {
                 <div className="flex justify-between">
                   <div></div>
                   <div className="mt-2">
-                    <Signature />
+                    <SignatureCol />
                     <hr />
                     Authorized Signatory
                   </div>
