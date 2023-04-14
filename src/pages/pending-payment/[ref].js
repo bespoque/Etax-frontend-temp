@@ -53,7 +53,7 @@ const Index = () => {
   }, []);
 
   // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
-  const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
+  const urlNew = "https://irs.kg.gov.ng/quickpay-live/"
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
@@ -130,8 +130,8 @@ const Index = () => {
     console.log("formdata", formData);
     console.log("paymentData", paymentData);
     try {
-      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
-      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      // const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      // handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
       // const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
       //   station: paymentData.station,
       //   ref: paymentData.description,
