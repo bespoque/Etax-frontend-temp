@@ -52,7 +52,7 @@ const Index = () => {
     setGlobalRef(String(result))
   }, []);
 
-  // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
+  // const urlNew = "https://irs.kg.gov.ng/quickpay-staging/"
   const urlNew = "https://irs.kg.gov.ng/quickpay-live/"
 
   const [openBank, setOpenBank] = useState(false);
