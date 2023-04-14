@@ -130,8 +130,8 @@ const Index = () => {
     console.log("formdata", formData);
     console.log("paymentData", paymentData);
     try {
-      // const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
-      // handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
       // const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
       //   station: paymentData.station,
       //   ref: paymentData.description,
