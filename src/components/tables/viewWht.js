@@ -4,6 +4,10 @@ import { formatNumber } from '../../functions/numbers';
 
 const singleFields = [
   {
+    name: 'Assessment Id',
+    key: 'assessmentId',
+  },
+  {
     name: 'Date',
     key: 'payPeriod',
   },
