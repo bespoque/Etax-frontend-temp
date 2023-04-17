@@ -28,6 +28,7 @@ const NewPaymentForm = () => {
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
+    { key: "Bank", value: "Bank" },
     { key: "Moniepoint POS", value: "Offline" }
   ]);
 
@@ -107,6 +108,30 @@ const NewPaymentForm = () => {
     }
   };
 
+  //get bank print
+  const fetchBankPrint = async (globalRef) => {
+    try {
+      const res = await axios.get(`${url.BASE_URL}user/bank-print/${globalRef}`, {
+        responseType: "blob",
+      });
+      const pdfBlob = new Blob([res.data], { type: "application/pdf" });
+      saveAs(pdfBlob, `${globalRef}__bankPrint.pdf`);
+      setLoading(false);
+      setLoadingState("");
+      setPdfMessage(
+        "Pdf successfully generated. Tender this at the bank to process payment"
+      );
+      setTimeout(() => {
+        setPdfMessage("");
+        router.push("/payment/pending-invoice");
+      }, 6000);
+    } catch (err) {
+      alert("Unable to generate pdf. Please try again");
+      setLoading(false);
+      setLoadingState("");
+    }
+  };
+
   //submit handler
   const SubmitHandler = (data) => {
     console.log(data);
@@ -142,10 +167,15 @@ const NewPaymentForm = () => {
     formData.paygatewayclient = "etax";
 
     const queryParams = new URLSearchParams(formData).toString();
+    const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
     try {
+      if (data.channel === "Bank") {
+        setLoadingState("Generating Pdf...");
+        await fetchBankPrint(globalRef);
+      } else {
+        handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      }
 
-      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
-      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
     } catch (e) {
       setLoading(false);
       setLoadingState("");
