@@ -49,7 +49,7 @@ const NewPaymentForm = () => {
   };
 
   // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
-  const urlNew = "https://irs.kg.gov.ng/quickpayapi.irs.kg.gov.ng/"
+  const urlNew = "https://irs.kg.gov.ng/quickpay-live/"
 
   useEffect(() => {
     const date = new Date();
