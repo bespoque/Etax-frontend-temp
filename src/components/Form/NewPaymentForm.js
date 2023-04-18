@@ -167,8 +167,8 @@ const NewPaymentForm = () => {
     formData.paygatewayclient = "etax";
 
     const queryParams = new URLSearchParams(formData).toString();
-    const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
     try {
+      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
       if (data.channel === "Bank") {
         setLoadingState("Generating Pdf...");
         await fetchBankPrint(globalRef);

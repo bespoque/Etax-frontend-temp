@@ -42,6 +42,7 @@ const Index = () => {
     // { key: "eTranzact", value: "eTransact" },
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
+    { key: "Bank", value: "Bank" },
     { key: "Moniepoint POS", value: "Offline" }
   ]);
   useEffect(() => {
@@ -131,7 +132,13 @@ const Index = () => {
     console.log("paymentData", paymentData);
     try {
       const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
-      handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      if (paymentData.channel === "Bank") {
+        setLoadingState("Generating Pdf...");
+        await fetchBankPrint(globalRef);
+      } else {
+        handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+      }
+      // handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
       // const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
       //   station: paymentData.station,
       //   ref: paymentData.description,
@@ -274,7 +281,7 @@ const Index = () => {
           <p>Fetching data...</p>
         </div>
       )}
-   
+
       <Modal isOpen={isModalOpen} url={modalUrl} />
       {data?.length > 0 &&
         data.map((da) => (
