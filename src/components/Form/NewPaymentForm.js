@@ -324,7 +324,7 @@ const NewPaymentForm = () => {
                   required
                   ref={register({ required: true })}
                   name="revenueItem"
-                  className="w-full  focus:outline-none focus:ring-0 focus:ring-offset-0  border-transparent bg-transparent text-gray-600 text-md border-none"
+                  className="w-full focus:outline-none focus:ring-0 focus:ring-offset-0  border-transparent bg-transparent text-gray-600 text-md border-none"
                 >
                   <option value="">Select Item</option>
                   {item.map((item, i) => (
@@ -366,7 +366,7 @@ const NewPaymentForm = () => {
                 label="Amount"
                 required
                 ref={register({
-                  minLength: 4,
+                  // minLength: 4,
                   pattern: {
                     value: /^[0-9]*[.]?[0-9]*$/,
                     message: "Amount must be a number",
@@ -374,11 +374,11 @@ const NewPaymentForm = () => {
                 })}
                 name="amount"
               />
-              {errors.amount && errors.amount.type === "minLength" && (
+              {/* {errors.amount && errors.amount.type === "minLength" && (
                 <p className="text-red-600">
                   Amount cannot be less than {formatNumber(1000)}
                 </p>
-              )}
+              )} */}
               {errors.amount && (
                 <p className="text-red-600 bg-white">{errors.amount.message}</p>
               )}
