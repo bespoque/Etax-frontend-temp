@@ -121,7 +121,8 @@ const Index = () => {
     formData.KGTIN = data[0].t_payer;
     formData.revenueSub = data[0].rev_sub;
     formData.agency = data[0].agency;
-    formData.description = paymentData.description;
+    formData.assessment_id = data[0].assessment_id;
+    formData.description = data[0].itemName;
     formData.paymentRef = globalRef;
     formData.paymentgateway = paymentData.channel;
     formData.paygatewayclient = "etax";
@@ -476,7 +477,7 @@ const Index = () => {
                             value={data[0].mdaName}
                             required
                             ref={register}
-                            name="description"
+                            name=""
                           />
 
                           <NewFormInput
@@ -484,7 +485,7 @@ const Index = () => {
                             value={data[0].itemName}
                             required
                             ref={register}
-                            name="description"
+                            name="revItem"
                           />
 
                           <NewFormInput
@@ -511,7 +512,7 @@ const Index = () => {
                             required
                             value={data[0].assessment_id}
                             ref={register}
-                            name="description"
+                            name="assessment_id"
                           />
                           <NewFormInput
                             label="email"
