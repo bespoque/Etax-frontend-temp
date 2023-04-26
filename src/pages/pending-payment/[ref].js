@@ -122,8 +122,7 @@ const Index = () => {
     setLoadingState("Submitting...");
     setLoading(true);
     const queryParams = new URLSearchParams(formData).toString();
-    console.log("formdata", formData);
-    console.log("paymentData", paymentData);
+
     try {
       const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
       if (paymentData.channel === "Bank") {
@@ -132,33 +131,6 @@ const Index = () => {
       } else {
         handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
       }
-      // handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
-      // const res = await axios.put(`${url.BASE_URL}payment/new-payment-update`, {
-      //   station: paymentData.station,
-      //   ref: paymentData.description,
-      //   channel: paymentData.channel,
-      //   phone: paymentData.phoneNumber,
-      //   email: paymentData.email,
-      //   name: paymentData.name,
-      // });
-      // if (res.data.status === 200) {
-      //   if (paymentData.channel === "Remita") {
-      //     router.push(
-      //       `${url.PAY_URL}remita/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-      //     );
-      //   } else if (paymentData.channel === "eTransact") {
-      //     router.push(
-      //       `${url.PAY_URL}etransact/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-      //     );
-      //   } else if (paymentData.channel === "WebPay") {
-      //     router.push(
-      //       `${url.PAY_URL}interswitch/initialize.php?assessmentId=${paymentData.assessmentId}&taxId=${paymentData.taxId}`
-      //     );
-      //   } else if (paymentData.channel === "Bank") {
-      //     setLoadingState("Generating Pdf...");
-      //     await fetchBankPrint(paymentData.ref);
-      //   }
-      // }
     } catch (e) {
       setLoading(false);
       setLoadingState("");
