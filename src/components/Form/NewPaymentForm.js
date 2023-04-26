@@ -48,8 +48,7 @@ const NewPaymentForm = () => {
     setOpen(false);
   };
 
-  // const urlNew = "https://irs.kg.gov.ng/etaxwebpay/v3/api_v3/"
-  const urlNew = "https://irs.kg.gov.ng/quickpay-live/"
+  const urlNew = "https://bespoque.dev/quickpay-live/"
 
   useEffect(() => {
     const date = new Date();

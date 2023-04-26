@@ -36,10 +36,7 @@ const Index = () => {
   const [modalUrl, setModalUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [channel, setChannel] = useState([
-    // { key: "WebPay", value: "Interswitch" },
-    // { key: "Bank", value: "Bank" },
-    // { key: "Remita", value: "Remita" },
-    // { key: "eTranzact", value: "eTransact" },
+  
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
     { key: "Bank", value: "Bank" },
@@ -54,7 +51,7 @@ const Index = () => {
   }, []);
 
   // const urlNew = "https://irs.kg.gov.ng/quickpay-staging/"
-  const urlNew = "https://irs.kg.gov.ng/quickpay-live/"
+  const urlNew = "https://bespoque.dev/quickpay-live/"
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
@@ -107,10 +104,6 @@ const Index = () => {
   }
 
   const PaymentHandler = async (paymentData) => {
-    // paymentData.ref = data[0].ref;
-    // paymentData.assessmentId = data[0].assessment_id;
-    // paymentData.taxId = data[0].t_payer;
-    // paymentData.name = data[0].taxPayerName;
     let formData = {};
     formData.name = data[0].taxPayerName;
     formData.email = paymentData.email;
