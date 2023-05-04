@@ -28,7 +28,7 @@ const NewPaymentForm = () => {
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    { key: "Bank", value: "Bank" },
+    // { key: "Bank", value: "Bank" },  
     { key: "Moniepoint POS", value: "Offline" }
   ]);
 
@@ -37,7 +37,9 @@ const NewPaymentForm = () => {
   const [pdfMessage, setPdfMessage] = useState("");
   const [item, setItem] = useState(() => []);
   const [open, setOpen] = useState(false);
-  const [globalRef, setGlobalRef] = useState(() => "");
+  const [globalAssId, setGlobalAssId] = useState(() => "");
+  const [bankPrintAssId, setBankprintAssID] = useState(() => "");
+  const [newGlobalRef, setNewGlobalRef] = useState(() => "");
   const [modalUrl, setModalUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
@@ -51,18 +53,21 @@ const NewPaymentForm = () => {
   const urlNew = "https://bespoque.dev/quickpay-live/"
 
   useEffect(() => {
+
     const date = new Date();
+    const randomNum = Math.floor(Math.random() * 1000000).toString().slice(-6)
     const timestamp = date.getTime().toString();
+    const newRef = (parseInt(randomNum) + (timestamp))
+    setNewGlobalRef(newRef)
     const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
-    const result = parsedTimestamp;
-    setGlobalRef(String(result))
+    setBankprintAssID(String(parsedTimestamp))
+    setGlobalAssId(String(`FA-${parsedTimestamp}`))
   }, []);
 
   const handleModalOpen = (url) => {
     setIsModalOpen(true);
     setModalUrl(url);
   };
-
 
   const Modal = ({ isOpen, url }) => {
 
@@ -108,13 +113,13 @@ const NewPaymentForm = () => {
   };
 
   //get bank print
-  const fetchBankPrint = async (globalRef) => {
+  const fetchBankPrint = async (bankPrintAssId) => {
     try {
-      const res = await axios.get(`${url.BASE_URL}user/bank-print/${globalRef}`, {
+      const res = await axios.get(`${url.BASE_URL}user/bank-print/${bankPrintAssId}`, {
         responseType: "blob",
       });
       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-      saveAs(pdfBlob, `${globalRef}__bankPrint.pdf`);
+      saveAs(pdfBlob, `${bankPrintAssId}__bankPrint.pdf`);
       setLoading(false);
       setLoadingState("");
       setPdfMessage(
@@ -161,7 +166,8 @@ const NewPaymentForm = () => {
     formData.revenueSub = data.revenueItem;
     formData.agency = data.agency;
     formData.description = data.description;
-    formData.paymentRef = globalRef;
+    formData.paymentRef = newGlobalRef;
+    formData.assessment_id = globalAssId
     formData.paymentgateway = data.channel;
     formData.paygatewayclient = "etax";
 
@@ -170,9 +176,9 @@ const NewPaymentForm = () => {
       const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
       if (data.channel === "Bank") {
         setLoadingState("Generating Pdf...");
-        await fetchBankPrint(globalRef);
+        await fetchBankPrint(bankPrintAssId);
       } else {
-        handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+        handleModalOpen(`${urlNew}processpayment.php?paymentref=${newGlobalRef}`)
       }
 
     } catch (e) {
@@ -451,7 +457,11 @@ const NewPaymentForm = () => {
                               <tbody className="divide-y">
                                 <tr>
                                   <td>Payment ID</td>
-                                  <td>{globalRef}</td>
+                                  <td>{newGlobalRef}</td>
+                                </tr>
+                                <tr>
+                                  <td>Assessment ID</td>
+                                  <td>{globalAssId}</td>
                                 </tr>
                                 <tr>
                                   <td>KGTIN</td>
