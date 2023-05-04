@@ -58,7 +58,7 @@ const NewPaymentForm = () => {
     const randomNum = Math.floor(Math.random() * 1000000).toString().slice(-6)
     const timestamp = date.getTime().toString();
     const newRef = (parseInt(randomNum) + (timestamp))
-    setNewGlobalRef(newRef)
+    setNewGlobalRef(String(newRef).slice(0, -5))
     const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
     setBankprintAssID(String(parsedTimestamp))
     setGlobalAssId(String(`FA-${parsedTimestamp}`))

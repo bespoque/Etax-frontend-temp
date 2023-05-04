@@ -35,19 +35,25 @@ const Index = () => {
   const [globalRef, setGlobalRef] = useState(() => "");
   const [modalUrl, setModalUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [globalAssId, setGlobalAssId] = useState(() => "");
+  const [bankPrintAssId, setBankprintAssID] = useState(() => "");
+  const [newGlobalRef, setNewGlobalRef] = useState(() => "");
   const [channel, setChannel] = useState([
   
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    { key: "Bank", value: "Bank" },
+    // { key: "Bank", value: "Bank" },
     { key: "Moniepoint POS", value: "Offline" }
   ]);
   useEffect(() => {
     const date = new Date();
+    const randomNum = Math.floor(Math.random() * 1000000).toString().slice(-6)
     const timestamp = date.getTime().toString();
+    const newRef = (parseInt(randomNum) + (timestamp))
+    setNewGlobalRef(String(newRef).slice(0, -5))
     const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
-    const result = parsedTimestamp;
-    setGlobalRef(String(result))
+    setBankprintAssID(String(parsedTimestamp))
+    setGlobalAssId(String(`FA-${parsedTimestamp}`))
   }, []);
 
   // const urlNew = "https://irs.kg.gov.ng/quickpay-staging/"
@@ -116,7 +122,7 @@ const Index = () => {
     formData.agency = data[0].agency;
     formData.assessment_id = data[0].assessment_id;
     formData.description = data[0].itemName;
-    formData.paymentRef = globalRef;
+    formData.paymentRef = newGlobalRef;
     formData.paymentgateway = paymentData.channel;
     formData.paygatewayclient = "etax";
     setLoadingState("Submitting...");
@@ -129,7 +135,7 @@ const Index = () => {
         setLoadingState("Generating Pdf...");
         await fetchBankPrint(globalRef);
       } else {
-        handleModalOpen(`${urlNew}processpayment.php?paymentref=${globalRef}`)
+        handleModalOpen(`${urlNew}processpayment.php?paymentref=${newGlobalRef}`)
       }
     } catch (e) {
       setLoading(false);
@@ -432,7 +438,7 @@ const Index = () => {
                         <div className="w-full px-8">
                           <NewFormInput
                             label="Payment ID"
-                            value={globalRef}
+                            value={newGlobalRef}
                             required
                             ref={register}
                             name="paymentRef"
