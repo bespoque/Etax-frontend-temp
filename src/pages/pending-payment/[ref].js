@@ -39,7 +39,7 @@ const Index = () => {
   const [bankPrintAssId, setBankprintAssID] = useState(() => "");
   const [newGlobalRef, setNewGlobalRef] = useState(() => "");
   const [channel, setChannel] = useState([
-  
+
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
     // { key: "Bank", value: "Bank" },
@@ -61,15 +61,36 @@ const Index = () => {
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
+  // const [data, setData] = useState([])
+  // const [isLoading, setIsLoading] = useState(true)
+  
   const router = useRouter();
   let ref = router.query;
-  // const { data, isLoading, error } = UseFetcherNoAuth(
-  //   `${urlNew}findpartpayment.php?assessment=${ref.ref}`
-  // );
+  // useEffect(() => {
+  //   const fetData = async () => {
+  //     try {
+  //       const response = await fetch(`${urlNew}findpartpayment.php?assessment=${ref.ref}`, {
+  //         method: 'GET',
+  //       })
+  //       setIsLoading(false)
+  //       const paymentData = await response.json()
+  //       let dataArr = [paymentData.body]
+  //       setData(dataArr)
+  //       console.log("data Arr", dataArr);
+
+  //     } catch (error) {
+  //       setIsLoading(false)
+  //       console.log(error);
+  //     }
+
+  //   }
+  //   fetData()
+  // }, [ref])
 
   const { data, isLoading, error } = UseFetcher(
     `${url.BASE_URL}user/invoice-details/${ref.ref}`
   );
+  console.log("data", data);
 
   const handleModalOpen = (url) => {
     setIsModalOpen(true);
@@ -90,7 +111,6 @@ const Index = () => {
     );
   };
 
-  console.log("data", data);
 
   const show = (data) => {
     if (data.mdaName !== "INTERNAL REVENUE SERVICE") {
@@ -105,7 +125,7 @@ const Index = () => {
 
   if (data) {
     data.forEach((rec) => {
-      rec.formattedAmount = formatNumber(rec.amount);
+      rec.formattedAmount = formatNumber(rec?.amount);
     });
   }
 
@@ -382,7 +402,7 @@ const Index = () => {
                 </div>
 
                 <div className="w-96 justify-between">
-                  {data[0].createby === "PORTAL" && (
+                  {data[0].createby === "WEB" && (
                     <button
                       onClick={() => deletePrompt(data[0].assessment_id)}
                       className="text-red-500 text-base mt-4 mr-4"
@@ -391,14 +411,14 @@ const Index = () => {
                     </button>
                   )}
 
-                  {data[0].pmt_meth === "WebPay" && (
+                  {/* {data[0].pmt_meth === "WebPay" && (
                     <button
                       onClick={() => RevalidateTransactions(data[0])}
                       className="text-green-500 text-base mt-4"
                     >
                       {`${validating ? "Re-validating..." : "Re-validate"}`}
                     </button>
-                  )}
+                  )} */}
                 </div>
               </div>
             </Widget>

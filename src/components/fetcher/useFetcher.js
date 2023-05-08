@@ -6,7 +6,6 @@ const UseFetcher = (url) => {
   const { data, error } = useSWR(url, async (url) => {
     setAuthToken();
     const res = await axios(url);
-    // console.log("res.data.body", res.data.body);
     return res.data.body;
   });
   

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const UseFetcherNoAuth = (url) => {
   const { data, error } = useSWR(url, async (url) => {
-    const res = await fetch(url);
+    const res = await axios(url);
     return res.data.body;
   });
   return {
