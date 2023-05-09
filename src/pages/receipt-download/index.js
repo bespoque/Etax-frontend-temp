@@ -99,7 +99,7 @@ const Index = () => {
                             <p>KOGI STATE GOVERNMENT</p>
                             <section className="flex justify-between">
                                 <p className="font-bold">REVENUE RECEIPT</p>
-                                <p className="font-bold">{`Ref - ${colData?.assessment_id || ""}`}</p>
+                                <p className="font-bold">{`Assessment ID - ${colData?.assessment_id || ""}`}</p>
                             </section>
                             <section className="flex justify-end mt-8">
                                 <CoatOfArms />
