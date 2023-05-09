@@ -155,7 +155,7 @@ export default function index() {
                   </div>
                   <div className="grid grid-cols-6 gap-2">
                     <p>PAID AT:</p>
-                    <p className="font-bold"> {colData.bank} </p>
+                    <p className="font-bold"> {colData?.bank || colData?.paymentMethod} </p>
                   </div>
                   <div className="grid grid-cols-6 gap-2">
                     <p>AGENCY:</p>

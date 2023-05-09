@@ -120,7 +120,7 @@ const Index = () => {
                                     </div>
                                     <div className="grid grid-cols-6 gap-2">
                                         <p>ADDRESS:</p>
-                                        <p className="font-bold col-span-2">{colData?.taxpayerAddress || ""}</p>
+                                        <p className="font-bold col-span-2">{colData?.taxPayerAddress || ""}</p>
                                     </div>
                                     <div className="flex mt-10">
                                         <div className='w-16 border-b-2'>
@@ -166,10 +166,10 @@ const Index = () => {
                                 <div className="grid grid-cols-6 gap-2">
                                     <p>BEING:</p>
                                     <div className="col-span-3">
-                                        <p className="font-bold"> {`Payment for ${colData?.revenueCode || ""}`} </p>
-                                        <small>
-                                            {colData?.revenueItem || ""}
-                                        </small>
+                                        <p className="font-bold"> {`Payment for ${colData?.rev_sub || colData?.revenueItem }`} </p>
+                                        {/* <small>
+                                            {colData?.rev_sub || colData?.revenueItem }
+                                        </small> */}
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-6 gap-2">
@@ -179,8 +179,8 @@ const Index = () => {
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-6 gap-2">
-                                    <p>Payment Method:</p>
-                                    <p className="font-bold"> {colData?.pmt_meth || ""} </p>
+                                    <p>Paid at:</p>
+                                    <p className="font-bold"> {colData?.channel_id || colData?.pmt_meth } </p>
                                 </div>
                                 <div className="grid grid-cols-6 gap-2">
                                     <p>AGENCY:</p>
