@@ -28,7 +28,7 @@ const NewPaymentForm = () => {
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    { key: "Bank", value: "Bank" },  
+    // { key: "Bank", value: "Bank" },  
     { key: "Moniepoint POS", value: "Offline" }
   ]);
 
