@@ -26,10 +26,10 @@ const NewPaymentForm = () => {
 
   const [modalData, setModalData] = useState(() => []);
   const [channel, setChannel] = useState([
-    { key: "Monnify", value: "Monnify" },
-    { key: "Credo", value: "Credo" },
+    // { key: "Monnify", value: "Monnify" },
+    // { key: "Credo", value: "Credo" },
     // { key: "Bank", value: "Bank" },  
-    { key: "Moniepoint POS", value: "Offline" }
+    // { key: "Moniepoint POS", value: "Offline" }
   ]);
 
   const [loadingState, setLoadingState] = useState("");
