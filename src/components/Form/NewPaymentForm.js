@@ -28,7 +28,7 @@ const NewPaymentForm = () => {
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    // { key: "Bank", value: "Bank" },  
+    { key: "Bank", value: "Bank" },  
     { key: "Moniepoint POS", value: "Offline" }
   ]);
 
@@ -113,13 +113,13 @@ const NewPaymentForm = () => {
   };
 
   //get bank print
-  const fetchBankPrint = async (bankPrintAssId) => {
+  const fetchBankPrint = async (newGlobalRef) => {
     try {
-      const res = await axios.get(`${url.BASE_URL}user/bank-print/${bankPrintAssId}`, {
+      const res = await axios.get(`${url.BASE_URL}user/bank-print/${newGlobalRef}`, {
         responseType: "blob",
       });
       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-      saveAs(pdfBlob, `${bankPrintAssId}__bankPrint.pdf`);
+      saveAs(pdfBlob, `${newGlobalRef}__bankPrint.pdf`);
       setLoading(false);
       setLoadingState("");
       setPdfMessage(
@@ -176,7 +176,7 @@ const NewPaymentForm = () => {
       const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
       if (data.channel === "Bank") {
         setLoadingState("Generating Pdf...");
-        await fetchBankPrint(bankPrintAssId);
+        await fetchBankPrint(newGlobalRef);
       } else {
         handleModalOpen(`${urlNew}processpayment.php?paymentref=${newGlobalRef}`)
       }
