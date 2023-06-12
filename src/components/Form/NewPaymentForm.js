@@ -38,7 +38,6 @@ const NewPaymentForm = () => {
   const [item, setItem] = useState(() => []);
   const [open, setOpen] = useState(false);
   const [globalAssId, setGlobalAssId] = useState(() => "");
-  const [bankPrintAssId, setBankprintAssID] = useState(() => "");
   const [newGlobalRef, setNewGlobalRef] = useState(() => "");
   const [modalUrl, setModalUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,7 +59,6 @@ const NewPaymentForm = () => {
     const newRef = (parseInt(randomNum) + (timestamp))
     setNewGlobalRef(String(newRef).slice(0, -5))
     const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
-    setBankprintAssID(String(parsedTimestamp))
     setGlobalAssId(String(`FA-${parsedTimestamp}`))
   }, []);
 

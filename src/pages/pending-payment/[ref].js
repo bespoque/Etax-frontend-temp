@@ -32,17 +32,15 @@ const Index = () => {
   const [updatRef, setUpdateRef] = useState(false);
   const [updateRefErrMessage, setUpdateRefErrMessage] = useState("");
   const [updateSuccMsg, setUpdateSuccMsg] = useState("");
-  const [globalRef, setGlobalRef] = useState(() => "");
   const [modalUrl, setModalUrl] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [globalAssId, setGlobalAssId] = useState(() => "");
-  const [bankPrintAssId, setBankprintAssID] = useState(() => "");
   const [newGlobalRef, setNewGlobalRef] = useState(() => "");
   const [channel, setChannel] = useState([
 
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    // { key: "Bank", value: "Bank" },
+    { key: "Bank", value: "Bank" },
     { key: "Moniepoint POS", value: "Offline" }
   ]);
   useEffect(() => {
@@ -52,18 +50,17 @@ const Index = () => {
     const newRef = (parseInt(randomNum) + (timestamp))
     setNewGlobalRef(String(newRef).slice(0, -5))
     const parsedTimestamp = parseInt(timestamp).toString().substring(0, 10);
-    setBankprintAssID(String(parsedTimestamp))
     setGlobalAssId(String(`FA-${parsedTimestamp}`))
   }, []);
 
-  // const urlNew = "https://irs.kg.gov.ng/quickpay-staging/"
+
   const urlNew = "https://bespoque.dev/quickpay-live/"
 
   const [openBank, setOpenBank] = useState(false);
   const [open, setOpen] = useState(false);
   // const [data, setData] = useState([])
   // const [isLoading, setIsLoading] = useState(true)
-  
+
   const router = useRouter();
   let ref = router.query;
   // useEffect(() => {
@@ -153,7 +150,7 @@ const Index = () => {
       const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
       if (paymentData.channel === "Bank") {
         setLoadingState("Generating Pdf...");
-        await fetchBankPrint(globalRef);
+        await fetchBankPrint(newGlobalRef);
       } else {
         handleModalOpen(`${urlNew}processpayment.php?paymentref=${newGlobalRef}`)
       }
@@ -168,13 +165,13 @@ const Index = () => {
   };
 
   //get bank print
-  const fetchBankPrint = async (ref) => {
+  const fetchBankPrint = async (newGlobalRef) => {
     try {
-      const res = await axios.get(`${url.BASE_URL}user/bank-print/${ref}`, {
+      const res = await axios.get(`${url.BASE_URL}user/bank-print/${newGlobalRef}`, {
         responseType: "blob",
       });
       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-      saveAs(pdfBlob, `${ref}__bankPrint.pdf`);
+      saveAs(pdfBlob, `${newGlobalRef}__bankPrint.pdf`);
       setLoading(false);
       setLoadingState("");
       setPdfMessage(
@@ -402,14 +399,14 @@ const Index = () => {
                 </div>
 
                 <div className="w-96 justify-between">
-                  {data[0].createby === "WEB" && (
+                  {data[0].createby === "WEB" || data[0].pmt_meth === "WebPay" || data[0].createby === "PORTAL" ? (
                     <button
                       onClick={() => deletePrompt(data[0].assessment_id)}
                       className="text-red-500 text-base mt-4 mr-4"
                     >
                       {`${deleting ? "Deleting..." : "Delete Invoice"}`}
                     </button>
-                  )}
+                  ) : ""}
 
                   {/* {data[0].pmt_meth === "WebPay" && (
                     <button
@@ -591,10 +588,13 @@ const Index = () => {
                         </div>
                         <div className="flex justify-between items-center px-8 mt-4">
                           <div className="">
-                            <SubmitButton text="Make Payment">
+                            <SubmitButton text="Make Payment"
+                              disabled={loading}
+                            >
                               {loadingState !== ""
                                 ? loadingState
                                 : "Confirm Payment"}
+
                               <Loader
                                 visible={loading}
                                 type="TailSpin"
