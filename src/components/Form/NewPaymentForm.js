@@ -20,7 +20,7 @@ const NewPaymentForm = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const { data, isLoading, isError } = UseFetcher(
+  const { data, isLoading } = UseFetcher(
     `${url.BASE_URL}user/new-payment`
   );
 
@@ -28,7 +28,7 @@ const NewPaymentForm = () => {
   const [channel, setChannel] = useState([
     { key: "Monnify", value: "Monnify" },
     { key: "Credo", value: "Credo" },
-    { key: "Bank", value: "Bank" },  
+    { key: "Bank", value: "Bank" },
     { key: "Moniepoint POS", value: "Offline" }
   ]);
 
@@ -73,7 +73,7 @@ const NewPaymentForm = () => {
       <>
         {isOpen && (
           <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-            <iframe src={url} className="w-full h-full lg:h-100vw border-0"></iframe>
+            <iframe src={url} className="w-full h-full lg:h-100vw border-0" title="Payment"></iframe>
           </div>
 
         )}
@@ -153,25 +153,24 @@ const NewPaymentForm = () => {
     setLoadingState("Submitting...");
     setLoading(true);
     console.log("data", data);
-    let formData = {};
-    formData.name = data.name;
-    formData.email = data.email;
-    formData.phoneNumber = data.phoneNumber;
-    formData.station = data.taxOffice;
-    formData.amount = data.amount;
-    formData.channel = data.channel;
-    formData.KGTIN = data.KGTIN;
-    formData.revenueSub = data.revenueItem;
-    formData.agency = data.agency;
-    formData.description = data.description;
-    formData.paymentRef = newGlobalRef;
-    formData.assessment_id = globalAssId
-    formData.paymentgateway = data.channel;
-    formData.paygatewayclient = "etax";
+    data.paygatewayclient = "quickpay"
+    data.paymentRef = newGlobalRef
+    data.assessment_id = globalAssId
+    data.revenueSub = data.revenueItem
+    data.agency = data.mdaName
+    data.channel = data.paymentgateway
 
-    const queryParams = new URLSearchParams(formData).toString();
+    delete data.mda
+    delete data.revenueItem
+    delete data.mdaName
+    delete data.itemName
+    delete data.address  
+    delete data.taxPayerType
+
+    var jsonString = JSON.stringify(data);
+
     try {
-      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      await fetch(`${urlNew}recordpayment.php`, jsonString);
       if (data.channel === "Bank") {
         setLoadingState("Generating Pdf...");
         await fetchBankPrint(newGlobalRef);
