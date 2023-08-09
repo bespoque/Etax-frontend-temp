@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form';
 import SectionTitle from '../../components/section-title/index'
 
-export default function index() {
+export default function Index() {
     const [selectedYear, setSelectedYear] = useState("")
-    const { register, handleSubmit, watch } = useForm();
     const router = useRouter()
 
     const goToUploadcsv = () => {
@@ -32,7 +30,6 @@ export default function index() {
                     <div className="flex justify-center">
                         <div>
                             <SectionTitle
-                                // title="Code structure"
                                 subtitle="File Annual Returns"
                             />
                         </div>
@@ -51,8 +48,8 @@ export default function index() {
                     </div>
                     <div className="flex justify-center">
                         <ul>
-                            <li className="my-4"><a onClick={() => goToUploadcsv()} className="underline">Upload CSV Schedule</a></li>
-                            <li><a onClick={() => goToUploaddoc()} className="underline">Upload Supporting Documents</a></li>
+                            <li className="my-4"><button onClick={() => goToUploadcsv()} className="underline">Upload CSV Schedule</button></li>
+                            <li><button onClick={() => goToUploaddoc()} className="underline">Upload Supporting Documents</button></li>
                         </ul>
                     </div>
                 </div>
