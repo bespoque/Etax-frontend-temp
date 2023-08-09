@@ -8,6 +8,7 @@ import { CoatOfArms, KgirsLogo, KogiGov, SignatureCol } from "../Images/Images";
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
 import axios from 'axios';
+import url from "../../config/url";
 
 const fields = [
   {
