@@ -113,7 +113,7 @@ const LoginForm = () => {
           </CustomButton>
           <div className="mt-2">
             <p>
-              <Link href="/reset-password">
+              <Link legacyBehavior href="/reset-password">
                 <a className="text-blue-500">Forgot password ?</a>
               </Link>
             </p>
@@ -123,7 +123,7 @@ const LoginForm = () => {
         <div className="mt-6">
           <p>
             Don't have an account?
-            <Link href="/signup">
+            <Link legacyBehavior href="/signup">
               <a className="text-blue-500"> Sign Up</a>
             </Link>
           </p>

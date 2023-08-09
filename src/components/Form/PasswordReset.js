@@ -145,7 +145,7 @@ const PasswordResetForm = () => {
               </div>
               <div className="">
                 <span>
-                  <Link href="/">
+                  <Link legacyBehavior href="/">
                     <a className="link">Back to Login</a>
                   </Link>
                 </span>

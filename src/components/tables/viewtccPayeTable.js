@@ -1,15 +1,11 @@
 import Widget from "../widget";
 import { formatNumber } from "../../functions/numbers";
-import * as Icons from '../Icons/index';
-import Widget1 from "../dashboard/widget-1";
 import dateformat from "dateformat";
 import Link from 'next/link';
 import { useRef } from "react";
-import setAuthToken from "../../functions/setAuthToken";
-import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature, SignatureCol } from "../Images/Images";
+import { CoatOfArms, KgirsLogo, KogiGov, SignatureCol } from "../Images/Images";
 import ReactToPrint from "react-to-print";
 import QRCode from "react-qr-code";
-import Image from 'next/image'
 import { useRouter } from "next/router";
 
 const fields = [
@@ -74,7 +70,7 @@ export const ViewPayeTableTCC = ({ tccData }) => {
                 {fields.map((field, j) => (
                   <td key={j} className="">
                     {/* {remittance[field.key]} */}
-                    <Link href={`/view/paye-tcc/${tccData.ref}`}>
+                    <Link legacyBehavior href={`/view/paye-tcc/${tccData.ref}`}>
                       <a className="hover:text-blue-500">
                         {tccData[field.key]}
                       </a>

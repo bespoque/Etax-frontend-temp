@@ -107,7 +107,7 @@ const ForgotPasswordForm = () => {
             <div className="flex flex-row w-full mt-3">
               <span className="mr-1">New user?</span>
               <span>
-                <Link href="/signup">
+                <Link legacyBehavior href="/signup">
                   <a className="link">Sign up here</a>
                 </Link>
               </span>
@@ -115,7 +115,7 @@ const ForgotPasswordForm = () => {
             <div className="flex flex-row w-full">
               <span className="mr-1">Already have an account?</span>
               <span>
-                <Link href="/">
+                <Link legacyBehavior href="/">
                   <a className="link">Login here</a>
                 </Link>
               </span>

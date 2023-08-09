@@ -48,7 +48,7 @@ export const ViewMonthlyTable = ({ remittance, total }) => {
                 <tr key={i} className="">
                   {fields.map((field, j) => (
                     <td key={j} className="">
-                      <Link
+                      <Link legacyBehavior
                         href={`/view/monthly/${
                           remittance['assessmentId'] || remittance['ref']
                         }`}

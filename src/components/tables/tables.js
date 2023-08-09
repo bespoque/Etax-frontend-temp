@@ -80,7 +80,7 @@ export const Table = (remittance) => {
                 {fields.map((field) => (
                   <td key={uuidv4()}>
                     {remittance['status'] === 'success' ? (
-                      <Link href={`/receipt/${remittance['ref']}`}>
+                      <Link legacyBehavior href={`/receipt/${remittance['ref']}`}>
                         <a className="hover:text-blue-500">
                           {field.name === 'STATUS' ? (
                             <div className="flex items-center">
@@ -93,7 +93,7 @@ export const Table = (remittance) => {
                         </a>
                       </Link>
                     ) : (
-                      <Link href={`/pending-payment/${remittance['assessment_id']}`}>
+                      <Link legacyBehavior href={`/pending-payment/${remittance['assessment_id']}`}>
                         <a className="hover:text-blue-500">
                           {field.name === 'STATUS' ? (
                             <div className="flex items-center">
@@ -105,18 +105,6 @@ export const Table = (remittance) => {
                           )}
                         </a>
                       </Link>
-                      // <Link href={`/pending-payment/${remittance['ref']}`}>
-                      //   <a className="hover:text-blue-500">
-                      //     {field.name === 'STATUS' ? (
-                      //       <div className="flex items-center">
-                      //         {remittance[field.key]}
-                      //         <span className="ml-2">{remittance['icon']}</span>
-                      //       </div>
-                      //     ) : (
-                      //       remittance[field.key]
-                      //     )}
-                      //   </a>
-                      // </Link>
                     )}
                   </td>
                 ))}

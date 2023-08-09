@@ -1,8 +1,5 @@
 import Widget from "../widget";
 import { formatNumber } from "../../functions/numbers";
-import * as Icons from '../../components/Icons/index';
-import Widget1 from "../dashboard/widget-1";
-import dateformat from "dateformat";
 import Link from 'next/link';
 
 const fields = [
@@ -68,12 +65,12 @@ export const ViewAnnualTable = ({ remittance }) => {
                     {remittance[field.key]}
                   </td>
                 ))}
-                <Link href={`/view/annual/${remittance.year}_${remittance.status}`}>
+                <Link legacyBehavior href={`/view/annual/${remittance.year}_${remittance.status}`}>
                   <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
                     CSV
                   </a>
                 </Link>
-                <Link href={`/view/annual/docs/${remittance.year}_${remittance.status}`}>
+                <Link legacyBehavior href={`/view/annual/docs/${remittance.year}_${remittance.status}`}>
                   <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-3 rounded-md  text-white border  hover:border-green-500">
                     Doc
                   </a>
