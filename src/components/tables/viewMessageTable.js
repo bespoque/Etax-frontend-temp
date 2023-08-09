@@ -73,6 +73,7 @@ export const ViewMessageTable = ({ remittance }) => {
     } catch (error) {
       setIsFetching(() => false);
       setRead(() => false)
+      console.log(error);
       // if (error.response) {
       //   console.log(error.response.data);
       //   setUploadErrors(() => error.response.data.body);
@@ -84,7 +85,7 @@ export const ViewMessageTable = ({ remittance }) => {
   const deleteHandler = async (id) => {
     // setIsFetching(true)
     try {
-      let res = await axios.delete(
+      await axios.delete(
         `${url.BASE_URL}user/delete-notification?id=${id}`
       );
       // setIsFetching(false)
@@ -185,12 +186,12 @@ export const ViewMessageTable = ({ remittance }) => {
 
                   </td>
                 ))}
-                <a onClick={() => handleView(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
+                <button onClick={() => handleView(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
                   <span>{remittance['icon']}</span>
-                </a>
-                <a onClick={() => deletePrompt(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
+                </button>
+                <button onClick={() => deletePrompt(remittance.id)} className="inline-flex disabled:opacity-50  py-2 px-3 rounded-md   hover:border-green-500">
                   <span><FaTrash /></span>
-                </a>
+                </button>
               </tr>
             ))}
           </tbody>

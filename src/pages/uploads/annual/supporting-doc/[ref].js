@@ -4,9 +4,9 @@ import { useSelector, shallowEqual } from 'react-redux';
 import Widget from '../../../../components/widget';
 import axios from 'axios';
 import url from '../../../../config/url';
-import { FiX, FiCheck } from 'react-icons/fi';
+import { FiCheck } from 'react-icons/fi';
 import setAuthToken from '../../../../functions/setAuthToken';
-import { ProcessorSpinner, Progress } from '../../../../components/spiner/index';
+import { Progress } from '../../../../components/spiner/index';
 import { useRouter } from 'next/router';
 import jwt from "jsonwebtoken";
 
@@ -104,8 +104,7 @@ const AnnualSupDocs = () => {
     const [submitting17, setSubmitting17] = useState(false);
     const [submitting18, setSubmitting18] = useState(false);
     const [year, setYear] = useState("");
-    const [submitErr, setSubmitErr] = useState(false);
-    const { register, handleSubmit, watch } = useForm();
+    const { handleSubmit } = useForm();
     const modalRef = useRef(null);
     const [open, setOpen] = useState(false);
     const router = useRouter()
@@ -625,7 +624,6 @@ const AnnualSupDocs = () => {
             setUploadedFile(true);
             setFile(null)
             setDisabled(true)
-            console.log(data.response.body);
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -666,7 +664,7 @@ const AnnualSupDocs = () => {
             setUploadedFile2(true);
             setFile2(null)
             setDisabled2(true)
-            console.log(data.response.body);
+          
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -707,7 +705,7 @@ const AnnualSupDocs = () => {
             setUploadedFile3(true);
             setFile3(null)
             setDisabled3(true)
-            console.log(data.response.body);
+            
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -750,7 +748,7 @@ const AnnualSupDocs = () => {
             setUploadedFile4(true);
             setFile4(null)
             setDisabled4(true)
-            console.log(data.response.body);
+         
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -793,7 +791,7 @@ const AnnualSupDocs = () => {
             setUploadedFile5(true);
             setFile5(null)
             setDisabled5(true)
-            console.log(data.response.body);
+          
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -836,7 +834,7 @@ const AnnualSupDocs = () => {
             setUploadedFile6(true);
             setFile6(null)
             setDisabled6(true)
-            console.log(data.response.body);
+           
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -878,7 +876,7 @@ const AnnualSupDocs = () => {
             setUploadedFile7(true);
             setFile7(null)
             setDisabled7(true)
-            console.log(data.response.body);
+        
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -920,7 +918,7 @@ const AnnualSupDocs = () => {
             setUploadedFile8(true);
             setFile8(null)
             setDisabled8(true)
-            console.log(data.response.body);
+       
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -963,7 +961,7 @@ const AnnualSupDocs = () => {
             setUploadedFile9(true);
             setFile9(null)
             setDisabled9(true)
-            console.log(data.response.body);
+           
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1005,7 +1003,6 @@ const AnnualSupDocs = () => {
             setUploadedFile10(true);
             setFile10(null)
             setDisabled10(true)
-            console.log(data.response.body);
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1048,7 +1045,6 @@ const AnnualSupDocs = () => {
             setUploadedFile11(true);
             setFile11(null)
             setDisabled11(true)
-            console.log(data.response.body);
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1090,7 +1086,7 @@ const AnnualSupDocs = () => {
             setUploadedFile12(true);
             setFile12(null)
             setDisabled12(true)
-            console.log(data.response.body);
+          
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1131,7 +1127,7 @@ const AnnualSupDocs = () => {
             setUploadedFile13(true);
             setFile13(null)
             setDisabled13(true)
-            console.log(data.response.body);
+         
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1173,7 +1169,7 @@ const AnnualSupDocs = () => {
             setUploadedFile14(true);
             setFile14(null)
             setDisabled14(true)
-            console.log(data.response.body);
+            
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1214,7 +1210,7 @@ const AnnualSupDocs = () => {
             setUploadedFile15(true);
             setFile15(null)
             setDisabled15(true)
-            console.log(data.response.body);
+            
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1256,7 +1252,7 @@ const AnnualSupDocs = () => {
             setUploadedFile16(true);
             setFile16(null)
             setDisabled16(true)
-            console.log(data.response.body);
+         
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1296,7 +1292,7 @@ const AnnualSupDocs = () => {
             setUploadedFile17(true);
             setFile17(null)
             setDisabled17(true)
-            console.log(data.response.body);
+    
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');
@@ -1337,7 +1333,7 @@ const AnnualSupDocs = () => {
             setUploadedFile18(true);
             setFile18(null)
             setDisabled18(true)
-            console.log(data.response.body);
+          
         } catch (err) {
             if (err.response === 500) {
                 console.log('There was a problem with the server');

@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { CoatOfArms, KgirsLogo, KgirsLogo2, KogiGov, Signature, SignatureCol } from '../../components/Images/Images'
+import { CoatOfArms, KgirsLogo2, KogiGov, SignatureCol } from '../../components/Images/Images'
 import axios from 'axios';
 import url from '../../config/url';
 import { useRouter } from 'next/router';
-import setAuthToken from '../../functions/setAuthToken';
 import QRCode from 'react-qr-code';
 import Loader from 'react-loader-spinner';
 import { formatNumber } from '../../functions/numbers';
 import ReactToPrint from 'react-to-print';
 
-export default function index() {
+export default function Index() {
   const [colData, setColData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
