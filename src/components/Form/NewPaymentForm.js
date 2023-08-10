@@ -116,6 +116,7 @@ const NewPaymentForm = () => {
       const res = await axios.get(`${url.BASE_URL}user/bank-print/${newGlobalRef}`, {
         responseType: "blob",
       });
+      console.log("Bank res", res);
       const pdfBlob = new Blob([res.data], { type: "application/pdf" });
       saveAs(pdfBlob, `${newGlobalRef}__bankPrint.pdf`);
       setLoading(false);
@@ -151,6 +152,8 @@ const NewPaymentForm = () => {
 
   console.log("modalData", modalData[0]);
   const submit = async (data) => {
+    setLoadingState("Submitting...");
+    setLoading(true);
     data.assessment_id = globalAssId
     data.paygatewayclient = "etax"
     data.paymentRef = newGlobalRef
@@ -158,8 +161,6 @@ const NewPaymentForm = () => {
     data.revenueSub = data.revenueItem
     data.station = data.taxOffice
 
-    // setLoadingState("Submitting...");
-    // setLoading(true);
 
 
     delete data.revenueItem

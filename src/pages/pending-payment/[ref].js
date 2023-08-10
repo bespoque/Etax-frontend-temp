@@ -16,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { taxStation } from "../../json/taxOffice";
 import UseFetcher from "../../components/fetcher/useFetcher";
 import { saveAs } from "file-saver";
-import UseFetcherNoAuth from "../../components/fetcher/useFetcherNoAuth";
 
 const Index = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -25,7 +24,6 @@ const Index = () => {
   });
 
   const [deleting, setDeleting] = useState(false);
-  const [validating, setValidating] = useState(false);
   const [loadingState, setLoadingState] = useState("");
   const [loading, setLoading] = useState(false);
   const [pdfMessage, setPdfMessage] = useState("");
@@ -144,10 +142,13 @@ const Index = () => {
     formData.paygatewayclient = "etax";
     setLoadingState("Submitting...");
     setLoading(true);
-    const queryParams = new URLSearchParams(formData).toString();
+
 
     try {
-      const response = await fetch(`${urlNew}recordpayment.php?${queryParams}`);
+      const response = await fetch(`${urlNew}recordpayment.php`, {
+        method: "POST",
+        body: JSON.stringify(formData) 
+      });
       if (paymentData.channel === "Bank") {
         setLoadingState("Generating Pdf...");
         await fetchBankPrint(newGlobalRef);
@@ -238,21 +239,6 @@ const Index = () => {
     }
   };
 
-  const RevalidateTransactions = async (data) => {
-    setValidating(true);
-    let { pmt_meth, ref, amount, assessment_id, t_payer } = data;
-    let payload = {};
-    payload.channelId = pmt_meth;
-    payload.assessmentId = assessment_id;
-
-    if (pmt_meth === "WebPay") {
-      amount = amount * 1;
-      amount = amount * 100;
-      router.push(
-        `${url.PAY_URL}interswitch/response.php?details=${assessment_id}&amount=${amount}&ref=${ref}&taxId=${t_payer}`
-      );
-    }
-  };
 
   return (
     <>
