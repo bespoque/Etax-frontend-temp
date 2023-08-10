@@ -149,28 +149,33 @@ const NewPaymentForm = () => {
     show();
   };
 
+  console.log("modalData", modalData[0]);
   const submit = async (data) => {
-    setLoadingState("Submitting...");
-    setLoading(true);
-    console.log("data", data);
-    data.paygatewayclient = "quickpay"
-    data.paymentRef = newGlobalRef
     data.assessment_id = globalAssId
+    data.paygatewayclient = "etax"
+    data.paymentRef = newGlobalRef
+    data.paymentgateway = data.channel
     data.revenueSub = data.revenueItem
-    data.agency = data.mdaName
-    data.channel = data.paymentgateway
+    data.station = data.taxOffice
 
-    delete data.mda
+    // setLoadingState("Submitting...");
+    // setLoading(true);
+
+
     delete data.revenueItem
-    delete data.mdaName
-    delete data.itemName
-    delete data.address  
+    delete data.address
     delete data.taxPayerType
-
-    var jsonString = JSON.stringify(data);
+    delete data.taxOffice
+    delete data.mda
+    delete data.itemName
+    console.log("dataetax", data);
+   
 
     try {
-      await fetch(`${urlNew}recordpayment.php`, jsonString);
+      let res = await fetch(`${urlNew}recordpayment.php`, {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
       if (data.channel === "Bank") {
         setLoadingState("Generating Pdf...");
         await fetchBankPrint(newGlobalRef);
