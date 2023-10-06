@@ -19,6 +19,7 @@ const ViewMonthlySingle = () => {
   const [isFetching, setIsFetching] = useState(() => true);
   const [currentPage, setCurrentPage] = useState(() => 1);
   const [postPerPage, setPostPerPage] = useState(20);
+  const [assessmentData, setAssessmentData] = useState({});
   const [query, setQuery] = useState(() => "");
   const router = useRouter();
 
@@ -31,6 +32,13 @@ const ViewMonthlySingle = () => {
           let res = await axios.get(
             `${url.BASE_URL}monthly/view-returns/${period}`
           );
+          const response = await fetch(`https://bespoque.dev/quickpay-live/getpayment.php?paymentref=${period}`, {
+            method: 'GET',
+          })
+
+          const dataFetch = await response.json()
+          setAssessmentData(dataFetch.body)
+          console.log("dataFetch", dataFetch);
           res = res.data.body;
 
           let sum = {};
@@ -107,6 +115,9 @@ const ViewMonthlySingle = () => {
     setQuery(() => e.target.value.toLowerCase());
   };
 
+  console.log("assessmentData", assessmentData);
+  console.log("post[0]", post[0]);
+
   let res = [];
   const search = (rows) => {
     let data = [];
@@ -165,9 +176,20 @@ const ViewMonthlySingle = () => {
               onChange={searchHandler}
             />
           </div>
-          {post[0]?.status === "Unpaid" ? (
+          {assessmentData?.status === "1" ? (
             <>
-            
+              <div className="lg:flex md:flex justify-between">
+                <div className="w-32 mb-2">
+                  <Link legacyBehavior href={`/receipt/${post[0]?.assessmentId}`}>
+                    <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-green-500 hover:bg-white hover:border-green-500">
+                      Get Receipt
+                    </a>
+                  </Link>
+                </div>
+              </div>
+            </>
+          ) : post[0]?.status === "Unpaid" ? (
+            <>
               <div className="lg:flex md:flex justify-between">
                 <div className="w-32 mb-2">
                   <Link legacyBehavior href={`/pending-payment/${post[0]?.assessmentId}`}>
@@ -182,18 +204,6 @@ const ViewMonthlySingle = () => {
                   >
                     Delete
                   </DeleteButton>
-                </div>
-              </div>
-            </>
-          ) : post[0]?.status === "Paid" ? (
-            <>
-              <div className="lg:flex md:flex justify-between">
-                <div className="w-32 mb-2">
-                  <Link href={`/receipt/${post[0]?.assessmentId}`}>
-                    <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-green-500 hover:bg-white hover:border-green-500">
-                      Get Receipt
-                    </a>
-                  </Link>
                 </div>
               </div>
             </>
