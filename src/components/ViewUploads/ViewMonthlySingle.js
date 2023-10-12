@@ -115,8 +115,6 @@ const ViewMonthlySingle = () => {
     setQuery(() => e.target.value.toLowerCase());
   };
 
-  console.log("assessmentData", assessmentData);
-  console.log("post[0]", post[0]);
 
   let res = [];
   const search = (rows) => {
