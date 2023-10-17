@@ -82,11 +82,16 @@ const Index = () => {
   //   fetData()
   // }, [ref])
 
-  const { data, isLoading, error } = UseFetcher(
+  const { data, isLoading } = UseFetcher(
     `${url.BASE_URL}user/invoice-details/${ref.ref}`
   );
   console.log("data", data);
+  let dataArrFirstElem = data
+  let arrFi = dataArrFirstElem?.[0]
+  let firstEl = [arrFi]
 
+  console.log("dataArrFirstElem", dataArrFirstElem);
+  console.log("arrFi", arrFi);
   const handleModalOpen = (url) => {
     setIsModalOpen(true);
     setModalUrl(url);
@@ -98,7 +103,7 @@ const Index = () => {
 
         {isOpen && (
           <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-            <iframe src={url} className="w-full h-full lg:h-100vw border-0"></iframe>
+            <iframe src={url} className="w-full h-full lg:h-100vw border-0" title="payment"></iframe>
           </div>
 
         )}
@@ -145,9 +150,9 @@ const Index = () => {
 
 
     try {
-      const response = await fetch(`${urlNew}recordpayment.php`, {
+      await fetch(`${urlNew}recordpayment.php`, {
         method: "POST",
-        body: JSON.stringify(formData) 
+        body: JSON.stringify(formData)
       });
       if (paymentData.channel === "Bank") {
         setLoadingState("Generating Pdf...");
@@ -260,7 +265,7 @@ const Index = () => {
 
       <Modal isOpen={isModalOpen} url={modalUrl} />
       {data?.length > 0 &&
-        data.map((da) => (
+        firstEl?.map((da) => (
           <div key={da.idpymt}>
             <SectionTitle subtitle="Unpaid Assessment" />
             <Widget>
