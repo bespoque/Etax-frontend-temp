@@ -212,7 +212,7 @@ const ViewAnnualSingle = () => {
           className="btn bg-green-600 mr-2 btn-default text-white btn-outlined bg-transparent rounded-md"
           type="submit"
         >
-          <Link href={`/view/annual/docs/${uploadYear}_${status}`}> View Documents</Link>
+          <Link legacyBehavior href={`/view/annual/docs/${uploadYear}_${status}`}> View Documents</Link>
         </button>
       </div>
       {isFetching && (

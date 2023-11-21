@@ -9,7 +9,6 @@ import { SubmitButton } from '../CustomButton/../../../../components/CustomButto
 import axios from 'axios';
 import url from '../../../../config/url'
 import { FiX, FiCheck } from 'react-icons/fi';
-import { SelectAnnual, SelectMonth } from '../../../../components/forms/selects';
 import { FiArrowDown } from 'react-icons/fi';
 
 import { SampleCsv } from '../../../../components/Images/Images';
@@ -274,7 +273,7 @@ const AnnualUploadcsv = () => {
                         <SampleCsv />
                         <div className="flex justify-center">
                             <div className="">
-                                <Link href="/csv/annual_returns_csv.csv">
+                                <Link legacyBehavior href="/csv/annual_returns_csv.csv">
                                     <a className="flex overflow-hidden btn btn-default btn-outlined  mr-4 bg-transparent text-green-500 hover:text-green-700 border-green-500 hover:border-green-700">
                                         <FiArrowDown size="16" className="animate-bounce" />
                                         Download sample CSV

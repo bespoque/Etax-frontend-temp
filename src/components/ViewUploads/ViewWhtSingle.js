@@ -142,7 +142,7 @@ const ViewWhtSingle = () => {
             <>
               <div className="lg:flex md:flex justify-between">
                 <div className="w-32 mb-2">
-                  <Link href={`/pending-payment/${post[0]?.assessmentId}`}>
+                  <Link legacyBehavior href={`/pending-payment/${post[0]?.assessmentId}`}>
                     <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-green-500 hover:bg-white hover:border-green-500">
                       Pay Now
                     </a>
@@ -171,7 +171,7 @@ const ViewWhtSingle = () => {
             <>
               <div className="lg:flex md:flex justify-between">
                 <div className="w-32 mb-2">
-                  <Link href={`/receipt/${post[0]?.assessmentId}`}>
+                  <Link legacyBehavior href={`/receipt/${post[0]?.assessmentId}`}>
                     <a className="inline-flex disabled:opacity-50 bg-green-500 py-2 px-6 rounded-md  text-white border hover:text-green-500 hover:bg-white hover:border-green-500">
                       Get Receipt
                     </a>

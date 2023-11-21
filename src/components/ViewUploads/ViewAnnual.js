@@ -1,6 +1,5 @@
 import SectionTitle from "../section-title";
 import Widget from "../widget";
-import { SubmitButton } from "../CustomButton/CustomButton";
 import { NewFormInput } from "../FormInput/formInputs";
 import { ViewAnnualTable } from "../tables/viewAnnual";
 import url from "../../config/url";
@@ -8,11 +7,8 @@ import setAuthToken from "../../functions/setAuthToken";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { CustomPagination } from "../pagination/customPagination";
-import { formatNumber } from "../../functions/numbers";
 import dateformat from "dateformat";
 import Loader from "react-loader-spinner";
-import Widget1 from "../dashboard/widget-1";
-import * as Icons from '../../components/Icons/index';
 
 const ViewAnnual = () => {
   const [post, setPost] = useState(() => []);
@@ -25,7 +21,6 @@ const ViewAnnual = () => {
     const fetchPost = async () => {
       try {
         let res = await axios.get(`${url.BASE_URL}annual/view-annual-year`);
-        console.log("res", res)
         res = res.data.body;
         let records = [];
         for (let i = 0; i < res.length; i++) {

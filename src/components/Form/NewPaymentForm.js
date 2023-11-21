@@ -150,7 +150,7 @@ const NewPaymentForm = () => {
     show();
   };
 
-  console.log("modalData", modalData[0]);
+
   const submit = async (data) => {
     setLoadingState("Submitting...");
     setLoading(true);
@@ -160,20 +160,15 @@ const NewPaymentForm = () => {
     data.paymentgateway = data.channel
     data.revenueSub = data.revenueItem
     data.station = data.taxOffice
-
-
-
     delete data.revenueItem
     delete data.address
     delete data.taxPayerType
     delete data.taxOffice
     delete data.mda
     delete data.itemName
-    console.log("dataetax", data);
-   
 
     try {
-      let res = await fetch(`${urlNew}recordpayment.php`, {
+      await fetch(`${urlNew}recordpayment.php`, {
         method: "POST",
         body: JSON.stringify(data)
       });
@@ -188,9 +183,6 @@ const NewPaymentForm = () => {
       setLoading(false);
       setLoadingState("");
       console.log(e);
-      if (e.response) {
-        console.log(e.response);
-      }
     }
   };
 
