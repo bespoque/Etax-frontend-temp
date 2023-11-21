@@ -38,7 +38,6 @@ const ViewMonthlySingle = () => {
 
           const dataFetch = await response.json()
           setAssessmentData(dataFetch.body)
-          console.log("dataFetch", dataFetch);
           res = res.data.body;
 
           let sum = {};
