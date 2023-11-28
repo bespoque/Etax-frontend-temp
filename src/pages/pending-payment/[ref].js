@@ -90,8 +90,6 @@ const Index = () => {
   let arrFi = dataArrFirstElem?.[0]
   let firstEl = [arrFi]
 
-  console.log("dataArrFirstElem", dataArrFirstElem);
-  console.log("arrFi", arrFi);
   const handleModalOpen = (url) => {
     setIsModalOpen(true);
     setModalUrl(url);
@@ -197,7 +195,6 @@ const Index = () => {
   //update bank ref
   const updateRefHandler = async (payload) => {
     payload.ref = data[0].ref;
-    console.log("payload", payload);
     // setUpdateRef(true);
     try {
       const result = await axios.put(
@@ -378,14 +375,14 @@ const Index = () => {
                           Pay Now
                         </button>
                       </div>
-                      {/* <button
+                      <button
                         className="py-2 mt-4 hover:text-green-600 text-black w-full text-left"
                         onClick={() => setOpenBank(true)}
                       >
                         Paid at bank?
                         <span className="text-green-600"> Click</span> to submit
                         payment reference.
-                      </button> */}
+                      </button>
                     </div>
                   </div>
                 </div>
