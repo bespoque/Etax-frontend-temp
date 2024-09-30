@@ -38,7 +38,7 @@ const Input = React.forwardRef((props, ref) => {
                 className="relative top-10 btn-abs  p-2 cursor-pointer"
                 onClick={typeHandler}
               >
-                {showPassword ? <PasswordShowIcon /> : <PasswordHideIcon />}
+                {/* {showPassword ? <PasswordShowIcon /> : <PasswordHideIcon />} */}
               </button>
             </div>
           )}

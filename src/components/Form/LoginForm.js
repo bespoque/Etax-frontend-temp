@@ -64,6 +64,7 @@ const LoginForm = () => {
         )}
         <Input
           name="kgtin"
+          value="2247062701"
           label={<KgtinIcon />}
           ref={register({
             minLength: 10,
@@ -95,7 +96,8 @@ const LoginForm = () => {
           autoComplete="off"
           required
           placeholder="Password"
-          usePasswordIcon
+          // usePasswordIcon
+          value="Hotspot247."
         />
 
         <div className="mt-8 flex justify-between">
